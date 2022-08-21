@@ -45,6 +45,8 @@ dependencies:
   firebase_storage: ^10.3.6
   firebase_analytics: ^9.3.2
 
+  twitter_login: ^4.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
