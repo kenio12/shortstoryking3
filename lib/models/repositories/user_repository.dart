@@ -1,18 +1,99 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:shortstoryking3/models/db/database_manager.dart';
+import 'package:twitter_login/twitter_login.dart';
 
-class UserRepository{
+import '../../data_models/user.dart';
+
+class UserRepository {
+
   final DatabaseManager dbManager;
+
   UserRepository({required this.dbManager});
 
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
 
- Future<bool> isSighIn() async{
+  Future<bool> isSighIn() async {
     final firebaseUser = _auth.currentUser;
-    if (firebaseUser != null){
+    if (firebaseUser != null) {
       return true;
     }
-     return false;
- }
+    return false;
+  }
+
+  Future<bool> sighIn() async {
+    try {
+      // Create a TwitterLogin instance
+      final twitterLogin = new TwitterLogin(
+        apiKey: "9eHrjSsXIODkX9KRVxY2Jzk8M",
+        apiSecretKey: "hCU0uub9dDLPb7V3gZelsmeehZwRQjE34B7YlM2NPpGSgEqgES",
+        redirectURI: "shortstoryking3://",
+      );
+
+      /// Forces the user to enter their credentials
+      /// to ensure the correct users account is authorized.
+      /// If you want to implement Twitter account switching, set [force_login] to true
+      /// login(forceLogin: true);
+      print("kokokokoここあ");
+      final authResult = await twitterLogin.loginV2();
+      print("waaaa");
+      switch (authResult.status) {
+        case TwitterLoginStatus.loggedIn:
+        // success
+          print("$authResult.status");
+          print('====== Login success ======');
+
+          // まるこぴ　Create a credential from the access token
+          final twitterAuthCredential = auth.TwitterAuthProvider.credential(
+            accessToken: authResult.authToken!,
+            secret: authResult.authTokenSecret!,
+          );
+          // まるこぴ　Once signed in, return the UserCredential
+          auth.UserCredential userCredential
+          = await _auth.signInWithCredential(twitterAuthCredential);
+          final firebaseUser = userCredential.user;
+          if (firebaseUser == null) {
+            print('====== ツイッターに登録されてないようだ ======');
+            return false;
+          }
+          // final isUserExitedINDb = await dbManager.searchUserInDb(firebaseUser);
+          print('====== 入れたぜえ！ ======');
+
+
+          final isUserExistedDb = await dbManager.searchUserInDb(firebaseUser);
+          if (!isUserExistedDb) {
+            await dbManager.insertUser(_convertToUser(firebaseUser));
+          }
+
+          return true;
+          break;
+        case TwitterLoginStatus.cancelledByUser:
+        // cancel
+          print('====== Login cancel ======');
+          return false;
+          break;
+        case TwitterLoginStatus.error:
+        case null:
+        // error
+          print('====== Login error ======');
+          return false;
+          break;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
+  _convertToUser(auth.User firebaseUser) {
+    return User(
+      userId: firebaseUser.uid,
+      twitterName: firebaseUser.displayName ?? "",
+      inAppUserName: firebaseUser.displayName ?? "",
+      inAppUserImage: "",
+      bio: "",
+      address: "",
+      sex: "",
+      age: 0,
+    );
+  }
 }

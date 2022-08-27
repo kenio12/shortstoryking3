@@ -2,23 +2,24 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/di/providers.dart';
+import 'package:shortstoryking3/firebase_options.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/view/home_screen.dart';
 import 'package:shortstoryking3/view/login/screens/login_screen.dart';
 import 'package:shortstoryking3/view_models/login_view_model.dart';
 
-
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-runApp(
-MultiProvider(
-providers: globalProviders,
-child: MyApp(),
-)
-);
+  runApp(
+    MultiProvider(
+      providers: globalProviders,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -44,8 +45,8 @@ class MyApp extends StatelessWidget {
       ),
       home: FutureBuilder(
         future: loginViewModel.isSighIn(),
-        builder: (context,AsyncSnapshot<bool> snapshot){
-          if(snapshot.hasData && snapshot.data == true){
+        builder: (context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.hasData && snapshot.data == true) {
             return HomeScreen();
           } else {
             return LoginScreen();
