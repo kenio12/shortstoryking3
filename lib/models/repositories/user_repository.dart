@@ -11,11 +11,15 @@ class UserRepository {
 
   UserRepository({required this.dbManager});
 
+  static User? currentUser;
+
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
 
   Future<bool> isSighIn() async {
     final firebaseUser = _auth.currentUser;
     if (firebaseUser != null) {
+      //再度、アクセスした際に、currentUserを取ってくるためのもの。
+      currentUser = await dbManager.getUserInfoFromDbById(firebaseUser.uid);
       return true;
     }
     return false;
@@ -40,7 +44,7 @@ class UserRepository {
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
         // success
-          print("$authResult.status");
+        //   print("${authResult.status}");
           print('====== Login success ======');
 
           // まるこぴ　Create a credential from the access token
@@ -56,15 +60,18 @@ class UserRepository {
             print('====== ツイッターに登録されてないようだ ======');
             return false;
           }
-          // final isUserExitedINDb = await dbManager.searchUserInDb(firebaseUser);
           print('====== 入れたぜえ！ ======');
 
-
           final isUserExistedDb = await dbManager.searchUserInDb(firebaseUser);
+
           if (!isUserExistedDb) {
             await dbManager.insertUser(_convertToUser(firebaseUser));
           }
+          // print("ここは？");
 
+          //DBから取ってきたUserDataを、上で宣言したstatic変数に入れる。
+          currentUser = await dbManager.getUserInfoFromDbById(firebaseUser.uid);
+          // print("${currentUser?.inAppUserImage}");
           return true;
           break;
         case TwitterLoginStatus.cancelledByUser:
@@ -80,6 +87,7 @@ class UserRepository {
           break;
       }
     } catch (error) {
+      print("sigh in error caught!:${error.toString()}");
       return false;
     }
   }
