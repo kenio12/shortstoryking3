@@ -128,6 +128,18 @@ flutter:
     - family: Yomogi-Regular
       fonts:
         - asset: assets/fonts/Yomogi-Regular.ttf
+
+  #   以下ICON画像
+    - family: writer
+      fonts:
+        - asset: assets/fonts/Writer.ttf
+    - family: battle
+      fonts:
+        - asset: assets/fonts/Battle.ttf
+    - family: battle2
+      fonts:
+        - asset: assets/fonts/Battle2.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

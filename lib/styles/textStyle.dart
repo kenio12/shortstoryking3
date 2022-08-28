@@ -10,3 +10,8 @@ const NovelYomogiFont = "Yomogi-Regular";
 
 //Text Style
 const loginTitleTextStyle = TextStyle(fontFamily: TitleFont,fontSize:48.0);
+
+// //Icon image
+// IconButton(
+//  icon
+// )
