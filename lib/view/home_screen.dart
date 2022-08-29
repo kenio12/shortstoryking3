@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:shortstoryking3/styles/battle2_icons.dart';
-import 'package:shortstoryking3/styles/battle_icons.dart';
-import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/styles/writer_icons.dart';
 import 'package:shortstoryking3/view/battle/pages/battle_page.dart';
 import 'package:shortstoryking3/view/myHome/pages/my_home_page.dart';
@@ -15,73 +14,58 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _pages = [];
-  int _currentIndex = 0;
-
-  //bottomBarをスクロール 上のSingleTickerProviderStateMixinもそう
-  late AnimationController _animationController;
-  late Animation<double> _height;
 
   @override
   void initState() {
     _pages = [
+      MyHomePage(),
       NovelPage(),
       WriterPage(),
       WritingPage(),
       BattlePage(),
-      MyHomePage(),
     ];
-
-    //bottomBarをスクロール
-    _animationController = AnimationController(
-        //1
-        vsync: this,
-        //2
-        duration: const Duration(milliseconds: 500),
-    );
-        //3
-        _height = Tween<double>(begin: 0, end: 100).animate(_animationController);
-
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        // selectedItemColor: Colors.white24,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+      body: PersistentTabView(
+        context,
+        hideNavigationBarWhenKeyboardShows: false,
+        screens: _pages,
         items: [
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.bookOpen),
-            label: "小説",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Writer.writer),
-            label: "作家",
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.featherAlt),
-            label: "執筆",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Battle2.battle2),
-            label: "バトル",
-          ),
-          BottomNavigationBarItem(
+          PersistentBottomNavBarItem(
             icon: FaIcon(FontAwesomeIcons.houseUser),
-            label: "自宅",
+            title: "自宅",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
+          ),
+          PersistentBottomNavBarItem(
+            icon: FaIcon(FontAwesomeIcons.bookOpen),
+            title: "小説",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
+          ),
+          PersistentBottomNavBarItem(
+            icon: Icon(Writer.writer),
+            title: "作家",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
+          ),
+          PersistentBottomNavBarItem(
+            icon: Icon(FontAwesomeIcons.featherAlt),
+            title: "執筆",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
+          ),
+          PersistentBottomNavBarItem(
+            icon: Icon(Battle2.battle2),
+            title: "バトル",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
           ),
         ],
       ),

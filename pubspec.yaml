@@ -55,6 +55,10 @@ dependencies:
 
   fluttertoast: ^8.0.9
 
+  dropdown_button2: ^1.7.2
+
+  persistent_bottom_nav_bar_v2: ^4.2.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -122,6 +126,9 @@ flutter:
     - family: SararaM
       fonts:
         - asset: assets/fonts/SararaM.otf
+    - family: SararaB
+      fonts:
+        - asset: assets/fonts/SararaB.otf
     - family: SararaR
       fonts:
         - asset: assets/fonts/SararaR.otf
@@ -139,6 +146,9 @@ flutter:
     - family: battle2
       fonts:
         - asset: assets/fonts/Battle2.ttf
+    - family: new
+      fonts:
+        - asset: assets/fonts/New.ttf
 
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

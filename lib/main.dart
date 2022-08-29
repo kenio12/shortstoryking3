@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Colors.blueGrey,
+            primary: Colors.grey,
           ),
         ),
         primaryIconTheme: IconThemeData(

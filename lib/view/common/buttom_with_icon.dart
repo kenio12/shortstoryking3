@@ -21,7 +21,7 @@ class ButtonWithIcon extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
-        )
+        ),
       ),
     );
   }
