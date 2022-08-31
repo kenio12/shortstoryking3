@@ -59,6 +59,9 @@ dependencies:
 
   persistent_bottom_nav_bar_v2: ^4.2.5
 
+  flutter_speed_dial: ^6.0.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -149,6 +152,10 @@ flutter:
     - family: new
       fonts:
         - asset: assets/fonts/New.ttf
+    - family: eye
+      fonts:
+        - asset: assets/fonts/Eye.ttf
+
 
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
