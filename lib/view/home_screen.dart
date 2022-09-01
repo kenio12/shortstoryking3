@@ -38,14 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
         screens: _pages,
         items: [
           PersistentBottomNavBarItem(
-            icon: FaIcon(FontAwesomeIcons.houseUser),
-            title: "自宅",
+            icon: FaIcon(FontAwesomeIcons.home),
+            title: "お家",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
           ),
           PersistentBottomNavBarItem(
             icon: FaIcon(FontAwesomeIcons.bookOpen),
-            title: "小説",
+            title: "読む",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
           ),
@@ -57,13 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           PersistentBottomNavBarItem(
             icon: Icon(FontAwesomeIcons.featherAlt),
-            title: "執筆",
+            title: "書く",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
           ),
           PersistentBottomNavBarItem(
             icon: Icon(Battle2.battle2),
-            title: "バトル",
+            title: "戦い",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
           ),

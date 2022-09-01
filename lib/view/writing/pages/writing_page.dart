@@ -91,8 +91,9 @@ class _WritingPageState extends State<WritingPage> {
                     //     fontSize: 25),
                     // labelText: "小説内容",
                     hintText: "小説ここに入力",
+                    enabledBorder: InputBorder.none,
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 2),
+                      borderSide: BorderSide.none,
                     ),
                   ),
                 ),
