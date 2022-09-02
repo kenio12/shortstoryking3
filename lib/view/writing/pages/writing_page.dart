@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 import 'package:shortstoryking3/styles/eye_icons.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/view/home_screen.dart';
+import 'package:shortstoryking3/view/novel/pages/novel_page.dart';
+import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class WritingPage extends StatefulWidget {
+  final PersistentTabController persistentTabController =
+      PersistentTabController();
+
+  WritingPage({required PersistentTabController persistentTabController});
+
   @override
   State<WritingPage> createState() => _WritingPageState();
 }
@@ -30,8 +40,8 @@ class _WritingPageState extends State<WritingPage> {
               SpeedDialChild(
                 child: Icon(Eye.eye),
                 backgroundColor: Colors.white70.withOpacity(0.5),
-                label: "キーボドを消して、確認",
-                labelStyle: TextStyle(color: Colors.black,fontSize: 18),
+                label: "キーボドを消して、確認する",
+                labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
                 onTap: () => FocusScope.of(context).unfocus(),
               ),
@@ -39,17 +49,17 @@ class _WritingPageState extends State<WritingPage> {
                 child: FaIcon(FontAwesomeIcons.database),
                 backgroundColor: Colors.white70.withOpacity(0.5),
                 label: "投稿せず、保存する",
-                labelStyle: TextStyle(color: Colors.black,fontSize: 18),
+                labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
                 onTap: () => FocusScope.of(context).unfocus(),
               ),
               SpeedDialChild(
                 child: FaIcon(FontAwesomeIcons.plus),
                 backgroundColor: Colors.white70.withOpacity(0.5),
-                label: "投稿する",
-                labelStyle: TextStyle(color: Colors.black,fontSize: 18),
+                label: "投稿、すなわち公開する",
+                labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
-                onTap: () => FocusScope.of(context).unfocus(),
+                onTap: () => _novel(context),
               ),
             ],
           ),
@@ -84,12 +94,6 @@ class _WritingPageState extends State<WritingPage> {
                   controller: _novelContentController,
                   maxLength: 10000,
                   decoration: InputDecoration(
-                    // prefixIconColor: Colors.black,
-                    // labelStyle: TextStyle(
-                    //     fontFamily: NovelSararaBFont,
-                    //     color: Colors.black,
-                    //     fontSize: 25),
-                    // labelText: "小説内容",
                     hintText: "小説ここに入力",
                     enabledBorder: InputBorder.none,
                     focusedBorder: UnderlineInputBorder(
@@ -97,19 +101,25 @@ class _WritingPageState extends State<WritingPage> {
                     ),
                   ),
                 ),
-                // ElevatedButton.icon(
-                //   style: ElevatedButton.styleFrom(
-                //     primary: Colors.white70.withOpacity(0.2),
-                //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))
-                //   ),
-                //   icon: Icon(Eye.eye,color: Colors.black,),
-                //   onPressed: ()=>FocusScope.of(context).unfocus(),
-                //   label:const Text("登録",style: TextStyle(color: Colors.black),),)
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  //TODO
+  _novel(BuildContext context) async {
+    // print("PostUploadScreen");
+    final novelViewModel = context.read<NovelViewModel>();
+    await novelViewModel.novel();
+
+      widget.persistentTabController.index = 1;
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder:
+          (context) => NovelPage()));
+
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Novel {
+  bool isPublish;
   String novelId;
   String userId;
   String title;
@@ -15,6 +16,7 @@ class Novel {
 //<editor-fold desc="Data Methods">
 
   Novel({
+    required this.isPublish,
     required this.novelId,
     required this.userId,
     required this.title,
@@ -32,6 +34,7 @@ class Novel {
       identical(this, other) ||
       (other is Novel &&
           runtimeType == other.runtimeType &&
+          isPublish == other.isPublish &&
           novelId == other.novelId &&
           userId == other.userId &&
           title == other.title &&
@@ -45,6 +48,7 @@ class Novel {
 
   @override
   int get hashCode =>
+      isPublish.hashCode ^
       novelId.hashCode ^
       userId.hashCode ^
       title.hashCode ^
@@ -59,6 +63,7 @@ class Novel {
   @override
   String toString() {
     return 'Novel{' +
+        ' isPublish: $isPublish,' +
         ' novelId: $novelId,' +
         ' userId: $userId,' +
         ' title: $title,' +
@@ -73,6 +78,7 @@ class Novel {
   }
 
   Novel copyWith({
+    bool? isPublish,
     String? novelId,
     String? userId,
     String? title,
@@ -85,6 +91,7 @@ class Novel {
     DateTime? postDateTime,
   }) {
     return Novel(
+      isPublish: isPublish ?? this.isPublish,
       novelId: novelId ?? this.novelId,
       userId: userId ?? this.userId,
       title: title ?? this.title,
@@ -100,6 +107,7 @@ class Novel {
 
   Map<String, dynamic> toMap() {
     return {
+      'isPublish': this.isPublish,
       'novelId': this.novelId,
       'userId': this.userId,
       'title': this.title,
@@ -115,6 +123,7 @@ class Novel {
 
   factory Novel.fromMap(Map<String, dynamic> map) {
     return Novel(
+      isPublish: map['isPublish'] as bool,
       novelId: map['novelId'] as String,
       userId: map['userId'] as String,
       title: map['title'] as String,
@@ -123,8 +132,8 @@ class Novel {
       genre: map['genre'] as String,
       wordCount: map['wordCount'] as String,
       battleType: map['battleType'] as String,
-      saveDateTime: DateTime.parse(map['saveDateTime'] as String),
-      postDateTime: DateTime.parse(map['postDateTime'] as String),
+      saveDateTime: DateTime.parse(map['saveDateTime'] as String).toLocal(),
+      postDateTime: DateTime.parse(map['postDateTime'] as String).toLocal(),
     );
   }
 

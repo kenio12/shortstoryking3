@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _pages = [];
+  PersistentTabController persistentTabController = PersistentTabController();
 
   @override
   void initState() {
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MyHomePage(),
       NovelPage(),
       WriterPage(),
-      WritingPage(),
+      WritingPage(persistentTabController: persistentTabController),
       BattlePage(),
     ];
     super.initState();
@@ -36,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context,
         hideNavigationBarWhenKeyboardShows: false,
         screens: _pages,
+        controller: persistentTabController,
         items: [
           PersistentBottomNavBarItem(
             icon: FaIcon(FontAwesomeIcons.home),
