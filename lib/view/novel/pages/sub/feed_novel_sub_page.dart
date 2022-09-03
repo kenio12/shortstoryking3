@@ -11,8 +11,8 @@ class FeedNovelSubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final feedViewModel = context.read<FeedNovelViewModel>();
-    Future(() =>feedViewModel.getNovels(feedNovelMode));
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    Future(() =>feedNovelViewModel.getNovels(feedNovelMode));
 
     return Consumer<FeedNovelViewModel>(
       builder: (context,model,child){
@@ -31,7 +31,6 @@ class FeedNovelSubPage extends StatelessWidget {
                   novel: model.novels![index],
                 );
               }
-
           );
         }
       },
