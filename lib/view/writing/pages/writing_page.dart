@@ -10,10 +10,9 @@ import 'package:shortstoryking3/view/novel/pages/novel_page.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class WritingPage extends StatefulWidget {
-  final PersistentTabController persistentTabController =
-      PersistentTabController();
+  final PersistentTabController persistentTabController;
 
-  WritingPage({required PersistentTabController persistentTabController});
+  WritingPage({required this.persistentTabController});
 
   @override
   State<WritingPage> createState() => _WritingPageState();
@@ -115,11 +114,13 @@ class _WritingPageState extends State<WritingPage> {
     final novelViewModel = context.read<NovelViewModel>();
     await novelViewModel.novel();
 
-      widget.persistentTabController.index = 1;
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder:
-          (context) => NovelPage()));
+      widget.persistentTabController.jumpToTab(1);
+
+
+      // Navigator.pushReplacement(
+      //     context,
+      //     MaterialPageRoute(builder:
+      //     (context) => NovelPage()));
 
   }
 }
