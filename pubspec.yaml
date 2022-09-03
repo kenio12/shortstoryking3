@@ -61,6 +61,10 @@ dependencies:
 
   flutter_speed_dial: ^6.0.0
 
+  responsive_framework: ^0.2.0
+
+  uuid: ^3.0.6
+
 
 dev_dependencies:
   flutter_test:

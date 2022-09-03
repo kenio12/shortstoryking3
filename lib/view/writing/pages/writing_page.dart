@@ -5,8 +5,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/styles/eye_icons.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
-import 'package:shortstoryking3/view/home_screen.dart';
-import 'package:shortstoryking3/view/novel/pages/novel_page.dart';
+import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class WritingPage extends StatefulWidget {
@@ -47,7 +46,7 @@ class _WritingPageState extends State<WritingPage> {
               SpeedDialChild(
                 child: FaIcon(FontAwesomeIcons.database),
                 backgroundColor: Colors.white70.withOpacity(0.5),
-                label: "投稿せず、保存する",
+                label: "保存だけする",
                 labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
                 onTap: () => FocusScope.of(context).unfocus(),
@@ -55,7 +54,7 @@ class _WritingPageState extends State<WritingPage> {
               SpeedDialChild(
                 child: FaIcon(FontAwesomeIcons.plus),
                 backgroundColor: Colors.white70.withOpacity(0.5),
-                label: "投稿、すなわち公開する",
+                label: "保存して、投稿する",
                 labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
                 onTap: () => _novel(context),
@@ -110,17 +109,27 @@ class _WritingPageState extends State<WritingPage> {
 
   //TODO
   _novel(BuildContext context) async {
-    // print("PostUploadScreen");
-    final novelViewModel = context.read<NovelViewModel>();
-    await novelViewModel.novel();
-
+    String _novelTitle = _titleController.value.text;
+    String _novelContent = _novelContentController.value.text;
+    if (_novelTitle == "") {
+      showAlertDialog(
+        title: "おいおい",
+        content: "タイトルないでー、やりなおしやー",
+        context: context,
+      );
+    } else if (_novelContent == "") {
+      showAlertDialog(
+        title: "おいおい",
+        content: "小説がないでー、やりなおしやー",
+        context: context,
+      );
+    } else {
+      final novelViewModel = context.read<NovelViewModel>();
+      await novelViewModel.novelPosting(_novelTitle,_novelContent);
       widget.persistentTabController.jumpToTab(1);
+      _titleController.clear();
+      _novelContentController.clear();
 
-
-      // Navigator.pushReplacement(
-      //     context,
-      //     MaterialPageRoute(builder:
-      //     (context) => NovelPage()));
-
+    }
   }
 }

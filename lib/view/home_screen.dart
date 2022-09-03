@@ -5,7 +5,7 @@ import 'package:shortstoryking3/styles/battle2_icons.dart';
 import 'package:shortstoryking3/styles/writer_icons.dart';
 import 'package:shortstoryking3/view/battle/pages/battle_page.dart';
 import 'package:shortstoryking3/view/myHome/pages/my_home_page.dart';
-import 'package:shortstoryking3/view/novel/pages/novel_page.dart';
+import 'package:shortstoryking3/view/novel/pages/feed_novel_page.dart';
 import 'package:shortstoryking3/view/writer/pages/writer_page.dart';
 import 'package:shortstoryking3/view/writing/pages/writing_page.dart';
 
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _pages = [
       MyHomePage(),
-      NovelPage(),
+      FeedNovelPage(),
       WriterPage(),
       WritingPage(persistentTabController: persistentTabController),
       BattlePage(),

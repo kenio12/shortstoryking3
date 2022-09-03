@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shortstoryking3/di/providers.dart';
 import 'package:shortstoryking3/firebase_options.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
@@ -28,6 +29,21 @@ class MyApp extends StatelessWidget {
     final loginViewModel = context.read<LoginViewModel>();
 
     return MaterialApp(
+      //responsive_framework　レスポンシブになるパッケージらしく、面白がって入れてみたが、効果がよくわからん（笑）
+      builder: (context,child) => ResponsiveWrapper.builder(
+      child,
+        maxWidth: 1200,
+        minWidth: 480,
+          defaultScale: true,
+        breakpoints: [
+          ResponsiveBreakpoint.resize(480, name: MOBILE),
+          ResponsiveBreakpoint.autoScale(800, name: TABLET),
+          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+        ],
+      ),
+      initialRoute: "/",
+      //ここまでがレスポンシブのコードだが、よく分からん。
+
       title: "ShortStoryKing",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

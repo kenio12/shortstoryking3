@@ -13,15 +13,16 @@ class NovelViewModel extends ChangeNotifier {
 
   bool isProcessing = false;
 
-  //TODO
- Future<void> novel() async{
-   isProcessing = true;
-   notifyListeners();
-   await novelRepository.novel(
-     UserRepository.currentUser,
-   );
-   isProcessing = false;
-   notifyListeners();
- }
+    Future<void>  novelPosting(String novelTitle, String novelContent) async{
+      isProcessing = true;
+      notifyListeners();
+      await novelRepository.novelPosting(
+        UserRepository.currentUser!,
+        novelTitle,
+        novelContent
+      );
+      isProcessing = false;
+      notifyListeners();
+  }
 
 }
