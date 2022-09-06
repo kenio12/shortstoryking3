@@ -29,12 +29,21 @@ class FeedNovelViewModel extends ChangeNotifier {
     }
 
   Future<void>  getNovels(FeedNovelMode feedNovelMode) async{
+    print("1");
     isProcessing = true;
     notifyListeners();
 
     novels = await novelRepository.getNovels(feedNovelMode);
+
     isProcessing = false;
     notifyListeners();
+  }
+
+  // notifyListeners()なし版
+  Future<void>  getNovels2(FeedNovelMode feedNovelMode) async{
+
+    novels = await novelRepository.getNovels(feedNovelMode);
+
   }
 
 }

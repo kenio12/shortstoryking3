@@ -5,7 +5,9 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/styles/eye_icons.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
+import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class WritingPage extends StatefulWidget {
@@ -23,6 +25,10 @@ class _WritingPageState extends State<WritingPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // //　投稿時に合わせて、小説リストを取ってくるために、宣言した。
+    // final feedNovelViewModel = context.read<FeedNovelViewModel>();
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -58,6 +64,8 @@ class _WritingPageState extends State<WritingPage> {
                 labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
                 onTap: () => _novel(context),
+              //  むりやり小説投稿時に、小説を取ってくるために、加えたこーど
+              //   onTap: () => _novel(context,feedNovelViewModel),
               ),
             ],
           ),
@@ -109,6 +117,8 @@ class _WritingPageState extends State<WritingPage> {
 
   //TODO
   _novel(BuildContext context) async {
+    //むりやり、小説を取るためにかいたこーど
+    //  _novel(BuildContext context, FeedNovelViewModel feedNovelViewModel,) async {
     String _novelTitle = _titleController.value.text;
     String _novelContent = _novelContentController.value.text;
     if (_novelTitle == "") {
@@ -126,6 +136,9 @@ class _WritingPageState extends State<WritingPage> {
     } else {
       final novelViewModel = context.read<NovelViewModel>();
       await novelViewModel.novelPosting(_novelTitle,_novelContent);
+      // 投稿時に、合わせて小説を取ってくることにした　これは禁じ手、もうすこし頑張る
+      // final feedNovelViewModel = context.read<FeedNovelViewModel>();
+      // await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS);
       widget.persistentTabController.jumpToTab(1);
       _titleController.clear();
       _novelContentController.clear();

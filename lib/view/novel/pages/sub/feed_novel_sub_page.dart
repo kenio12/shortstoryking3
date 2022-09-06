@@ -12,28 +12,35 @@ class FeedNovelSubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    Future(() =>feedNovelViewModel.getNovels(feedNovelMode));
+    Future(() => feedNovelViewModel.getNovels(feedNovelMode));
 
-    return Consumer<FeedNovelViewModel>(
-      builder: (context,model,child){
-        if (model.isProcessing){
-          print("くるくる");
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return (model.novels == null) ? Container()
-              : ListView.builder(
-              itemCount: model.novels!.length,
-              itemBuilder: (context,index){
-                return FeedNovelTile(
-                  feedNovelMode: feedNovelMode,
-                  novel: model.novels![index],
-                );
-              }
-          );
-        }
-      },
+    return Consumer<FeedNovelViewModel>(builder: (context, model, child) {
+      if (model.isProcessing) {
+        print("くるくる");
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } else {
+        // ぐるぐるになるので、諦めた
+        // model.getNovels2(feedNovelMode);
+
+        //これも使ったが、うまくいかない
+        // return FutureBuilder(
+        //     future: model.getNovels(feedNovelMode),
+        //     builder: (context, AsyncSnapshot<void> snapshot) {
+        return (model.novels == null)
+            ? Container()
+            : ListView.builder(
+          itemCount: model.novels!.length,
+          itemBuilder: (context, index) {
+            return FeedNovelTile(
+              feedNovelMode: feedNovelMode,
+              novel: model.novels![index],
+            );
+          },
+        );
+      }
+    }
     );
   }
-}
+  }
