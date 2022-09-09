@@ -7,6 +7,7 @@ import 'package:shortstoryking3/styles/eye_icons.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
+import 'package:shortstoryking3/view/novel/pages/feed_novel_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
@@ -136,10 +137,21 @@ class _WritingPageState extends State<WritingPage> {
     } else {
       final novelViewModel = context.read<NovelViewModel>();
       await novelViewModel.novelPosting(_novelTitle,_novelContent);
+
       // 投稿時に、合わせて小説を取ってくることにした　これは禁じ手、もうすこし頑張る
-      // final feedNovelViewModel = context.read<FeedNovelViewModel>();
-      // await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS);
+      final feedNovelViewModel = context.read<FeedNovelViewModel>();
+      await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS);
+
+      // 　これ以外を使っています。
       widget.persistentTabController.jumpToTab(1);
+
+
+
+      // Navigator.pushReplacement(context, MaterialPageRoute(
+      //     builder: (_) => FeedNovelPage(),));
+      // widget.persistentTabController.jumpToTab(1);
+
+
       _titleController.clear();
       _novelContentController.clear();
 

@@ -22,7 +22,7 @@ class FeedNovelSubPage extends StatelessWidget {
         );
       } else {
         // ぐるぐるになるので、諦めた
-        // model.getNovels2(feedNovelMode);
+        model.getNovels2(feedNovelMode);
 
         //これも使ったが、うまくいかない
         // return FutureBuilder(
@@ -30,17 +30,20 @@ class FeedNovelSubPage extends StatelessWidget {
         //     builder: (context, AsyncSnapshot<void> snapshot) {
         return (model.novels == null)
             ? Container()
-            : ListView.builder(
-          itemCount: model.novels!.length,
-          itemBuilder: (context, index) {
-            return FeedNovelTile(
-              feedNovelMode: feedNovelMode,
-              novel: model.novels![index],
-            );
-          },
-        );
+            : RefreshIndicator(
+                onRefresh: () => model.getNovels(feedNovelMode),
+                child: ListView.builder(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  itemCount: model.novels!.length,
+                  itemBuilder: (context, index) {
+                    return FeedNovelTile(
+                      feedNovelMode: feedNovelMode,
+                      novel: model.novels![index],
+                    );
+                  },
+                ),
+              );
       }
-    }
-    );
+    });
   }
-  }
+}
