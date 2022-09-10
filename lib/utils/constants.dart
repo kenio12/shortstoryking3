@@ -6,3 +6,8 @@ enum FeedNovelMode {
   SELECTED_NOVELS,
   ALL_NOVELS,
 }
+
+enum ProfileMode{
+  MYSELF,
+  OTHER
+}

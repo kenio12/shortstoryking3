@@ -13,7 +13,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.white24,
         centerTitle: true,
         actions: [
-        ProfileSettingPart(),
+        ProfileSettingPart()
         ],
 
       ),

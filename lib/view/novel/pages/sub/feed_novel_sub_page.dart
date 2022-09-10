@@ -43,71 +43,75 @@ class FeedNovelSubPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        color: Colors.white70,
-                        child: FutureBuilder(
-                          future: model
-                              .getNovelUserInfo(model.novels?[index].userId),
-                          builder: (context, AsyncSnapshot<User> snapshot) {
-                            if (snapshot.hasData && snapshot.data != null) {
-                              final novelUser = snapshot.data!;
-                              final currentUser = model.currentUser;
-                              // final DateFormat outputDateTime =
-                              // DateFormat('yyyy年MM月dd日');
-                              // String date = outputDateTime.format(
-                              //     model.novels?[index].postDateTime
-                              // );
-                              final String? year = model
-                                  .novels?[index].postDateTime.year
-                                  .toString();
-                              final String? month = model
-                                  .novels?[index].postDateTime.month
-                                  .toString();
-                              final String? day = model
-                                  .novels?[index].postDateTime.day
-                                  .toString();
-                              final String? hour = model
-                                  .novels?[index].postDateTime.hour
-                                  .toString();
-                              final String? minute = model
-                                  .novels?[index].postDateTime.minute
-                                  .toString();
-                              final String? second = model
-                                  .novels?[index].postDateTime.second
-                                  .toString();
+                      child: InkWell(
+                        splashColor: Colors.black,
+                        onTap:()=> null,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          color: Colors.white70,
+                          child: FutureBuilder(
+                            future: model
+                                .getNovelUserInfo(model.novels?[index].userId),
+                            builder: (context, AsyncSnapshot<User> snapshot) {
+                              if (snapshot.hasData && snapshot.data != null) {
+                                final novelUser = snapshot.data!;
+                                final currentUser = model.currentUser;
+                                // final DateFormat outputDateTime =
+                                // DateFormat('yyyy年MM月dd日');
+                                // String date = outputDateTime.format(
+                                //     model.novels?[index].postDateTime
+                                // );
+                                final String? year = model
+                                    .novels?[index].postDateTime.year
+                                    .toString();
+                                final String? month = model
+                                    .novels?[index].postDateTime.month
+                                    .toString();
+                                final String? day = model
+                                    .novels?[index].postDateTime.day
+                                    .toString();
+                                final String? hour = model
+                                    .novels?[index].postDateTime.hour
+                                    .toString();
+                                final String? minute = model
+                                    .novels?[index].postDateTime.minute
+                                    .toString();
+                                final String? second = model
+                                    .novels?[index].postDateTime.second
+                                    .toString();
 
-                              //model.novels?[index].postDateTime
-                              return ListTile(
-                                // dense: true,
-                                title: Text(
-                                  "${model.novels?[index].title}",
-                                  style: TextStyle(
-                                      fontFamily: NovelSararaBFont,
-                                      fontSize: 20),
-                                ),
-                                subtitle: Text(
-                                  "${year}年"
-                                  "${month}月"
-                                      "${day}日"
-                                      " ${hour}:"
-                                      "${minute}:"
-                                      "${second}"
+                                //model.novels?[index].postDateTime
+                                return ListTile(
+                                  // dense: true,
+                                  title: Text(
+                                    "${model.novels?[index].title}",
+                                    style: TextStyle(
+                                        fontFamily: NovelSararaBFont,
+                                        fontSize: 20),
+                                  ),
+                                  subtitle: Text(
+                                    "${year}年"
+                                    "${month}月"
+                                        "${day}日"
+                                        " ${hour}:"
+                                        "${minute}:"
+                                        "${second}"
 
-                                  "\n${novelUser.inAppUserName}",
-                                  style: TextStyle(
-                                      fontFamily: NovelSararaRFont,
-                                      color: Colors.black,
-                                      fontSize: 19),
-                                ),
-                                tileColor: Colors.white10,
-                              );
-                            } else {
-                              return Container();
-                            }
-                          },
+                                    "\n${novelUser.inAppUserName}",
+                                    style: TextStyle(
+                                        fontFamily: NovelSararaRFont,
+                                        color: Colors.black,
+                                        fontSize: 19),
+                                  ),
+                                  tileColor: Colors.white10,
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
                         ),
                       ),
                     );
