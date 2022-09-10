@@ -26,7 +26,6 @@ class _WritingPageState extends State<WritingPage> {
 
   @override
   Widget build(BuildContext context) {
-
     // //　投稿時に合わせて、小説リストを取ってくるために、宣言した。
     // final feedNovelViewModel = context.read<FeedNovelViewModel>();
 
@@ -65,8 +64,8 @@ class _WritingPageState extends State<WritingPage> {
                 labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                 labelBackgroundColor: Colors.transparent,
                 onTap: () => _novel(context),
-              //  むりやり小説投稿時に、小説を取ってくるために、加えたこーど
-              //   onTap: () => _novel(context,feedNovelViewModel),
+                //  むりやり小説投稿時に、小説を取ってくるために、加えたこーど
+                //   onTap: () => _novel(context,feedNovelViewModel),
               ),
             ],
           ),
@@ -97,7 +96,11 @@ class _WritingPageState extends State<WritingPage> {
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  style: TextStyle(fontFamily: NovelSararaRFont, fontSize: 21),
+                  style: TextStyle(
+                    fontFamily: NovelSararaRFont,
+                    fontSize: 21,
+                    color: Colors.black,
+                  ),
                   controller: _novelContentController,
                   maxLength: 10000,
                   decoration: InputDecoration(
@@ -136,7 +139,7 @@ class _WritingPageState extends State<WritingPage> {
       );
     } else {
       final novelViewModel = context.read<NovelViewModel>();
-      await novelViewModel.novelPosting(_novelTitle,_novelContent);
+      await novelViewModel.novelPosting(_novelTitle, _novelContent);
 
       // 投稿時に、合わせて小説を取ってくることにした　これは禁じ手、もうすこし頑張る
       final feedNovelViewModel = context.read<FeedNovelViewModel>();
@@ -145,16 +148,12 @@ class _WritingPageState extends State<WritingPage> {
       // 　これ以外を使っています。
       widget.persistentTabController.jumpToTab(1);
 
-
-
       // Navigator.pushReplacement(context, MaterialPageRoute(
       //     builder: (_) => FeedNovelPage(),));
       // widget.persistentTabController.jumpToTab(1);
 
-
       _titleController.clear();
       _novelContentController.clear();
-
     }
   }
 }

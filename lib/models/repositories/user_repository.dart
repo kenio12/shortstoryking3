@@ -104,4 +104,8 @@ class UserRepository {
       age: 0,
     );
   }
+
+ Future<User> getUserById(String? userId) async{
+    return await dbManager.getUserInfoFromDbById(userId!);
+ }
 }

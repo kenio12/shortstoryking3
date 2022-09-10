@@ -8,7 +8,6 @@ import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/login_view_model.dart';
 
 class FeedNovelPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
@@ -20,9 +19,18 @@ class FeedNovelPage extends StatelessWidget {
         shadowColor: Colors.white,
         backgroundColor: Colors.white24,
         centerTitle: true,
-        title: Text("${currentUser.inAppUserName}:全ての小説",style: TextStyle(color: Colors.black,fontFamily: NovelSararaBFont),),
+        title: Text(
+          "${currentUser.inAppUserName}:全ての小説",
+          style: TextStyle(color: Colors.black, fontFamily: NovelSararaBFont),
+        ),
       ),
-      body: FeedNovelSubPage(feedNovelMode: FeedNovelMode.ALL_NOVELS,)
+      body: Container(
+        color: Colors.black26,
+        child: FeedNovelSubPage(
+          feedNovelMode: FeedNovelMode.ALL_NOVELS,
+
+        ),
+      ),
     );
   }
 }

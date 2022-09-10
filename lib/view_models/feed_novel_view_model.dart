@@ -20,13 +20,15 @@ class FeedNovelViewModel extends ChangeNotifier {
   late User feedNovelUser;
   User get currentUser => UserRepository.currentUser!;
 
-  void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
-    if (feedNovelMode == FeedNovelMode.MY_NOVELS){
-      feedNovelUser = currentUser;
-    } else if (feedNovelMode == FeedNovelMode.SELECTED_WRITERS_NOVELS){
-      feedNovelUser = user!;
-    }
-    }
+
+
+  // void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
+  //   if (feedNovelMode == FeedNovelMode.MY_NOVELS){
+  //     feedNovelUser = currentUser;
+  //   } else if (feedNovelMode == FeedNovelMode.SELECTED_WRITERS_NOVELS){
+  //     feedNovelUser = user!;
+  //   }
+  //   }
 
   Future<void>  getNovels(FeedNovelMode feedNovelMode) async{
     print("1");
@@ -39,11 +41,15 @@ class FeedNovelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+ Future<User> getNovelUserInfo(String? userId) async{
+    return await userRepository.getUserById(userId);
+ }
+
   // notifyListeners()なし版
-  Future<void>  getNovels2(FeedNovelMode feedNovelMode) async{
-
-    novels = await novelRepository.getNovels(feedNovelMode);
-
-  }
+  // Future<void>  getNovels2(FeedNovelMode feedNovelMode) async{
+  //
+  //   novels = await novelRepository.getNovels(feedNovelMode);
+  //
+  // }
 
 }
