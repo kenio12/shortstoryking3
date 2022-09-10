@@ -3,15 +3,16 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:shortstoryking3/data_models/novel.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/novel/components/feed_novel_tile.dart';
+import 'package:shortstoryking3/view/novel/pages/sub/novel_detail_sub_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 
 class FeedNovelSubPage extends StatelessWidget {
   final FeedNovelMode feedNovelMode;
-
   FeedNovelSubPage({required this.feedNovelMode});
 
   @override
@@ -20,6 +21,7 @@ class FeedNovelSubPage extends StatelessWidget {
     Future(() => feedNovelViewModel.getNovels(feedNovelMode));
 
     return Consumer<FeedNovelViewModel>(builder: (context, model, child) {
+      if (model.isFeedNovel){
       if (model.isProcessing) {
         print("くるくる");
         return Center(
@@ -41,11 +43,12 @@ class FeedNovelSubPage extends StatelessWidget {
                   physics: AlwaysScrollableScrollPhysics(),
                   itemCount: model.novels!.length,
                   itemBuilder: (context, index) {
+                    final Novel novel = model.novels![index];
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(2.0),
                       child: InkWell(
                         splashColor: Colors.black,
-                        onTap:()=> null,
+                        onTap:()=> model.changeNovelDetailSubPage(novel.novelId),
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
@@ -124,6 +127,12 @@ class FeedNovelSubPage extends StatelessWidget {
                 ),
               );
       }
-    });
+    } else{
+        return NovelDetailSubPage();
+      }
+    },
+    );
+
   }
+
 }

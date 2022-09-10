@@ -98,7 +98,7 @@ class _WritingPageState extends State<WritingPage> {
                   maxLines: null,
                   style: TextStyle(
                     fontFamily: NovelSararaRFont,
-                    fontSize: 21,
+                    fontSize: 25,
                     color: Colors.black,
                   ),
                   controller: _novelContentController,
@@ -144,6 +144,7 @@ class _WritingPageState extends State<WritingPage> {
       // 投稿時に、合わせて小説を取ってくることにした　これは禁じ手、もうすこし頑張る
       final feedNovelViewModel = context.read<FeedNovelViewModel>();
       await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS);
+      feedNovelViewModel.changeFeedNovelSubPage();
 
       // 　これ以外を使っています。
       widget.persistentTabController.jumpToTab(1);

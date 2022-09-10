@@ -51,4 +51,8 @@ class NovelRepository {
     }
 
  }
+
+ Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
+    return await dbManager.selectedNovelFromNovelId(selectedNovelId);
+ }
 }

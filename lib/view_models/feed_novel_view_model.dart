@@ -20,8 +20,10 @@ class FeedNovelViewModel extends ChangeNotifier {
   late User feedNovelUser;
   User get currentUser => UserRepository.currentUser!;
 
-
-
+  bool isFeedNovel = true;
+  
+  String selectedNovelId = "";
+  
   // void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
   //   if (feedNovelMode == FeedNovelMode.MY_NOVELS){
   //     feedNovelUser = currentUser;
@@ -44,6 +46,21 @@ class FeedNovelViewModel extends ChangeNotifier {
  Future<User> getNovelUserInfo(String? userId) async{
     return await userRepository.getUserById(userId);
  }
+
+  void changeNovelDetailSubPage(String novelId) {
+    isFeedNovel = false;
+    selectedNovelId = novelId;
+    notifyListeners();
+  }
+
+  void changeFeedNovelSubPage() {
+    isFeedNovel = true;
+    notifyListeners();
+  }
+
+  Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
+    return await novelRepository.selectedNovelFromNovelId(selectedNovelId);
+  }
 
   // notifyListeners()なし版
   // Future<void>  getNovels2(FeedNovelMode feedNovelMode) async{

@@ -20,7 +20,7 @@ class FeedNovelPage extends StatelessWidget {
         backgroundColor: Colors.white24,
         centerTitle: true,
         title: Text(
-          "${currentUser.inAppUserName}:全ての小説",
+          "俺は${currentUser.inAppUserName}:全ての小説",
           style: TextStyle(color: Colors.black, fontFamily: NovelSararaBFont),
         ),
       ),

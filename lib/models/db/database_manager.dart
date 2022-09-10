@@ -54,4 +54,12 @@ class DatabaseManager {
     print("novel:$results");
     return results;
   }
+
+  Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
+    final query =
+    await _db.collection("novels").where("novelId", isEqualTo: selectedNovelId).get();
+    // print("$query.docs[0].");
+
+    return Novel.fromMap(query.docs[0].data());
+  }
 }
