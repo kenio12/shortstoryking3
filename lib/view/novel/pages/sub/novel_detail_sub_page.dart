@@ -30,6 +30,10 @@ class NovelDetailSubPage extends StatelessWidget {
                       child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
                   ),
                   SizedBox(height: 30),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(" タイトル",style: TextStyle(color: Colors.grey)),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
@@ -38,14 +42,14 @@ class NovelDetailSubPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black54, width: 5),
                         borderRadius: BorderRadius.circular(9.0),
-                        color: Colors.black87
+                        color: Colors.white
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text("${selectedNovel.title}",
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: Colors.black,
                               // letterSpacing: 6.0,
                               fontFamily: NovelSararaBFont,
                               fontSize: 30,
@@ -69,8 +73,6 @@ class NovelDetailSubPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                       ChangeJapaneaseDay(postDateTime: selectedNovel.postDateTime),
-                      Text("  ${selectedNovel.content.length}文字",
-                        style: TextStyle(fontSize: 18,fontFamily: NovelSararaBFont),),
                     ],),
                   ),
                   FutureBuilder(
@@ -99,7 +101,23 @@ class NovelDetailSubPage extends StatelessWidget {
                   ),
 
                   SizedBox(height: 20.0),
-
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("  以下本文",style: TextStyle(fontSize: 16,
+                            color: Colors.grey),),
+                        Text("総文字数：${selectedNovel.content.length}文字　",
+                          style: TextStyle(fontSize: 16,
+                          ),),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.black26,
+                    thickness: 1.0,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Container(

@@ -6,7 +6,7 @@ const RegularFont = "BIZUDGothic-Regular";
 const BoldFont = "BIZUDGothic-Bold";
 const NovelKleeRFont = "KleeOne-Regular";
 const NovelSararaBFont = "SararaB";
-const NovelSararaRFont = "SararaR";
+const NovelSararaRFont = "SararaB";
 const NovelYomogiFont = "Yomogi-Regular";
 
 //Text Style
