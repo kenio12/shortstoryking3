@@ -79,14 +79,14 @@ class _WritingPageState extends State<WritingPage> {
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  style: TextStyle(fontFamily: NovelSararaBFont, fontSize: 25),
+                  style: TextStyle(fontFamily: NovelSararaBFont, fontSize: 35),
                   controller: _titleController,
                   maxLength: 30,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         fontFamily: NovelSararaBFont, color: Colors.black),
-                    labelText: "タイトル",
-                    hintText: "ここに入力",
+                    // labelText: "タイトル",
+                    hintText: "ここにタイトルを入力",
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 2),
                     ),
@@ -98,13 +98,13 @@ class _WritingPageState extends State<WritingPage> {
                   maxLines: null,
                   style: TextStyle(
                     fontFamily: NovelSararaRFont,
-                    fontSize: 25,
+                    fontSize: 28,
                     color: Colors.black,
                   ),
                   controller: _novelContentController,
                   maxLength: 10000,
                   decoration: InputDecoration(
-                    hintText: "小説ここに入力",
+                    hintText: "ここに小説を入力",
                     enabledBorder: InputBorder.none,
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide.none,

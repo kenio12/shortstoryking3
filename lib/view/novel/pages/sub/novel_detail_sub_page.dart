@@ -149,6 +149,27 @@ class NovelDetailSubPage extends StatelessWidget {
                       ),
                     ),
 
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: Text("おわり ",style: TextStyle(color: Colors.grey)),
+                  ),
+
+                  Divider(
+                    color: Colors.black26,
+                    thickness: 1.0,
+                  ),
+
+
+
+                  Container(
+                    alignment: Alignment.topRight,
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: ElevatedButton(
+                      onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(),
+                      child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
+                  ),
+                  SizedBox(height: 20.0),
+
                 ],
               ),
             );
