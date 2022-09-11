@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           PersistentBottomNavBarItem(
             icon: FaIcon(FontAwesomeIcons.home),
-            title: "お家",
+            title: "自宅",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
           ),

@@ -102,8 +102,9 @@ class FeedNovelSubPage extends StatelessWidget {
                                         "${minute}:"
                                         "${second}"
                                     "　文字数${model.novels?[index].content.length}文字"
-
-                                    "\n作　${novelUser.inAppUserName}",
+                                    // 改行消したいが、これでは無理っぽい。
+                                    "\n作　${(novelUser.inAppUserName)
+                                        .replaceAll('\n','')}",
                                     style: TextStyle(
                                         fontFamily: NovelSararaRFont,
                                         color: Colors.black,
