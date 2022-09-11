@@ -14,21 +14,23 @@ class FeedNovelPage extends StatelessWidget {
     final currentUser = feedNovelViewModel.currentUser;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.2,
-        shadowColor: Colors.white,
-        backgroundColor: Colors.white24,
-        centerTitle: true,
-        title: Text(
-          "俺は${currentUser.inAppUserName}:全ての小説",
-          style: TextStyle(color: Colors.black, fontFamily: NovelSararaBFont),
-        ),
-      ),
-      body: Container(
-        color: Colors.black26,
-        child: FeedNovelSubPage(
-          feedNovelMode: FeedNovelMode.ALL_NOVELS,
+      // appBar: AppBar(
+      //   elevation: 0.2,
+      //   shadowColor: Colors.white,
+      //   backgroundColor: Colors.white24,
+      //   centerTitle: true,
+      //   title: Text(
+      //     "俺は${currentUser.inAppUserName}:全ての小説",
+      //     style: TextStyle(color: Colors.black, fontFamily: NovelSararaBFont),
+      //   ),
+      // ),
+      body: SafeArea(
+        child: Container(
+          // color: Colors.black26,
+          child: FeedNovelSubPage(
+            feedNovelMode: FeedNovelMode.ALL_NOVELS,
 
+          ),
         ),
       ),
     );
