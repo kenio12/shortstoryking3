@@ -101,8 +101,9 @@ class FeedNovelSubPage extends StatelessWidget {
                                         " ${hour}:"
                                         "${minute}:"
                                         "${second}"
+                                    "　文字数${model.novels?[index].content.length}文字"
 
-                                    "\n${novelUser.inAppUserName}",
+                                    "\n作　${novelUser.inAppUserName}",
                                     style: TextStyle(
                                         fontFamily: NovelSararaRFont,
                                         color: Colors.black,

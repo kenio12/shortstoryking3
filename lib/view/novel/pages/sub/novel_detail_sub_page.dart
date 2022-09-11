@@ -37,7 +37,7 @@ class NovelDetailSubPage extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black54, width: 5),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(9.0),
                         color: Colors.black87
                       ),
                       child: Padding(
@@ -62,10 +62,17 @@ class NovelDetailSubPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.topRight,
-                      padding: const EdgeInsets.only(top:25,right: 20.0),
-                      child: ChangeJapaneaseDay(postDateTime: selectedNovel.postDateTime)),
+                  SizedBox(height: 20,),
+                  Padding(
+                    padding: const EdgeInsets.only(right:20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                      ChangeJapaneaseDay(postDateTime: selectedNovel.postDateTime),
+                      Text("  ${selectedNovel.content.length}文字",
+                        style: TextStyle(fontSize: 18,fontFamily: NovelSararaBFont),),
+                    ],),
+                  ),
                   FutureBuilder(
                       future: feedNovelViewPage.getNovelUserInfo(
                           selectedNovel.userId),
@@ -94,18 +101,17 @@ class NovelDetailSubPage extends StatelessWidget {
                   SizedBox(height: 20.0),
 
                   Padding(
-                    padding: const EdgeInsets.all(14.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Container(
-                      // width: double.infinity,
+                      width: double.infinity,
                       padding: const EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black54, width: 2),
-                        // borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.white24,
-                      ),
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(color: Colors.black54, width: 1),
+                      //   // borderRadius: BorderRadius.circular(20.0),
+                      //   color: Colors.white24,
+                      // ),
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
+                        padding: const EdgeInsets.all(5.0),
                           child: Text("${selectedNovel.content}",
                             style: TextStyle(
                               // letterSpacing: 6.0,
@@ -113,6 +119,7 @@ class NovelDetailSubPage extends StatelessWidget {
                               fontSize: 28,
                               // backgroundColor: Colors.white,
                               letterSpacing: 1,
+                              color: Colors.black,
                               // shadows:[
                               //    Shadow(
                               //      blurRadius: 80.0,
@@ -123,7 +130,6 @@ class NovelDetailSubPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
 
                 ],
               ),
