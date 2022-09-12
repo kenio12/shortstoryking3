@@ -59,11 +59,16 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _openHomeScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => HomeScreen(),
-      ),
-    );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false);
+
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => HomeScreen(),
+    //   ),
+    // );
   }
 }
