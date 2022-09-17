@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "92603000617",
+    "project_id": "shortstoryking3",
+    "storage_bucket": "shortstoryking3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92603000617:android:83c8c18b159a663a47b938",
+        "android_client_info": {
+          "package_name": "fun.shumi.shortstoryking3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92603000617-5k0oiu8jhkclbv7vsku5va75ou2h39cl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBwTVLmZmtdnXwyf6LFGHEld_sRQLcQa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92603000617-5k0oiu8jhkclbv7vsku5va75ou2h39cl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "92603000617-fshaa1rpebe9mbv8r8br2prl415hjlgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fun.shumi.shortstoryking3"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
