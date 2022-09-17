@@ -16,3 +16,6 @@ const loginTitleTextStyle = TextStyle(fontFamily: TitleFont,fontSize:48.0);
 // IconButton(
 //  icon
 // )
+
+//プロフィールの文字
+const profileTextStyle = TextStyle(fontSize: 22.0,fontFamily: NovelSararaBFont);

@@ -66,11 +66,6 @@ class FeedNovelSubPage extends StatelessWidget {
                                       snapshot.data != null) {
                                     final novelUser = snapshot.data!;
                                     final currentUser = model.currentUser;
-                                    // final DateFormat outputDateTime =
-                                    // DateFormat('yyyy年MM月dd日');
-                                    // String date = outputDateTime.format(
-                                    //     model.novels?[index].postDateTime
-                                    // );
 
                                     //model.novels?[index].postDateTime
                                     return ListTile(

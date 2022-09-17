@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shortstoryking3/view/myHome/components/profile_setting_part.dart';
+import 'package:shortstoryking3/view/myHome/components/my_home_setting_part.dart';
+import 'package:shortstoryking3/view/myHome/components/my_profile_detail.dart';
+import 'package:shortstoryking3/view/myHome/components/my_profile_image.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -11,24 +13,26 @@ class MyHomePage extends StatelessWidget {
     final currentUser = profileViewModel.currentUser;
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.2,
+        elevation: 0,
         shadowColor: Colors.white,
-        backgroundColor: Colors.white24,
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           "${currentUser.inAppUserName}　の部屋",
           style: TextStyle(fontSize: 20, color: Colors.black),
         ),
         actions: [
-          ProfileSettingPart(
+          MyHomeSettingPart(
             profileViewModel: profileViewModel,
             currentUser: currentUser,
           )
         ],
       ),
-      body: Center(
-        child: Text("私の家ページ"),
-      ),
+      body: Column(
+        children: [
+        MyProfileImage(),
+        MyProfileDetail(),
+      ],)
     );
   }
 }

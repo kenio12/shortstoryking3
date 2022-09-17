@@ -5,11 +5,11 @@ import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/view/login/screens/login_screen.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
-class ProfileSettingPart extends StatelessWidget {
+class MyHomeSettingPart extends StatelessWidget {
   final ProfileViewModel profileViewModel;
   final User currentUser;
 
-  ProfileSettingPart({
+  MyHomeSettingPart({
     required this.profileViewModel,
     required this.currentUser,
   });
