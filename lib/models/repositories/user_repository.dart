@@ -6,7 +6,6 @@ import 'package:twitter_login/twitter_login.dart';
 import '../../data_models/user.dart';
 
 class UserRepository {
-
   final DatabaseManager dbManager;
 
   UserRepository({required this.dbManager});
@@ -43,8 +42,8 @@ class UserRepository {
       print("waaaa");
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
-        // success
-        //   print("${authResult.status}");
+          // success
+          //   print("${authResult.status}");
           print('====== Login success ======');
 
           // まるこぴ　Create a credential from the access token
@@ -53,8 +52,8 @@ class UserRepository {
             secret: authResult.authTokenSecret!,
           );
           // まるこぴ　Once signed in, return the UserCredential
-          auth.UserCredential userCredential
-          = await _auth.signInWithCredential(twitterAuthCredential);
+          auth.UserCredential userCredential =
+              await _auth.signInWithCredential(twitterAuthCredential);
           final firebaseUser = userCredential.user;
           if (firebaseUser == null) {
             print('====== ツイッターに登録されてないようだ ======');
@@ -75,13 +74,13 @@ class UserRepository {
           return true;
           break;
         case TwitterLoginStatus.cancelledByUser:
-        // cancel
+          // cancel
           print('====== Login cancel ======');
           return false;
           break;
         case TwitterLoginStatus.error:
         case null:
-        // error
+          // error
           print('====== Login error ======');
           return false;
           break;
@@ -97,7 +96,7 @@ class UserRepository {
       userId: firebaseUser.uid,
       twitterName: firebaseUser.displayName ?? "",
       inAppUserName: firebaseUser.displayName ?? "",
-      inAppUserImage: "",
+      inAppUserImage: "assets/images/level1_avatar/baby.png",
       bio: "",
       address: "",
       sex: "",
@@ -105,12 +104,40 @@ class UserRepository {
     );
   }
 
- Future<User> getUserById(String? userId) async{
+  Future<User> getUserById(String? userId) async {
     return await dbManager.getUserInfoFromDbById(userId!);
- }
+  }
 
- Future<void> signOut() async{
+  Future<void> signOut() async {
     await _auth.signOut();
     currentUser = null;
- }
+  }
+
+  Future<void> changeProfileImage(String inAppUserImage) async {
+    String newInAppUserImage = "";
+    switch (inAppUserImage) {
+      case "assets/images/level1_avatar/baby.png":
+        newInAppUserImage = "assets/images/level1_avatar/baby2.png";
+        break;
+      case "assets/images/level1_avatar/baby2.png":
+        newInAppUserImage = "assets/images/level1_avatar/baby3.png";
+        break;
+      case "assets/images/level1_avatar/baby3.png":
+        newInAppUserImage = "assets/images/level1_avatar/baby4.png";
+        break;
+      case "assets/images/level1_avatar/baby4.png":
+        newInAppUserImage = "assets/images/level1_avatar/baby5.png";
+        break;
+      case "assets/images/level1_avatar/baby5.png":
+        newInAppUserImage = "assets/images/level1_avatar/baby.png";
+        break;
+    }
+    final currentUserBeforeUpdate =
+        await dbManager.getUserInfoFromDbById(currentUser!.userId);
+    final updateCurrentUser =
+        currentUserBeforeUpdate.copyWith(inAppUserImage: newInAppUserImage);
+
+    await dbManager.changeProfileImage(updateCurrentUser);
+    currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
+  }
 }

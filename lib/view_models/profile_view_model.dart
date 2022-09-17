@@ -19,4 +19,9 @@ class ProfileViewModel extends ChangeNotifier{
    await userRepository.signOut();
        notifyListeners();
  }
+
+ Future<void> changeProfileImage(String inAppUserImage) async{
+  await userRepository.changeProfileImage(inAppUserImage);
+  notifyListeners();
+ }
 }

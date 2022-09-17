@@ -18,7 +18,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          "${currentUser.inAppUserName}　の部屋",
+          "${currentUser.inAppUserName}",
           style: TextStyle(fontSize: 20, color: Colors.black),
         ),
         actions: [

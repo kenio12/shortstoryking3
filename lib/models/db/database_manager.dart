@@ -22,6 +22,11 @@ class DatabaseManager {
     await _db.collection("users").doc(user.userId).set(user.toMap());
   }
 
+  Future<void> changeProfileImage(User updateCurrentUser) async{
+    final reference = _db.collection("users").doc(updateCurrentUser.userId);
+    await reference.update(updateCurrentUser.toMap());
+  }
+
   Future<User> getUserInfoFromDbById(String userId) async {
     final query =
         await _db.collection("users").where("userId", isEqualTo: userId).get();
@@ -62,4 +67,7 @@ class DatabaseManager {
 
     return Novel.fromMap(query.docs[0].data());
   }
+
+
+
 }
