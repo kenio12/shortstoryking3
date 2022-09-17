@@ -54,11 +54,11 @@ class ProfileSettingPart extends StatelessWidget {
     //       return LoginScreen();}), (route) {
     //       return false;
     //     });
-    Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-            builder: (context) => LoginScreen()),
-            (_) => false);
+    // Navigator.pushAndRemoveUntil(
+    //         context,
+    //         MaterialPageRoute(
+    //         builder: (context) => LoginScreen()),
+    //         (_) => false);
     //   context,
     //   MaterialPageRoute(
     //     builder: (context) => LoginScreen(),

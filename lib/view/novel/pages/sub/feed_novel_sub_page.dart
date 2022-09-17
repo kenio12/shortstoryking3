@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:intl/intl.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shortstoryking3/data_models/novel.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
+import 'package:shortstoryking3/view/common/change_japanease_day.dart';
 import 'package:shortstoryking3/view/novel/components/feed_novel_tile.dart';
 import 'package:shortstoryking3/view/novel/pages/sub/novel_detail_sub_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';

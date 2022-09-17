@@ -3,9 +3,7 @@ import 'package:shortstoryking3/styles/textStyle.dart';
 
 class ChangeJapaneaseDay extends StatelessWidget {
   final DateTime postDateTime;
-  ChangeJapaneaseDay({
-    required this.postDateTime,
-  });
+  ChangeJapaneaseDay({required this.postDateTime,});
   @override
   Widget build(BuildContext context) {
     final String? year = postDateTime.year.toString();
