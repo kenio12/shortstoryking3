@@ -11,6 +11,7 @@ class NovelDetailSubPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final feedNovelViewPage = context.read<FeedNovelViewModel>();
     final String selectedNovelId = feedNovelViewPage.selectedNovelId;
+    final int selectedListIndex = feedNovelViewPage.selectedListIndex;
     final currentUser = feedNovelViewPage.currentUser;
     return FutureBuilder(
         future: feedNovelViewPage.selectedNovelFromNovelId(selectedNovelId),
@@ -26,7 +27,7 @@ class NovelDetailSubPage extends StatelessWidget {
                     alignment: Alignment.topRight,
                     padding: const EdgeInsets.only(right: 20.0),
                     child: ElevatedButton(
-                      onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(),
+                      onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
                       child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
                   ),
                   SizedBox(height: 30),
@@ -165,7 +166,7 @@ class NovelDetailSubPage extends StatelessWidget {
                     alignment: Alignment.topRight,
                     padding: const EdgeInsets.only(right: 20.0),
                     child: ElevatedButton(
-                      onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(),
+                      onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
                       child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
                   ),
                   SizedBox(height: 20.0),

@@ -23,6 +23,8 @@ class FeedNovelViewModel extends ChangeNotifier {
   bool isFeedNovel = true;
   
   String selectedNovelId = "";
+
+  int selectedListIndex = 0;
   
   // void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
   //   if (feedNovelMode == FeedNovelMode.MY_NOVELS){
@@ -47,13 +49,15 @@ class FeedNovelViewModel extends ChangeNotifier {
     return await userRepository.getUserById(userId);
  }
 
-  void changeNovelDetailSubPage(String novelId) {
+  void changeNovelDetailSubPage(String novelId, int index) {
     isFeedNovel = false;
     selectedNovelId = novelId;
+    selectedListIndex = index;
     notifyListeners();
   }
 
-  void changeFeedNovelSubPage() {
+  void changeFeedNovelSubPage(int selectedListIndex2) {
+    selectedListIndex = selectedListIndex2;
     isFeedNovel = true;
     notifyListeners();
   }
