@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
+import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
 class StatefulMyProfileImageDetail extends StatefulWidget {
@@ -13,18 +14,27 @@ class StatefulMyProfileImageDetail extends StatefulWidget {
 class _StatefulMyProfileImageDetail
     extends State<StatefulMyProfileImageDetail> {
   String _inAppUserImage = "";
+  String _sex =  "";
+  int _age = 0;
+  String _address = "";
+  String _bio = "";
+  double _width = 0.0;
 
   @override
   void initState() {
     final profileViewModel = context.read<ProfileViewModel>();
     final User currentUser = profileViewModel.currentUser;
     _inAppUserImage = currentUser.inAppUserImage;
-
+    _age = currentUser.age;
+    _address = currentUser.address;
+    _bio = currentUser.bio;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _width = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         Center(
@@ -50,9 +60,47 @@ class _StatefulMyProfileImageDetail
             ),
           ),
         ),
+
+
+      Padding(
+        padding: EdgeInsets.only(left: _width/2-140),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Text("性　　別：",style: profileTextStyle,),
+                Text(" 　${_sex}",style: profileTextStyle,)
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                Text("年　　齢：",style: profileTextStyle,),
+                Text(" 　${_age}　歳",style: profileTextStyle,)
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                Text("住　　処：",style: profileTextStyle,),
+                Text(" 　${_address}",style: profileTextStyle,)
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                Text("自己紹介：",style: profileTextStyle,),
+              ],
+            ),
+            Text("${_bio}",
+              style: profileTextStyle,
+              softWrap: true,),
+          ],
+
+        ),
+      ),
       ],
-
-
 
     );
   }
