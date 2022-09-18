@@ -12,6 +12,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final profileViewModel = context.read<ProfileViewModel>();
     final currentUser = profileViewModel.currentUser;
+    final ScrollController _scrollController = ScrollController();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -30,8 +32,9 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: StatefulMyProfileImageDetail(),)
+          child: StatefulMyProfileImageDetail(scrollController: _scrollController),)
     );
   }
 }

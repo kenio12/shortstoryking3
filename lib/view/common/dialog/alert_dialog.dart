@@ -4,6 +4,7 @@ showAlertDialog({
   required BuildContext context,
   required String title,
   required String content,
+  required String message,
 }) {
   showDialog(
     context: context,
@@ -11,6 +12,7 @@ showAlertDialog({
     builder: (_) => ConfirmDialog(
       title: title,
       content: content,
+      message: message,
     ),
   );
 }
@@ -18,10 +20,12 @@ showAlertDialog({
 class ConfirmDialog extends StatelessWidget {
   final String title;
   final String content;
+  final String message;
 
   ConfirmDialog({
     required this.title,
     required this.content,
+    required this.message,
   });
 
   @override
@@ -31,7 +35,7 @@ class ConfirmDialog extends StatelessWidget {
       content: Text(content,style: TextStyle(fontSize: 20)),
       actions: [
         TextButton(
-            child: Text("でなおす",style: TextStyle(fontSize: 20),),
+            child: Text(message,style: TextStyle(fontSize: 20),),
             onPressed: () {
               Navigator.pop(context);
             }),

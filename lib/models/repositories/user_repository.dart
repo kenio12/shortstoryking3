@@ -114,31 +114,52 @@ class UserRepository {
     currentUser = null;
   }
 
-  Future<void> changeProfileImage(String inAppUserImage) async {
-    String newInAppUserImage = "";
-    switch (inAppUserImage) {
-      case "assets/images/level1_avatar/baby.png":
-        newInAppUserImage = "assets/images/level1_avatar/baby2.png";
-        break;
-      case "assets/images/level1_avatar/baby2.png":
-        newInAppUserImage = "assets/images/level1_avatar/baby3.png";
-        break;
-      case "assets/images/level1_avatar/baby3.png":
-        newInAppUserImage = "assets/images/level1_avatar/baby4.png";
-        break;
-      case "assets/images/level1_avatar/baby4.png":
-        newInAppUserImage = "assets/images/level1_avatar/baby5.png";
-        break;
-      case "assets/images/level1_avatar/baby5.png":
-        newInAppUserImage = "assets/images/level1_avatar/baby.png";
-        break;
-    }
+  // Future<void> changeProfileImage(String inAppUserImage) async {
+  //   String newInAppUserImage = "";
+  //   switch (inAppUserImage) {
+  //     case "assets/images/level1_avatar/baby.png":
+  //       newInAppUserImage = "assets/images/level1_avatar/baby2.png";
+  //       break;
+  //     case "assets/images/level1_avatar/baby2.png":
+  //       newInAppUserImage = "assets/images/level1_avatar/baby3.png";
+  //       break;
+  //     case "assets/images/level1_avatar/baby3.png":
+  //       newInAppUserImage = "assets/images/level1_avatar/baby4.png";
+  //       break;
+  //     case "assets/images/level1_avatar/baby4.png":
+  //       newInAppUserImage = "assets/images/level1_avatar/baby5.png";
+  //       break;
+  //     case "assets/images/level1_avatar/baby5.png":
+  //       newInAppUserImage = "assets/images/level1_avatar/baby.png";
+  //       break;
+  //   }
+  //   final currentUserBeforeUpdate =
+  //       await dbManager.getUserInfoFromDbById(currentUser!.userId);
+  //   final updateCurrentUser =
+  //       currentUserBeforeUpdate.copyWith(inAppUserImage: newInAppUserImage);
+  //
+  //   await dbManager.changeProfileImage(updateCurrentUser);
+  //   currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
+  // }
+
+  Future<void> changeProfile(
+    String inAppUserImage,
+    String sex,
+    String era,
+    String address,
+    String bio,
+  ) async {
     final currentUserBeforeUpdate =
         await dbManager.getUserInfoFromDbById(currentUser!.userId);
-    final updateCurrentUser =
-        currentUserBeforeUpdate.copyWith(inAppUserImage: newInAppUserImage);
+    final updateCurrentUser = currentUserBeforeUpdate.copyWith(
+      inAppUserImage: inAppUserImage,
+      sex: sex,
+      era: era,
+      address: address,
+      bio: bio,
+    );
 
-    await dbManager.changeProfileImage(updateCurrentUser);
+    await dbManager.changeProfile(updateCurrentUser);
     currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
   }
 }

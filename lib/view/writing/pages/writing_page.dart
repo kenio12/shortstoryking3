@@ -78,7 +78,7 @@ class _WritingPageState extends State<WritingPage> {
             child: Column(
               children: [
                 TextFormField(
-                  autofocus: true,
+                  // autofocus: true,
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   inputFormatters: [
@@ -99,7 +99,7 @@ class _WritingPageState extends State<WritingPage> {
                   ),
                 ),
                 TextFormField(
-                  autofocus: true,
+                  // autofocus: true,
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
@@ -136,12 +136,14 @@ class _WritingPageState extends State<WritingPage> {
       showAlertDialog(
         title: "おいおい",
         content: "タイトルないでー、やりなおしやー",
+        message: "でなおす",
         context: context,
       );
     } else if (_novelContent == "") {
       showAlertDialog(
         title: "おいおい",
         content: "小説がないでー、やりなおしやー",
+        message: "でなおす",
         context: context,
       );
     } else {

@@ -4,9 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
 class StatefulMyProfileImageDetail extends StatefulWidget {
+  final ScrollController scrollController;
+
+  StatefulMyProfileImageDetail({required this.scrollController});
+
   @override
   State<StatefulMyProfileImageDetail> createState() =>
       _StatefulMyProfileImageDetail();
@@ -16,6 +21,7 @@ class _StatefulMyProfileImageDetail
     extends State<StatefulMyProfileImageDetail> {
   String _inAppUserImage = "";
   String _sex = "";
+
   // int _age = 0;
   String _era = "";
   String _address = "";
@@ -129,7 +135,7 @@ class _StatefulMyProfileImageDetail
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: _width / 2 - 180,right: 50),
+          padding: EdgeInsets.only(left: _width / 2 - 180, right: 50),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -141,8 +147,8 @@ class _StatefulMyProfileImageDetail
                   ),
                   DropdownButton<String>(
                       value: _sex,
-                      items:
-                          _sexList.map<DropdownMenuItem<String>>((String value) {
+                      items: _sexList
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -169,8 +175,8 @@ class _StatefulMyProfileImageDetail
                   ),
                   DropdownButton<String>(
                       value: _era,
-                      items:
-                      _eraList.map<DropdownMenuItem<String>>((String value) {
+                      items: _eraList
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -196,8 +202,8 @@ class _StatefulMyProfileImageDetail
                   ),
                   DropdownButton<String>(
                       value: _address,
-                      items:
-                      _addressList.map<DropdownMenuItem<String>>((String value) {
+                      items: _addressList
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -218,38 +224,59 @@ class _StatefulMyProfileImageDetail
               Row(
                 children: [
                   Text(
-                    "自己紹介：",
+                    "自己紹介：　",
                     style: profileTextStyle,
                   ),
-                  FaIcon(FontAwesomeIcons.angleDown,color: Colors.black ,),
+                  FaIcon(
+                    FontAwesomeIcons.arrowDown,
+                    color: Colors.black,
+                  ),
                 ],
               ),
-              TextFormField(
-                autofocus: true,
-                cursorColor: Colors.black,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                style: profileTextStyle,
-                controller: _bioController,
-                maxLength: 100,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
-                  hintText: "ここに自己紹介入力",
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide.none,
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(width: 1)),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    // autofocus: true,
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    style: TextStyle(fontSize: 30.0,fontFamily: NovelSararaBFont),
+                    controller: _bioController,
+                    maxLength: 100,
+                    decoration: InputDecoration(
+                      border:
+                          OutlineInputBorder(borderSide: BorderSide(width: 1)),
+                      hintText: "ここに自己紹介入力",
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Container(
                 alignment: Alignment.topRight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.black87,
                   ),
-                  onPressed: ()=>null,
-                  child: Text("このプロフィールで保存？"),),
+                  onPressed: () {
+                    _changeProfile(_inAppUserImage, _sex, _era, _address,
+                        _bioController.text, widget.scrollController);
+                  },
+                  child: Text("このプロフィールにする？"),
+                ),
               ),
             ],
           ),
@@ -278,6 +305,37 @@ class _StatefulMyProfileImageDetail
     }
     _inAppUserImage = inAppUserImage;
     setState(() {});
+  }
+
+  void _changeProfile(
+    String inAppUserImage,
+    String sex,
+    String era,
+    String address,
+    String text,
+    ScrollController scrollController,
+  ) async {
+    final profileViewModel = context.read<ProfileViewModel>();
+    await profileViewModel.changeProfile(
+      inAppUserImage,
+      sex,
+      era,
+      address,
+      text,
+    );
+    primaryFocus?.unfocus();
+    setState(() {});
+    scrollController.animateTo(
+      0,
+      duration: Duration(microseconds: 2),
+      curve: Curves.linear,
+    );
+    showAlertDialog(
+      title: "プロフィール",
+      content: "変えたでー",
+      message: "はいはい",
+      context: context,
+    );
   }
 }
 

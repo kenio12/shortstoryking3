@@ -3,7 +3,7 @@ import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/models/repositories/novel_repository.dart';
 import 'package:shortstoryking3/models/repositories/user_repository.dart';
 
-class ProfileViewModel extends ChangeNotifier{
+class ProfileViewModel extends ChangeNotifier {
   final UserRepository userRepository;
   final NovelRepository novelRepository;
 
@@ -13,15 +13,27 @@ class ProfileViewModel extends ChangeNotifier{
   });
 
   late User profileUser;
+
   User get currentUser => UserRepository.currentUser!;
 
- Future<void> signOut() async{
-   await userRepository.signOut();
-       notifyListeners();
- }
+  Future<void> signOut() async {
+    await userRepository.signOut();
+    notifyListeners();
+  }
 
- Future<void> changeProfileImage(String inAppUserImage) async{
-  await userRepository.changeProfileImage(inAppUserImage);
-  notifyListeners();
- }
+  // Future<void> changeProfileImage(String inAppUserImage) async {
+  //   await userRepository.changeProfileImage(inAppUserImage);
+  //   notifyListeners();
+  // }
+
+ Future<void> changeProfile(
+    String inAppUserImage,
+    String sex,
+    String era,
+    String address,
+    String bio,
+  ) async{
+    await userRepository.changeProfile(inAppUserImage, sex, era, address, bio);
+
+  }
 }
