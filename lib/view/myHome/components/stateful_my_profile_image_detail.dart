@@ -14,11 +14,23 @@ class StatefulMyProfileImageDetail extends StatefulWidget {
 class _StatefulMyProfileImageDetail
     extends State<StatefulMyProfileImageDetail> {
   String _inAppUserImage = "";
-  String _sex =  "";
+  String _sex = "";
   int _age = 0;
   String _address = "";
   String _bio = "";
   double _width = 0.0;
+
+  List<String> _sexList = [
+    '',
+    '男',
+    '女',
+  ];
+
+  List<String> sexList = [
+    '',
+    '男',
+    '女',
+  ];
 
   @override
   void initState() {
@@ -60,48 +72,86 @@ class _StatefulMyProfileImageDetail
             ),
           ),
         ),
-
-
-      Padding(
-        padding: EdgeInsets.only(left: _width/2-140),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Text("性　　別：",style: profileTextStyle,),
-                Text(" 　${_sex}",style: profileTextStyle,)
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              children: [
-                Text("年　　齢：",style: profileTextStyle,),
-                Text(" 　${_age}　歳",style: profileTextStyle,)
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              children: [
-                Text("住　　処：",style: profileTextStyle,),
-                Text(" 　${_address}",style: profileTextStyle,)
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              children: [
-                Text("自己紹介：",style: profileTextStyle,),
-              ],
-            ),
-            Text("${_bio}",
-              style: profileTextStyle,
-              softWrap: true,),
-          ],
-
+        Padding(
+          padding: EdgeInsets.only(left: _width / 2 - 140),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "性　　別：　",
+                    style: profileTextStyle,
+                  ),
+                  DropdownButton<String>(
+                      value: _sex,
+                      items:
+                          _sexList.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: profileTextStyle,
+                            ));
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          _sex = value!;
+                        });
+                      })
+                  // Text(" 　${_sex}",style: profileTextStyle,)
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "年　　齢：",
+                    style: profileTextStyle,
+                  ),
+                  Text(
+                    " 　${_age}　歳",
+                    style: profileTextStyle,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "住　　処：",
+                    style: profileTextStyle,
+                  ),
+                  Text(
+                    " 　${_address}",
+                    style: profileTextStyle,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "自己紹介：",
+                    style: profileTextStyle,
+                  ),
+                ],
+              ),
+              Text(
+                "${_bio}",
+                style: profileTextStyle,
+                softWrap: true,
+              ),
+            ],
+          ),
         ),
-      ),
       ],
-
     );
   }
 
@@ -124,8 +174,7 @@ class _StatefulMyProfileImageDetail
         break;
     }
     _inAppUserImage = inAppUserImage;
-    setState(() {
-    });
+    setState(() {});
   }
 }
 
