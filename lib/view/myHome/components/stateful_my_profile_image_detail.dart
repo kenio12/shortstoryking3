@@ -97,6 +97,7 @@ class _StatefulMyProfileImageDetail
   void initState() {
     final profileViewModel = context.read<ProfileViewModel>();
     final User currentUser = profileViewModel.currentUser;
+    _sex = currentUser.sex;
     _inAppUserImage = currentUser.inAppUserImage;
     // _age = currentUser.age;
     _era = currentUser.era;
@@ -122,11 +123,18 @@ class _StatefulMyProfileImageDetail
                       border: Border.all(color: Colors.black, width: 3)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      _inAppUserImage,
-                      fit: BoxFit.contain,
-                      width: 280,
-                      height: 280,
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          _inAppUserImage,
+                          fit: BoxFit.contain,
+                          width: 280,
+                          height: 280,
+                        ),
+                        Positioned(
+                            right: 0,
+                            child: Text("LV1",style: profileTextStyle,)),
+                      ],
                     ),
                   ),
                 ),
