@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shortstoryking3/view/myHome/components/my_home_setting_part.dart';
 import 'package:shortstoryking3/view/myHome/components/my_profile_detail.dart';
 import 'package:shortstoryking3/view/myHome/components/my_profile_image.dart';
+import 'package:shortstoryking3/view/myHome/components/stateful_my_profile_image_detail.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -30,8 +31,9 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-        MyProfileImage(),
-        MyProfileDetail(),
+          StatefulMyProfileImageDetail(),
+        // MyProfileImage(),
+        // MyProfileDetail(),
       ],)
     );
   }

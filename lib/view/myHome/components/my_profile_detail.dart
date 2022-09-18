@@ -49,11 +49,9 @@ class _MyProfileDetailState extends State<MyProfileDetail> {
           Row(
             children: [
               Text("自己紹介：",style: profileTextStyle,),
-
-              // Text("${currentUser.bio}",style: profileTextStyle,)
             ],
           ),
-          Text("もおおおおおおおおおおおおおおおおおおおお",
+            Text("${currentUser.bio}",
             style: profileTextStyle,
             softWrap: true,),
         ],

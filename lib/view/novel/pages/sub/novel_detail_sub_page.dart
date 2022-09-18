@@ -31,10 +31,7 @@ class NovelDetailSubPage extends StatelessWidget {
                       child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
                   ),
                   SizedBox(height: 30),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(" タイトル",style: TextStyle(color: Colors.grey)),
-                  ),
+
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
@@ -47,22 +44,28 @@ class NovelDetailSubPage extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text("${selectedNovel.title}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              // letterSpacing: 6.0,
-                              fontFamily: NovelSararaBFont,
-                              fontSize: 30,
-                              // backgroundColor: Colors.white,
-                              letterSpacing: 10,
-                              // shadows:[
-                              //    Shadow(
-                              //      blurRadius: 80.0,
-                              //    ),
-                              // ]
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.topLeft,
+                              child: Text(" タイトル",style: TextStyle(color: Colors.grey)),
                             ),
-                          ),
+                            Text("${selectedNovel.title}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                // letterSpacing: 6.0,
+                                fontFamily: NovelSararaBFont,
+                                fontSize: 30,
+                                // backgroundColor: Colors.white,
+                                letterSpacing: 10,
+                                // shadows:[
+                                //    Shadow(
+                                //      blurRadius: 80.0,
+                                //    ),
+                                // ]
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -105,10 +108,8 @@ class NovelDetailSubPage extends StatelessWidget {
                   Container(
                     alignment: Alignment.topRight,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("  以下本文",style: TextStyle(fontSize: 16,
-                            color: Colors.grey),),
                         Text("総文字数：${selectedNovel.content.length}文字　",
                           style: TextStyle(fontSize: 16,
                           ),),
@@ -118,6 +119,12 @@ class NovelDetailSubPage extends StatelessWidget {
                   Divider(
                     color: Colors.black26,
                     thickness: 1.0,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    alignment: Alignment.topLeft,
+                    child: Text("  以下本文",style: TextStyle(fontSize: 16,
+                        color: Colors.grey),),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
