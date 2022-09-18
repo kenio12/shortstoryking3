@@ -29,12 +29,9 @@ class MyHomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          StatefulMyProfileImageDetail(),
-        // MyProfileImage(),
-        // MyProfileDetail(),
-      ],)
+      body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: StatefulMyProfileImageDetail(),)
     );
   }
 }

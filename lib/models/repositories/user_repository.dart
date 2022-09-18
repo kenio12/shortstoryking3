@@ -101,6 +101,7 @@ class UserRepository {
       address: "",
       sex: "",
       age: 0,
+      era: "",
     );
   }
 

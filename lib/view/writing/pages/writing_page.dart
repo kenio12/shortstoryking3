@@ -74,9 +74,11 @@ class _WritingPageState extends State<WritingPage> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
                 TextFormField(
+                  autofocus: true,
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   inputFormatters: [
@@ -97,6 +99,7 @@ class _WritingPageState extends State<WritingPage> {
                   ),
                 ),
                 TextFormField(
+                  autofocus: true,
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,

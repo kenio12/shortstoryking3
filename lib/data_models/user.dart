@@ -7,6 +7,7 @@ class User {
   final String address;
   final String sex;
   final int age;
+  final String era;
 
 //<editor-fold desc="Data Methods">
 
@@ -19,6 +20,7 @@ class User {
     required this.address,
     required this.sex,
     required this.age,
+    required this.era,
   });
 
   @override
@@ -33,7 +35,9 @@ class User {
           bio == other.bio &&
           address == other.address &&
           sex == other.sex &&
-          age == other.age);
+          age == other.age &&
+          era == other.era
+      );
 
   @override
   int get hashCode =>
@@ -44,7 +48,9 @@ class User {
       bio.hashCode ^
       address.hashCode ^
       sex.hashCode ^
-      age.hashCode;
+      age.hashCode ^
+      era.hashCode
+  ;
 
   @override
   String toString() {
@@ -57,6 +63,7 @@ class User {
         ' address: $address,' +
         ' sex: $sex,' +
         ' age: $age,' +
+        ' era: $era,' +
         '}';
   }
 
@@ -69,6 +76,7 @@ class User {
     String? address,
     String? sex,
     int? age,
+    String? era,
   }) {
     return User(
       userId: userId ?? this.userId,
@@ -79,6 +87,7 @@ class User {
       address: address ?? this.address,
       sex: sex ?? this.sex,
       age: age ?? this.age,
+      era: era ?? this.era,
     );
   }
 
@@ -92,6 +101,7 @@ class User {
       'address': this.address,
       'sex': this.sex,
       'age': this.age,
+      'era': this.era,
     };
   }
 
@@ -105,6 +115,7 @@ class User {
       address: map['address'] as String,
       sex: map['sex'] as String,
       age: map['age'] as int,
+      era: map['era'] as String,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
@@ -15,21 +16,75 @@ class _StatefulMyProfileImageDetail
     extends State<StatefulMyProfileImageDetail> {
   String _inAppUserImage = "";
   String _sex = "";
-  int _age = 0;
+  // int _age = 0;
+  String _era = "";
   String _address = "";
   String _bio = "";
   double _width = 0.0;
+  TextEditingController _bioController = TextEditingController();
 
   List<String> _sexList = [
     '',
-    '男',
-    '女',
+    '男性',
+    '女性',
   ];
 
-  List<String> sexList = [
+  List<String> _eraList = [
     '',
-    '男',
-    '女',
+    '３９歳まで',
+    '４０歳以上',
+  ];
+
+  List<String> _addressList = [
+    '',
+    '外国',
+    '北海道',
+    '青森県',
+    '岩手県',
+    '宮城県',
+    '秋田県',
+    '山形県',
+    '福島県',
+    '茨城県',
+    '栃木県',
+    '群馬県',
+    '埼玉県',
+    '千葉県',
+    '東京都',
+    '神奈川県',
+    '新潟県',
+    '富山県',
+    '石川県',
+    '福井県',
+    '山梨県',
+    '長野県',
+    '岐阜県',
+    '静岡県',
+    '愛知県',
+    '三重県',
+    '滋賀県',
+    '京都府',
+    '大阪府',
+    '兵庫県',
+    '奈良県',
+    '和歌山県',
+    '鳥取県',
+    '島根県',
+    '岡山県',
+    '広島県',
+    '山口県',
+    '徳島県',
+    '香川県',
+    '愛媛県',
+    '高知県',
+    '福岡県',
+    '佐賀県',
+    '長崎県',
+    '熊本県',
+    '大分県',
+    '宮崎県',
+    '鹿児島県',
+    '沖縄県',
   ];
 
   @override
@@ -37,16 +92,17 @@ class _StatefulMyProfileImageDetail
     final profileViewModel = context.read<ProfileViewModel>();
     final User currentUser = profileViewModel.currentUser;
     _inAppUserImage = currentUser.inAppUserImage;
-    _age = currentUser.age;
+    // _age = currentUser.age;
+    _era = currentUser.era;
     _address = currentUser.address;
-    _bio = currentUser.bio;
+
+    _bioController.text = currentUser.bio;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
-
     return Column(
       children: [
         Center(
@@ -73,7 +129,7 @@ class _StatefulMyProfileImageDetail
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: _width / 2 - 140),
+          padding: EdgeInsets.only(left: _width / 2 - 180,right: 50),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -103,37 +159,61 @@ class _StatefulMyProfileImageDetail
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Row(
                 children: [
                   Text(
-                    "年　　齢：",
+                    "年　　代：　",
                     style: profileTextStyle,
                   ),
-                  Text(
-                    " 　${_age}　歳",
-                    style: profileTextStyle,
-                  )
+                  DropdownButton<String>(
+                      value: _era,
+                      items:
+                      _eraList.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: profileTextStyle,
+                            ));
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          _era = value!;
+                        });
+                      })
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Row(
                 children: [
                   Text(
-                    "住　　処：",
+                    "住　　処：　",
                     style: profileTextStyle,
                   ),
-                  Text(
-                    " 　${_address}",
-                    style: profileTextStyle,
-                  )
+                  DropdownButton<String>(
+                      value: _address,
+                      items:
+                      _addressList.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: profileTextStyle,
+                            ));
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          _address = value!;
+                        });
+                      })
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Row(
                 children: [
@@ -141,12 +221,35 @@ class _StatefulMyProfileImageDetail
                     "自己紹介：",
                     style: profileTextStyle,
                   ),
+                  FaIcon(FontAwesomeIcons.angleDown,color: Colors.black ,),
                 ],
               ),
-              Text(
-                "${_bio}",
+              TextFormField(
+                autofocus: true,
+                cursorColor: Colors.black,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
                 style: profileTextStyle,
-                softWrap: true,
+                controller: _bioController,
+                maxLength: 100,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
+                  hintText: "ここに自己紹介入力",
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              SizedBox(height: 5,),
+              Container(
+                alignment: Alignment.topRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black87,
+                  ),
+                  onPressed: ()=>null,
+                  child: Text("このプロフィールで保存？"),),
               ),
             ],
           ),

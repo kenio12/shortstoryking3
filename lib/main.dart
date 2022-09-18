@@ -63,7 +63,9 @@ class MyApp extends StatelessWidget {
         future: loginViewModel.isSighIn(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasData && snapshot.data == true) {
-            return HomeScreen();
+            return GestureDetector(
+                onTap:() => primaryFocus?.unfocus(),
+                child: HomeScreen(),);
           } else {
             return LoginScreen();
           }
