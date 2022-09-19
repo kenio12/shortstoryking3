@@ -6,6 +6,7 @@ import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/change_japanease_day.dart';
+import 'package:shortstoryking3/view/common/dialog/conpact_change_japanease_day.dart';
 import 'package:shortstoryking3/view/novel/components/feed_novel_tile.dart';
 import 'package:shortstoryking3/view/novel/pages/sub/novel_detail_sub_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
@@ -45,77 +46,76 @@ class FeedNovelSubPage extends StatelessWidget {
                       physics: AlwaysScrollableScrollPhysics(),
                       itemCount: model.novels!.length,
                       itemBuilder: (context, index) {
-                        final Novel novel = model.novels![index];
+                        final List<Novel> novels = model.novels!;
+                        final Novel selectedNovel = model.novels![index];
                         return Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: InkWell(
                             splashColor: Colors.black,
-                            onTap: () =>
-                                model.changeNovelDetailSubPage(novel.novelId,index),
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              color: Colors.white,
-                              child: FutureBuilder(
-                                future: model.getNovelUserInfo(
-                                    model.novels?[index].userId),
-                                builder:
-                                    (context, AsyncSnapshot<User> snapshot) {
-                                  if (snapshot.hasData &&
-                                      snapshot.data != null) {
-                                    final novelUser = snapshot.data!;
-                                    final currentUser = model.currentUser;
+                            onLongPress: () => model.changeNovelDetailSubPage(
+                                selectedNovel.novelId, index),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Colors.white24.withOpacity(0.2),
+                                child: FutureBuilder(
+                                  future: model
+                                      .getNovelUserInfo(selectedNovel.userId),
+                                  builder:
+                                      (context, AsyncSnapshot<User> snapshot) {
+                                    if (snapshot.hasData &&
+                                        snapshot.data != null) {
+                                      final selectedNovelUser = snapshot.data!;
+                                      final currentUser = model.currentUser;
 
-                                    //model.novels?[index].postDateTime
-                                    return ListTile(
-                                      // dense: true,
-                                      title: Text(
-                                        "${model.novels?[index].title}",
-                                        style: TextStyle(
-                                            fontFamily: NovelSararaBFont,
-                                            fontSize: 20),
-                                      ),
-                                      subtitle: Column(
+                                      //model.novels?[index].postDateTime
+                                      child:
+                                      return Row(
                                         children: [
-                                          Row(
+                                          Expanded(
+                                            flex: 5,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Image.asset(
+                                              selectedNovelUser.inAppUserImage,
+                                              fit: BoxFit.contain,
+                                              width: 120,
+                                              height: 120,
+                                            ),
+                                          ),),
+                                          Expanded(
+                                            flex: 1,
+                                            child: SizedBox(width: 2,),
+                                          ),
+                                        Expanded(
+                                          flex: 10,
+                                          child:  Column(
                                             children: [
-                                              ChangeJapaneaseDay(
-                                                postDateTime: model
-                                                    .novels![index]
-                                                    .postDateTime,
-                                              ),
                                               Text(
-                                                "　文字数${model.novels?[index].content.length}文字"
-                                                // 改行消したいが、これでは無理っぽい。
-                                                ,
+                                                "${selectedNovel.title}",
                                                 style: TextStyle(
-                                                    fontFamily:
-                                                        NovelSararaRFont,
-                                                    color: Colors.black,
-                                                    fontSize: 18),
+                                                  fontFamily: NovelSararaBFont,
+                                                  fontSize: 25,),
+                                                overflow: TextOverflow.fade,
+                                                textAlign: TextAlign.start,
                                               ),
+                                              ConpactChangeJapaneaseDay(
+                                                  postDateTime:
+                                                  selectedNovel.postDateTime),
                                             ],
                                           ),
-                                          Container(
-                                            width: double.infinity,
-                                            child: Text(
-                                              "作　${(novelUser.inAppUserName)}",
-                                              textAlign: TextAlign.right,
-                                              style: TextStyle(
-                                                  fontFamily: NovelSararaRFont,
-                                                  color: Colors.black,
-                                                  fontSize: 18),
-                                            ),
-                                          ),
+                                        ),
+
                                         ],
-                                      ),
-                                      tileColor: Colors.white10,
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                },
+                                      );
+                                    } else {
+                                      return Container();
+                                    }
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -136,3 +136,58 @@ class FeedNovelSubPage extends StatelessWidget {
     );
   }
 }
+
+// ListTileではうまくいかない。
+//   ListTile(
+//   leading: Image.asset(
+//     novelUser.inAppUserImage,
+//     fit: BoxFit.contain,
+//     width: 120,
+//     height: 120,
+//   ),
+//
+//   // dense: true,
+//   title: Text(
+//     "${model.novels?[index].title}",
+//     style: TextStyle(
+//         fontFamily: NovelSararaBFont,
+//         fontSize: 20),
+//   ),
+//   subtitle: Column(
+//     children: [
+//       Row(
+//         mainAxisAlignment:
+//             MainAxisAlignment.spaceBetween,
+//         children: [
+//           ConpactChangeJapaneaseDay(
+//             postDateTime: model
+//                 .novels![index]
+//                 .postDateTime,
+//           ),
+//           Text(
+//             "${model.novels?[index].content.length}文字"
+//             // 改行消したいが、これでは無理っぽい。
+//             ,
+//             style: TextStyle(
+//                 fontFamily:
+//                     NovelSararaRFont,
+//                 color: Colors.black,
+//                 fontSize: 18),
+//           ),
+//         ],
+//       ),
+//       Container(
+//         width: double.infinity,
+//         child: Text(
+//           "作　${(novelUser.inAppUserName)}",
+//           textAlign: TextAlign.left,
+//           style: TextStyle(
+//               fontFamily: NovelSararaRFont,
+//               color: Colors.black,
+//               fontSize: 18),
+//         ),
+//       ),
+//     ],
+//   ),
+//   tileColor: Colors.white10,
+// );

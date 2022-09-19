@@ -22,104 +22,158 @@ class NovelDetailSubPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 30),
-                  Container(
-                    alignment: Alignment.topRight,
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: ElevatedButton(
-                      onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
-                      child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
-                  ),
-                  SizedBox(height: 30),
 
                   Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(3.0),
                     child: Container(
-                      // width: double.infinity,
-                      padding: const EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black54, width: 5),
-                        borderRadius: BorderRadius.circular(9.0),
-                        color: Colors.white
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: Text(" タイトル",style: TextStyle(color: Colors.grey)),
-                            ),
-                            Text("${selectedNovel.title}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                // letterSpacing: 6.0,
-                                fontFamily: NovelSararaBFont,
-                                fontSize: 30,
-                                // backgroundColor: Colors.white,
-                                letterSpacing: 10,
-                                // shadows:[
-                                //    Shadow(
-                                //      blurRadius: 80.0,
-                                //    ),
-                                // ]
+                      color: Colors.black26,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 30),
+                          Container(
+                            alignment: Alignment.topRight,
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: ElevatedButton(
+                              onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
+                              child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
+                          ),
+                          SizedBox(height: 30),
+
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              // width: double.infinity,
+                              padding: const EdgeInsets.all(5.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black54, width: 5),
+                                  borderRadius: BorderRadius.circular(9.0),
+                                  color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(" タイトル",style: TextStyle(color: Colors.grey)),
+                                    ),
+                                    Text("${selectedNovel.title}",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        // letterSpacing: 6.0,
+                                        fontFamily: NovelSararaBFont,
+                                        fontSize: 30,
+                                        // backgroundColor: Colors.white,
+                                        letterSpacing: 10,
+                                        // shadows:[
+                                        //    Shadow(
+                                        //      blurRadius: 80.0,
+                                        //    ),
+                                        // ]
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Padding(
-                    padding: const EdgeInsets.only(right:20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                      ChangeJapaneaseDay(postDateTime: selectedNovel.postDateTime),
-                    ],),
-                  ),
-                  FutureBuilder(
-                      future: feedNovelViewPage.getNovelUserInfo(
-                          selectedNovel.userId),
-                      builder: (context, AsyncSnapshot<User> snapshot) {
-                        if (snapshot.hasData && snapshot.data != null) {
-                          final novelUser = snapshot.data!;
-                          return Container(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: Text(
-                                    "作　${novelUser.inAppUserName}"
-                                    ,style: TextStyle(
-                                        fontFamily: NovelSararaBFont,
-                                  fontSize: 25.0
-                                ),
-                                ),
-                              )
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }
-                  ),
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child:
+                                    FutureBuilder(
+                                    future: feedNovelViewPage.getNovelUserInfo(
+                                            selectedNovel.userId),
+                                            builder: (context, AsyncSnapshot<User> snapshot) {
+                                            if (snapshot.hasData && snapshot.data != null) {
+                                              final selectedNovelUser = snapshot.data!;
+                                            return Image.asset(
+                                              selectedNovelUser.inAppUserImage,
+                                              fit: BoxFit.contain,
+                                              width: 120,
+                                              height: 120,
+                                            );
+                                            } else {
+                                              return Container();
+                                            }
+                                            }
+                                    )
 
-                  SizedBox(height: 20.0),
-                  Container(
-                    alignment: Alignment.topRight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text("総文字数：${selectedNovel.content.length}文字　",
-                          style: TextStyle(fontSize: 16,
-                          ),),
-                      ],
+
+
+
+                                  )
+
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(right:20.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            ChangeJapaneaseDay(postDateTime: selectedNovel.postDateTime),
+                                          ],),
+                                      ),
+                                      FutureBuilder(
+                                          future: feedNovelViewPage.getNovelUserInfo(
+                                              selectedNovel.userId),
+                                          builder: (context, AsyncSnapshot<User> snapshot) {
+                                            if (snapshot.hasData && snapshot.data != null) {
+                                              final novelUser = snapshot.data!;
+                                              return Container(
+                                                  alignment: Alignment.topRight,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(right: 20.0),
+                                                    child: Text(
+                                                      "作　${novelUser.inAppUserName}"
+                                                      ,style: TextStyle(
+                                                        fontFamily: NovelSararaBFont,
+                                                        fontSize: 25.0
+                                                    ),
+                                                    ),
+                                                  )
+                                              );
+                                            } else {
+                                              return Container();
+                                            }
+                                          }
+                                      ),
+
+                                      SizedBox(height: 20.0),
+                                      Container(
+                                        alignment: Alignment.topRight,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text("総文字数：${selectedNovel.content.length}文字　",
+                                              style: TextStyle(fontSize: 16,
+                                              ),),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 10,),
+                                    ],
+                                  ))
+                            ],
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
                   Divider(
                     color: Colors.black26,
                     thickness: 1.0,
                   ),
+                  SizedBox(height: 10,),
+
                   Container(
                     width: double.infinity,
                     alignment: Alignment.topLeft,
