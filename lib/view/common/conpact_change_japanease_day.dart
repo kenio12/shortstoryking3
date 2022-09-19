@@ -12,6 +12,8 @@ class ConpactChangeJapaneaseDay extends StatelessWidget {
     final String? hour = postDateTime.hour.toString();
 
     return Text("${year}年${month}月${day}日 ${hour}時"
-    ,style: TextStyle(fontSize: 18,fontFamily: NovelSararaBFont),);
+    ,style: TextStyle(fontSize: 18,fontFamily: NovelSararaBFont),
+      textAlign: TextAlign.left,
+    );
   }
 }

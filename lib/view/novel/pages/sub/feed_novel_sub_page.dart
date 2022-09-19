@@ -6,7 +6,7 @@ import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/change_japanease_day.dart';
-import 'package:shortstoryking3/view/common/dialog/conpact_change_japanease_day.dart';
+import 'package:shortstoryking3/view/common/conpact_change_japanease_day.dart';
 import 'package:shortstoryking3/view/novel/components/feed_novel_tile.dart';
 import 'package:shortstoryking3/view/novel/pages/sub/novel_detail_sub_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
@@ -77,38 +77,81 @@ class FeedNovelSubPage extends StatelessWidget {
                                         children: [
                                           Expanded(
                                             flex: 5,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.asset(
-                                              selectedNovelUser.inAppUserImage,
-                                              fit: BoxFit.contain,
-                                              width: 120,
-                                              height: 120,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.only(left: 10.0,top:10.0),
+                                              child: Image.asset(
+                                                selectedNovelUser
+                                                    .inAppUserImage,
+                                                fit: BoxFit.contain,
+                                                width: 120,
+                                                height: 120,
+                                              ),
                                             ),
-                                          ),),
+                                          ),
                                           Expanded(
                                             flex: 1,
-                                            child: SizedBox(width: 2,),
+                                            child: SizedBox(
+                                              width: 2,
+                                            ),
                                           ),
-                                        Expanded(
-                                          flex: 10,
-                                          child:  Column(
-                                            children: [
-                                              Text(
-                                                "${selectedNovel.title}",
-                                                style: TextStyle(
-                                                  fontFamily: NovelSararaBFont,
-                                                  fontSize: 25,),
-                                                overflow: TextOverflow.fade,
-                                                textAlign: TextAlign.start,
-                                              ),
-                                              ConpactChangeJapaneaseDay(
-                                                  postDateTime:
-                                                  selectedNovel.postDateTime),
-                                            ],
-                                          ),
-                                        ),
+                                          Expanded(
+                                            flex: 10,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  child: Text(
+                                                    "${selectedNovel.title}",
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          NovelSararaBFont,
+                                                      fontSize: 25,
+                                                    ),
+                                                    overflow: TextOverflow.fade,
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: double.infinity,
+                                                  child:
+                                                      ConpactChangeJapaneaseDay(
+                                                          postDateTime:
+                                                              selectedNovel
+                                                                  .postDateTime),
+                                                ),
+                                                //           Text(
 
+                                                Container(
+                                                  width: double.infinity,
+                                                  child: Text(
+                                                    "${selectedNovel.content.length}文字",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            NovelSararaRFont,
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: double.infinity,
+                                                  child: Text(
+                                                    "作　${(selectedNovelUser.inAppUserName)}",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            NovelSararaRFont,
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                    textAlign: TextAlign.left,
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       );
                                     } else {
