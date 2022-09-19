@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/models/repositories/novel_repository.dart';
 import 'package:shortstoryking3/models/repositories/user_repository.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   final UserRepository userRepository;
@@ -14,10 +15,13 @@ class ProfileViewModel extends ChangeNotifier {
 
   late User profileUser;
 
+  late MyHomeMode myHomeMode = MyHomeMode.NORMAL_PROFILE;
+
   User get currentUser => UserRepository.currentUser!;
 
   Future<void> signOut() async {
     await userRepository.signOut();
+    myHomeMode = MyHomeMode.NORMAL_PROFILE;
     notifyListeners();
   }
 
@@ -26,14 +30,32 @@ class ProfileViewModel extends ChangeNotifier {
   //   notifyListeners();
   // }
 
- Future<void> changeProfile(
+  Future<void> changeProfile(
     String inAppUserImage,
     String sex,
     String era,
     String address,
     String bio,
-  ) async{
-    await userRepository.changeProfile(inAppUserImage, sex, era, address, bio);
+    String inAppUserName,
+  ) async {
+    await userRepository.changeProfile(
+      inAppUserImage,
+      sex,
+      era,
+      address,
+      bio,
+      inAppUserName,
+    );
+    ChangeNotifier();
+  }
 
+  void changeEditMyProfile() {
+    myHomeMode = MyHomeMode.EDIT_PROFILE;
+    notifyListeners();
+  }
+
+  void changeNormalMyProfile() {
+    myHomeMode = MyHomeMode.NORMAL_PROFILE;
+    notifyListeners();
   }
 }

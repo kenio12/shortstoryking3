@@ -16,3 +16,9 @@ enum MyHomeMode{
   EDIT_PROFILE,
   NORMAL_PROFILE
 }
+
+enum MyProfileSettingMenu{
+  LOG_OUT,
+  EDIT_PROFILE,
+  NORMAL_PROFILE,
+}

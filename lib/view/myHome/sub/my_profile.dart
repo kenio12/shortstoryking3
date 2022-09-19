@@ -122,10 +122,10 @@ class MyProfile extends StatelessWidget {
                     "自己紹介：　",
                     style: profileTextStyle,
                   ),
-                  FaIcon(
-                    FontAwesomeIcons.arrowDown,
-                    color: Colors.black,
-                  ),
+                  // FaIcon(
+                  //   FontAwesomeIcons.arrowDown,
+                  //   color: Colors.black,
+                  // ),
                 ],
               ),
               SizedBox(
@@ -133,15 +133,20 @@ class MyProfile extends StatelessWidget {
               ),
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(width: 1)),
+                decoration: BoxDecoration(color: Colors.black12,
+                    //     borderRadius: BorderRadius.circular(8),
+                    //     border: Border.all(width: 1)
+                    ),
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     "${_bio}",
-                    style: profileTextStyle,
-                  ), //
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontFamily: NovelSararaBFont,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(

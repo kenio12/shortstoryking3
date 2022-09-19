@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,14 @@ class EditMyProfile extends StatefulWidget {
   EditMyProfile({required this.scrollController});
 
   @override
-  State<EditMyProfile> createState() =>
-      _EditMyProfile();
+  State<EditMyProfile> createState() => _EditMyProfile();
 }
 
-class _EditMyProfile
-    extends State<EditMyProfile> {
+class _EditMyProfile extends State<EditMyProfile> {
+  String _twitterName = "";
+  String _inAppUserName = "";
+  String _checkName = "";
+
   String _inAppUserImage = "";
   String _sex = "";
 
@@ -27,6 +30,7 @@ class _EditMyProfile
   String _address = "";
   String _bio = "";
   double _width = 0.0;
+  TextEditingController _inAppUserNameController = TextEditingController();
   TextEditingController _bioController = TextEditingController();
 
   List<String> _sexList = [
@@ -97,12 +101,19 @@ class _EditMyProfile
   void initState() {
     final profileViewModel = context.read<ProfileViewModel>();
     final User currentUser = profileViewModel.currentUser;
+
+    _twitterName = currentUser.twitterName;
+    if (_twitterName != "") {_checkName = _twitterName;}
+
+    _inAppUserName = currentUser.inAppUserName;
+
     _sex = currentUser.sex;
     _inAppUserImage = currentUser.inAppUserImage;
     // _age = currentUser.age;
     _era = currentUser.era;
     _address = currentUser.address;
 
+    _inAppUserNameController.text = currentUser.inAppUserName;
     _bioController.text = currentUser.bio;
     super.initState();
   }
@@ -131,7 +142,7 @@ class _EditMyProfile
                             height: 40,
                             width: 40,
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(width: 2)),
                             child: Center(
@@ -161,6 +172,50 @@ class _EditMyProfile
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              (_inAppUserName == _checkName) ?
+              Row(
+                children: [
+                  Text(
+                    "名　　前：名前の設定は１回のみ",
+                    style: profileTextStyle,
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.arrowDown,
+                    color: Colors.black,
+                  ),
+                ],
+              )
+              : Container()
+              ,
+              (_inAppUserName == _checkName) ?
+              TextFormField(
+                // autofocus: true,
+                cursorColor: Colors.black,
+                keyboardType: TextInputType.multiline,
+                inputFormatters: [
+                  FilteringTextInputFormatter.singleLineFormatter
+                ],
+                maxLines: null,
+                style: profileTextStyle,
+                controller: _inAppUserNameController,
+                maxLength: 15,
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(
+                      fontFamily: NovelSararaBFont, color: Colors.black),
+                  hintText: "名前は一度だけ。心せよ！",
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 2),
+                  ),
+                ),
+              )
+              : Container()
+              ,
+              (_inAppUserName == _checkName) ?
+              SizedBox(
+                height: 5.0,
+              )
+              : Container()
+              ,
               Row(
                 children: [
                   Text(
@@ -272,7 +327,7 @@ class _EditMyProfile
                     style:
                         TextStyle(fontSize: 30.0, fontFamily: NovelSararaBFont),
                     controller: _bioController,
-                    maxLength: 100,
+                    maxLength: 250,
                     decoration: InputDecoration(
                       border:
                           OutlineInputBorder(borderSide: BorderSide(width: 1)),
@@ -295,8 +350,15 @@ class _EditMyProfile
                     primary: Colors.black87,
                   ),
                   onPressed: () {
-                    _changeProfile(_inAppUserImage, _sex, _era, _address,
-                        _bioController.text, widget.scrollController);
+                    _changeProfile(
+                      _inAppUserImage,
+                      _sex,
+                      _era,
+                      _address,
+                      _bioController.text,
+                      widget.scrollController,
+                      _inAppUserNameController.text,
+                    );
                   },
                   child: Text("このプロフィールにする？"),
                 ),
@@ -335,8 +397,9 @@ class _EditMyProfile
     String sex,
     String era,
     String address,
-    String text,
+    String bio,
     ScrollController scrollController,
+      String inAppUserName,
   ) async {
     final profileViewModel = context.read<ProfileViewModel>();
     await profileViewModel.changeProfile(
@@ -344,9 +407,11 @@ class _EditMyProfile
       sex,
       era,
       address,
-      text,
+      bio,
+      inAppUserName,
     );
     primaryFocus?.unfocus();
+    profileViewModel.changeNormalMyProfile();
     setState(() {});
     scrollController.animateTo(
       0,
@@ -361,4 +426,3 @@ class _EditMyProfile
     );
   }
 }
-

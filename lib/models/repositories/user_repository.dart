@@ -148,6 +148,7 @@ class UserRepository {
     String era,
     String address,
     String bio,
+    String inAppUserName,
   ) async {
     final currentUserBeforeUpdate =
         await dbManager.getUserInfoFromDbById(currentUser!.userId);
@@ -157,6 +158,7 @@ class UserRepository {
       era: era,
       address: address,
       bio: bio,
+      inAppUserName: inAppUserName,
     );
 
     await dbManager.changeProfile(updateCurrentUser);
