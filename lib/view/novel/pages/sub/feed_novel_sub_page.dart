@@ -56,7 +56,7 @@ class FeedNovelSubPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
-                              color: Colors.white70,
+                              color: Colors.white,
                               child: FutureBuilder(
                                 future: model.getNovelUserInfo(
                                     model.novels?[index].userId),

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:shortstoryking3/styles/battle2_icons.dart';
 import 'package:shortstoryking3/styles/writer_icons.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/battle/pages/battle_page.dart';
 import 'package:shortstoryking3/view/myHome/pages/my_home_page.dart';
 import 'package:shortstoryking3/view/novel/pages/feed_novel_page.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _pages = [
-      MyHomePage(),
+      MyHomePage(myHomeMode: MyHomeMode.NORMAL_PROFILE),
       FeedNovelPage(),
       WriterPage(),
       WritingPage(persistentTabController: persistentTabController),

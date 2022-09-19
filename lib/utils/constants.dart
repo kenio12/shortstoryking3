@@ -11,3 +11,8 @@ enum ProfileMode{
   MYSELF,
   OTHER
 }
+
+enum MyHomeMode{
+  EDIT_PROFILE,
+  NORMAL_PROFILE
+}

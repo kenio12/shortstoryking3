@@ -7,18 +7,18 @@ import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
-class StatefulMyProfileImageDetail extends StatefulWidget {
+class EditMyProfile extends StatefulWidget {
   final ScrollController scrollController;
 
-  StatefulMyProfileImageDetail({required this.scrollController});
+  EditMyProfile({required this.scrollController});
 
   @override
-  State<StatefulMyProfileImageDetail> createState() =>
-      _StatefulMyProfileImageDetail();
+  State<EditMyProfile> createState() =>
+      _EditMyProfile();
 }
 
-class _StatefulMyProfileImageDetail
-    extends State<StatefulMyProfileImageDetail> {
+class _EditMyProfile
+    extends State<EditMyProfile> {
   String _inAppUserImage = "";
   String _sex = "";
 
@@ -125,15 +125,29 @@ class _StatefulMyProfileImageDetail
                     padding: const EdgeInsets.all(8.0),
                     child: Stack(
                       children: [
+                        Positioned(
+                          right: 0,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(width: 2)),
+                            child: Center(
+                              child: Text(
+                                "児",
+                                style: profileTextStyle,
+                              ),
+                            ),
+                          ),
+                        ),
                         Image.asset(
                           _inAppUserImage,
                           fit: BoxFit.contain,
                           width: 280,
                           height: 280,
                         ),
-                        Positioned(
-                            right: 0,
-                            child: Text("LV1",style: profileTextStyle,)),
                       ],
                     ),
                   ),
@@ -255,7 +269,8 @@ class _StatefulMyProfileImageDetail
                     cursorColor: Colors.black,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
-                    style: TextStyle(fontSize: 30.0,fontFamily: NovelSararaBFont),
+                    style:
+                        TextStyle(fontSize: 30.0, fontFamily: NovelSararaBFont),
                     controller: _bioController,
                     maxLength: 100,
                     decoration: InputDecoration(
@@ -347,37 +362,3 @@ class _StatefulMyProfileImageDetail
   }
 }
 
-// return Consumer<ProfileViewModel>(builder: (context, model, child) {
-//   print("うおおおおおおおおおおお${model.currentUser.inAppUserImage}");
-//   return InkWell(
-//     onTap: () => _changeProfileImage(
-//         model.currentUser.inAppUserImage, profileViewModel),
-//     child: Container(
-//       child: Padding(
-//         padding: const EdgeInsets.only(top: 30,bottom:30),
-//         child: Container(
-//           decoration: BoxDecoration(
-//             border: Border.all(
-//               color: Colors.black,
-//               width: 3
-//             )
-//           ),
-//           child: Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Image.asset(
-//               model.currentUser.inAppUserImage,
-//               fit: BoxFit.contain,
-//               width: 280,
-//               height: 280,
-//             ),
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// });
-// }
-
-// _changeProfileImage(
-//     String inAppUserImage, ProfileViewModel profileViewModel) async {
-//   await profileViewModel.changeProfileImage(inAppUserImage);}
