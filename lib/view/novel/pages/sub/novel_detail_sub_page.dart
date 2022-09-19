@@ -222,19 +222,22 @@ class NovelDetailSubPage extends StatelessWidget {
                   ),
 
 
-Container(
-  color: Colors.black26,
-  child: Column(
-    children: [
-      Container(
-        alignment: Alignment.topRight,
-        padding: const EdgeInsets.only(right: 20.0),
-        child: ElevatedButton(
-          onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
-          child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
-      ),
-      SizedBox(height: 120.0),
-    ],
+Padding(
+  padding: const EdgeInsets.all(3.0),
+  child:   Container(
+    color: Colors.black26,
+    child: Column(
+      children: [
+        Container(
+          alignment: Alignment.topRight,
+          padding: const EdgeInsets.only(right: 20.0),
+          child: ElevatedButton(
+            onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
+            child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
+        ),
+        SizedBox(height: 120.0),
+      ],
+    ),
   ),
 )
 
