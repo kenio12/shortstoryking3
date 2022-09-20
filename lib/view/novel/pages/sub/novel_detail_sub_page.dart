@@ -24,12 +24,13 @@ class NovelDetailSubPage extends StatelessWidget {
                 children: [
 
                   Padding(
-                    padding: const EdgeInsets.all(3.0),
+                    padding: const EdgeInsets.only(left: 3.0,
+                    right: 3),
                     child: Container(
                       color: Colors.black26,
                       child: Column(
                         children: [
-                          SizedBox(height: 30),
+                          // SizedBox(height: 30),
                           Container(
                             alignment: Alignment.topRight,
                             padding: const EdgeInsets.only(right: 20.0),
@@ -37,7 +38,7 @@ class NovelDetailSubPage extends StatelessWidget {
                               onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
                               child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 10),
 
                           Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -45,8 +46,8 @@ class NovelDetailSubPage extends StatelessWidget {
                               // width: double.infinity,
                               padding: const EdgeInsets.all(5.0),
                               decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black54, width: 5),
-                                  borderRadius: BorderRadius.circular(9.0),
+                                  border: Border.all(color: Colors.black54, width: 2),
+                                  borderRadius: BorderRadius.circular(2.0),
                                   color: Colors.white,
                               ),
                               child: Padding(
@@ -55,7 +56,8 @@ class NovelDetailSubPage extends StatelessWidget {
                                   children: [
                                     Container(
                                       alignment: Alignment.topLeft,
-                                      child: Text(" タイトル",style: TextStyle(color: Colors.grey)),
+                                      child: Text(" タイトル",
+                                          style: TextStyle(color: Colors.grey)),
                                     ),
                                     Text("${selectedNovel.title}",
                                       style: TextStyle(
@@ -77,13 +79,13 @@ class NovelDetailSubPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 10,),
                           Row(
                             children: [
                               Expanded(
                                   flex: 1,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(left: 8.0,right: 8),
                                     child:
                                     FutureBuilder(
                                     future: feedNovelViewPage.getNovelUserInfo(
@@ -168,66 +170,90 @@ class NovelDetailSubPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Divider(
-                    color: Colors.black26,
-                    thickness: 1.0,
-                  ),
-                  SizedBox(height: 10,),
-
-                  Container(
-                    width: double.infinity,
-                    alignment: Alignment.topLeft,
-                    child: Text("  以下本文",style: TextStyle(fontSize: 16,
-                        color: Colors.grey),),
-                  ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(left: 3.0,
+                    right: 3),
                     child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(5.0),
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(color: Colors.black54, width: 1),
-                      //   // borderRadius: BorderRadius.circular(20.0),
-                      //   color: Colors.white24,
-                      // ),
+                      color: Colors.black26,
                       child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                          child: Text("${selectedNovel.content}",
-                            style: TextStyle(
-                              // letterSpacing: 6.0,
-                              fontFamily: NovelSararaRFont,
-                              fontSize: 28,
-                              // backgroundColor: Colors.white,
-                              letterSpacing: 1,
-                              color: Colors.black,
-                              // shadows:[
-                              //    Shadow(
-                              //      blurRadius: 80.0,
-                              //    ),
-                              // ]
-                            ),
+                        padding: const EdgeInsets.only(left: 8.0,
+                        right: 8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(2),
+                            color: Colors.white,
                           ),
+                          child: Column(
+                            children: [
+                              // Divider(
+                              //   color: Colors.black26,
+                              //   thickness: 1.0,
+                              // ),
+                              SizedBox(height: 10,),
+
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.topLeft,
+                                child: Text("  以下本文",style: TextStyle(fontSize: 16,
+                                    color: Colors.grey),),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(5.0),
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(color: Colors.black54, width: 1),
+                                  //   // borderRadius: BorderRadius.circular(20.0),
+                                  //   color: Colors.white24,
+                                  // ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text("${selectedNovel.content}",
+                                      style: TextStyle(
+                                        // letterSpacing: 6.0,
+                                        fontFamily: NovelSararaRFont,
+                                        fontSize: 28,
+                                        // backgroundColor: Colors.white,
+                                        letterSpacing: 1,
+                                        color: Colors.black,
+                                        // shadows:[
+                                        //    Shadow(
+                                        //      blurRadius: 80.0,
+                                        //    ),
+                                        // ]
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              Container(
+                                alignment: Alignment.topRight,
+                                child: Text("おわり ",
+                                    style: TextStyle(color: Colors.grey)),
+                              ),
+
+                              // Divider(
+                              //   color: Colors.black26,
+                              //   thickness: 1.0,
+                              // ),
+                          ],),
                         ),
                       ),
                     ),
-
-                  Container(
-                    alignment: Alignment.topRight,
-                    child: Text("おわり ",style: TextStyle(color: Colors.grey)),
                   ),
 
-                  Divider(
-                    color: Colors.black26,
-                    thickness: 1.0,
-                  ),
 
 
 Padding(
-  padding: const EdgeInsets.all(3.0),
+  padding: const EdgeInsets.only(left: 3.0,right: 3),
   child:   Container(
     color: Colors.black26,
     child: Column(
       children: [
+        SizedBox(height: 10,),
         Container(
           alignment: Alignment.topRight,
           padding: const EdgeInsets.only(right: 20.0),

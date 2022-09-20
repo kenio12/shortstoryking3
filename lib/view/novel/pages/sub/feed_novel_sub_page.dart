@@ -55,7 +55,7 @@ class FeedNovelSubPage extends StatelessWidget {
                             onLongPress: () => model.changeNovelDetailSubPage(
                                 selectedNovel.novelId, index),
                             child: Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.only(left: 10.0,top: 10,right: 20),
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15.0),
