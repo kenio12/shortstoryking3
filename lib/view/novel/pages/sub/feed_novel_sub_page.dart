@@ -55,12 +55,12 @@ class FeedNovelSubPage extends StatelessWidget {
                             onLongPress: () => model.changeNovelDetailSubPage(
                                 selectedNovel.novelId, index),
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 10.0,top: 10,right: 20),
+                              padding: const EdgeInsets.only(left: 10.0,top: 10,right: 10),
                               child: Card(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                color: Colors.white24.withOpacity(0.2),
+                                color: Colors.white70.withOpacity(0.8),
                                 child: FutureBuilder(
                                   future: model
                                       .getNovelUserInfo(selectedNovel.userId),
@@ -173,7 +173,10 @@ class FeedNovelSubPage extends StatelessWidget {
                   );
           }
         } else {
-          return NovelDetailSubPage();
+          return Container(
+              height: MediaQuery.of(context).size.height,
+              color: Colors.black12,
+              child: NovelDetailSubPage());
         }
       },
     );

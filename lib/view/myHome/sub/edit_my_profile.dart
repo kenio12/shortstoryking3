@@ -167,8 +167,9 @@ class _EditMyProfile extends State<EditMyProfile> {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: _width / 2 - 180, right: 50),
+        Container(
+          width: 300,
+          // height: 280,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

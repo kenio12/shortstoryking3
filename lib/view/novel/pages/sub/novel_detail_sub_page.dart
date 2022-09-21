@@ -27,7 +27,7 @@ class NovelDetailSubPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 3.0,
                     right: 3),
                     child: Container(
-                      color: Colors.black26,
+                      // color: Colors.black26,
                       child: Column(
                         children: [
                           // SizedBox(height: 30),
@@ -35,6 +35,9 @@ class NovelDetailSubPage extends StatelessWidget {
                             alignment: Alignment.topRight,
                             padding: const EdgeInsets.only(right: 20.0),
                             child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                              primary: Colors.black45
+                              ),
                               onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
                               child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
                           ),
@@ -48,7 +51,7 @@ class NovelDetailSubPage extends StatelessWidget {
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.black54, width: 2),
                                   borderRadius: BorderRadius.circular(2.0),
-                                  color: Colors.white,
+                                  color: Colors.white70.withOpacity(0.8)
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -59,19 +62,25 @@ class NovelDetailSubPage extends StatelessWidget {
                                       child: Text(" タイトル",
                                           style: TextStyle(color: Colors.grey)),
                                     ),
-                                    Text("${selectedNovel.title}",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        // letterSpacing: 6.0,
-                                        fontFamily: NovelSararaBFont,
-                                        fontSize: 30,
-                                        // backgroundColor: Colors.white,
-                                        letterSpacing: 10,
-                                        // shadows:[
-                                        //    Shadow(
-                                        //      blurRadius: 80.0,
-                                        //    ),
-                                        // ]
+                                    Container(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Text("${selectedNovel.title}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            // letterSpacing: 6.0,
+                                            fontFamily: NovelSararaBFont,
+                                            fontSize: 30,
+                                            // backgroundColor: Colors.white,
+                                            letterSpacing: 5,
+                                            // shadows:[
+                                            //    Shadow(
+                                            //      blurRadius: 80.0,
+                                            //    ),
+                                            // ]
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -174,7 +183,7 @@ class NovelDetailSubPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 3.0,
                     right: 3),
                     child: Container(
-                      color: Colors.black26,
+                      // color: Colors.black26,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0,
                         right: 8),
@@ -182,7 +191,7 @@ class NovelDetailSubPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 1),
                             borderRadius: BorderRadius.circular(2),
-                            color: Colors.white,
+                            color: Colors.white70.withOpacity(0.8),
                           ),
                           child: Column(
                             children: [
@@ -229,10 +238,13 @@ class NovelDetailSubPage extends StatelessWidget {
                                 ),
                               ),
 
-                              Container(
-                                alignment: Alignment.topRight,
-                                child: Text("おわり ",
-                                    style: TextStyle(color: Colors.grey)),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Container(
+                                  alignment: Alignment.topRight,
+                                  child: Text("おわり ",
+                                      style: TextStyle(color: Colors.grey)),
+                                ),
                               ),
 
                               // Divider(
@@ -250,7 +262,7 @@ class NovelDetailSubPage extends StatelessWidget {
 Padding(
   padding: const EdgeInsets.only(left: 3.0,right: 3),
   child:   Container(
-    color: Colors.black26,
+    // color: Colors.black26,
     child: Column(
       children: [
         SizedBox(height: 10,),
@@ -258,10 +270,13 @@ Padding(
           alignment: Alignment.topRight,
           padding: const EdgeInsets.only(right: 20.0),
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.black54,
+            ),
             onPressed: () => feedNovelViewPage.changeFeedNovelSubPage(selectedListIndex),
             child: Text("一覧に戻るよ",style: TextStyle(fontSize: 20),),),
         ),
-        SizedBox(height: 120.0),
+        SizedBox(height: 20),
       ],
     ),
   ),

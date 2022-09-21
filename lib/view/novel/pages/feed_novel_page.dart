@@ -26,7 +26,7 @@ class FeedNovelPage extends StatelessWidget {
       // ),
       body: SafeArea(
         child: Container(
-          // color: Colors.black26,
+          color: Colors.black12,
           child: FeedNovelSubPage(
             feedNovelMode: FeedNovelMode.ALL_NOVELS,
 

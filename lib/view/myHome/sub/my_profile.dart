@@ -66,8 +66,8 @@ class MyProfile extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: _width / 2 - 180, right: 50),
+        Container(
+          width: 300,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
