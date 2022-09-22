@@ -22,3 +22,7 @@ enum MyProfileSettingMenu{
   EDIT_PROFILE,
   NORMAL_PROFILE,
 }
+
+enum FeedWriterMode{
+  All_Writer,
+}

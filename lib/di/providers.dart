@@ -8,6 +8,7 @@ import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/login_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
+import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 List<SingleChildWidget> globalProviders = [
   ...independentModels,
@@ -50,6 +51,12 @@ List<SingleChildWidget> viewModels = [
   ),
   ChangeNotifierProvider<ProfileViewModel>(
     create: (context) => ProfileViewModel(
+      userRepository: context.read<UserRepository>(),
+      novelRepository: context.read<NovelRepository>(),
+    ),
+  ),
+  ChangeNotifierProvider<WriterViewModel>(
+    create: (context) => WriterViewModel(
       userRepository: context.read<UserRepository>(),
       novelRepository: context.read<NovelRepository>(),
     ),
