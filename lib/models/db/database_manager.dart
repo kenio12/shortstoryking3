@@ -89,7 +89,7 @@ class DatabaseManager {
         ));
       });
     });
-    print("users:$results");
+    print("おおおおい　users:$results");
     return results;
     }
 

@@ -3,6 +3,7 @@ import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/models/repositories/novel_repository.dart';
 import 'package:shortstoryking3/models/repositories/user_repository.dart';
 import 'package:shortstoryking3/utils/constants.dart';
+import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   final UserRepository userRepository;
@@ -46,6 +47,9 @@ class ProfileViewModel extends ChangeNotifier {
       bio,
       inAppUserName,
     );
+    // final writerViewModel = WriterViewModel(
+    //     userRepository: userRepository, novelRepository: novelRepository);
+    // await writerViewModel.getWriter(FeedWriterMode.All_Writer);
     ChangeNotifier();
   }
 
@@ -54,8 +58,9 @@ class ProfileViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeNormalMyProfile() {
+  Future<void> changeNormalMyProfile() async{
     myHomeMode = MyHomeMode.NORMAL_PROFILE;
+    // await userRepository.getWriter(FeedWriterMode.All_Writer);
     notifyListeners();
   }
 }
