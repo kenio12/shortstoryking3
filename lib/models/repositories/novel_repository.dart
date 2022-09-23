@@ -31,22 +31,22 @@ class NovelRepository {
  Future<List<Novel>> getNovels(FeedNovelMode feedNovelMode) async{
     switch (feedNovelMode){
       case FeedNovelMode.ALL_NOVELS:
-      return dbManager.getAllNovels();
+      return await dbManager.getAllNovels();
 
       case FeedNovelMode.FAVORITE_WRITERS_NOVELS:
-        return dbManager.getAllNovels();
+        return await dbManager.getAllNovels();
 
       case FeedNovelMode.FRIENDS_WRITERS_NOVELS:
-        return dbManager.getAllNovels();
+        return await dbManager.getAllNovels();
 
       case FeedNovelMode.SELECTED_NOVELS:
-        return dbManager.getAllNovels();
+        return await dbManager.getAllNovels();
 
       case FeedNovelMode.SELECTED_WRITERS_NOVELS:
-        return dbManager.getAllNovels();
+        return await dbManager.getAllNovels();
 
       case FeedNovelMode.MY_NOVELS:
-        return dbManager.getAllNovels();
+        return await dbManager.getAllNovels();
 
     }
 

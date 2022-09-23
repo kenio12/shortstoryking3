@@ -35,7 +35,7 @@ class FeedNovelViewModel extends ChangeNotifier {
   //   }
 
   Future<void>  getNovels(FeedNovelMode feedNovelMode) async{
-    print("1");
+    // print("1");
     isProcessing = true;
     notifyListeners();
 

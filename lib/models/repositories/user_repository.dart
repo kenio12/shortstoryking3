@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shortstoryking3/models/db/database_manager.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 import '../../data_models/user.dart';
@@ -164,4 +165,13 @@ class UserRepository {
     await dbManager.changeProfile(updateCurrentUser);
     currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
   }
+
+ Future<List<User>> getWriter(FeedWriterMode feedWriterMode) async {
+   switch (feedWriterMode) {
+     case FeedWriterMode.All_Writer:
+       return await dbManager.getAllWriter();
+   }
+ }
+
+
 }

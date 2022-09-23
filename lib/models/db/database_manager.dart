@@ -61,7 +61,7 @@ class DatabaseManager {
         ));
       });
     });
-    print("novel:$results");
+    // print("novel:$results");
     return results;
   }
 
@@ -72,5 +72,25 @@ class DatabaseManager {
 
     return Novel.fromMap(query.docs[0].data());
   }
+
+  Future<List<User>> getAllWriter() async{
+    final query = await _db.collection("users").get();
+    if (query.docs.length == 0) return [];
+
+    var results = <User>[];
+    await _db
+        .collection("users")
+        .orderBy("inAppUserName", descending: true)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(User.fromMap(
+          element.data(),
+        ));
+      });
+    });
+    print("users:$results");
+    return results;
+    }
 
 }
