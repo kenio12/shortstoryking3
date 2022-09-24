@@ -18,10 +18,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _pages = [];
-  PersistentTabController persistentTabController = PersistentTabController();
+
+    late PersistentTabController persistentTabController;
 
   @override
   void initState() {
+    persistentTabController = PersistentTabController(initialIndex: 0);
     _pages = [
       // MyHomePage(myHomeMode: MyHomeMode.NORMAL_PROFILE),
       MyHomePage(),

@@ -16,19 +16,8 @@ class FeedWriterPage extends StatelessWidget {
     final currentUser  = writerViewModel.currentUser;
     Future(() => writerViewModel.getWriter(feedWriterMode));
 
-    return PageView.builder(
-        controller: PageController(),
-        itemCount: writerViewModel.writers!.length,
-        itemBuilder: (context, index) {
-          final User writer = writerViewModel.writers![index];
-          // return Text("${writer.inAppUserName}");
-          // return WriterProfile(writer: writer, pageController: PageController());
-          //   },
-          // );
-
-          return Consumer<WriterViewModel>(
+            return Consumer<WriterViewModel>(
             builder: (context, model, child) {
-              // model.getWriter(FeedWriterMode.All_Writer);
               if (model.isProcessing) {
                 print("くるくる");
                 return Center(
@@ -53,6 +42,4 @@ class FeedWriterPage extends StatelessWidget {
             },
           );
         }
-    );
   }
-}

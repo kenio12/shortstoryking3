@@ -5,8 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
+import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class EditMyProfile extends StatefulWidget {
   final ScrollController scrollController;
@@ -425,5 +427,7 @@ class _EditMyProfile extends State<EditMyProfile> {
       message: "はいはい",
       context: context,
     );
+    final writerViewModel = context.read<WriterViewModel>();
+    writerViewModel.getWriter(FeedWriterMode.All_Writer);
   }
 }

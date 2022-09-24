@@ -30,13 +30,7 @@ class FeedNovelSubPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else {
-            // ぐるぐるになるので、諦めた
-            // model.getNovels2(feedNovelMode);
 
-            //これも使ったが、うまくいかない
-            // return FutureBuilder(
-            //     future: model.getNovels(feedNovelMode),
-            //     builder: (context, AsyncSnapshot<void> snapshot) {
             return (model.novels == null)
                 ? Container()
                 : RefreshIndicator(
