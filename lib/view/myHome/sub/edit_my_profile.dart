@@ -178,9 +178,12 @@ class _EditMyProfile extends State<EditMyProfile> {
               (_inAppUserName == _checkName) ?
               Row(
                 children: [
-                  Text(
-                    "名　　前：名前の設定は１回のみ",
-                    style: profileTextStyle,
+                  Flexible(
+                    child: Text(
+                      "名　　前：変更１回のみ",
+                      style: profileTextStyle,
+                      softWrap: true,
+                    ),
                   ),
                   FaIcon(
                     FontAwesomeIcons.arrowDown,

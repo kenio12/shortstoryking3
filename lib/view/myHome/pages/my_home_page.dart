@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: (myHomeMode == MyHomeMode.EDIT_PROFILE)
-              ? Text("ただ今編集中！　${currentUser.inAppUserName}",
+              ? Text("ただ今編集中！　${model.currentUser.inAppUserName}",
               style: TextStyle(fontSize: 20, color: Colors.black),
               )
 

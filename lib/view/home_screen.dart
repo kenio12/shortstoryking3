@@ -12,10 +12,7 @@ import 'package:shortstoryking3/view/writer/pages/writer_page.dart';
 import 'package:shortstoryking3/view/writing/pages/writing_page.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
-
   // static PersistentTabController persistentTabController = PersistentTabController(initialIndex: 0);
 
   @override
@@ -25,8 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _pages = [];
 
-    late PersistentTabController persistentTabController;
-    late String a = "";
+  late PersistentTabController persistentTabController;
 
   @override
   void initState() {
@@ -53,38 +49,74 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: persistentTabController,
         items: [
           PersistentBottomNavBarItem(
-            icon: FaIcon(FontAwesomeIcons.home),
-            title: "自宅",
-            activeColorPrimary: Colors.black,
-            inactiveColorPrimary: Colors.grey,
+              icon: FaIcon(FontAwesomeIcons.home),
+              title: "自宅",
+              activeColorPrimary: Colors.black,
+              inactiveColorPrimary: Colors.grey,
+              // onPressed: (context) {
+              //   persistentTabController.index = 0;
+              //   Navigator.of(context!).push(MaterialPageRoute(
+              //     builder: (context) => MyHomePage(),
+              //   ));
+              // },
           ),
           PersistentBottomNavBarItem(
             icon: FaIcon(FontAwesomeIcons.bookOpen),
             title: "読む",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
+            // onPressed: (context){
+            //   persistentTabController.index = 1;
+            //   Navigator.of(context!).pushAndRemoveUntil(MaterialPageRoute(
+            //     builder: (context) => FeedNovelPage()),(context) => false);
+            // },
           ),
           PersistentBottomNavBarItem(
             icon: Icon(Writer.writer),
             title: "作家",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
-            onPressed: (context){
-              Navigator.of(context!).push(MaterialPageRoute(
-                  builder: (context)=> WriterPage(null),));
-            },
+            onPressed: (context) {
+              final writerViewModel = context?.read<WriterViewModel>();
+              Future(() => writerViewModel?.getWriter(FeedWriterMode.All_Writer,null));
+
+            persistentTabController.jumpToTab(2);
+    }
+            // {
+              // persistentTabController.index = 2;
+              // Navigator.of(context!).push(MaterialPageRoute(
+              //   builder: (context) => WriterPage(null),
+            //   ));
+            // },
           ),
           PersistentBottomNavBarItem(
             icon: Icon(FontAwesomeIcons.featherAlt),
             title: "書く",
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
+            // onPressed: (context) {
+            //   persistentTabController.index = 3;
+            //   Navigator.of(context!).push(
+            //     MaterialPageRoute(
+            //       builder: (context) => WritingPage(
+            //           persistentTabController: persistentTabController),
+            //     ),
+            //   );
+            // },
           ),
           PersistentBottomNavBarItem(
-            icon: Icon(Battle2.battle2),
-            title: "戦い",
-            activeColorPrimary: Colors.black,
-            inactiveColorPrimary: Colors.grey,
+              icon: Icon(Battle2.battle2),
+              title: "戦い",
+              activeColorPrimary: Colors.black,
+              inactiveColorPrimary: Colors.grey,
+              // onPressed: (context) {
+              //   persistentTabController.index = 4;
+              //   Navigator.of(context!).push(
+              //     MaterialPageRoute(
+              //       builder: (context) => BattlePage(),
+              //     ),
+              //   );
+              // },
           ),
         ],
       ),
