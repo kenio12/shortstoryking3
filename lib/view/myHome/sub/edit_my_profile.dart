@@ -428,6 +428,6 @@ class _EditMyProfile extends State<EditMyProfile> {
       context: context,
     );
     final writerViewModel = context.read<WriterViewModel>();
-    writerViewModel.getWriter(FeedWriterMode.All_Writer);
+    writerViewModel.getWriter(FeedWriterMode.All_Writer,null);
   }
 }

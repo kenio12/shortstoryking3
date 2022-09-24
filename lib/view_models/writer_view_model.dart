@@ -21,11 +21,11 @@ class WriterViewModel extends ChangeNotifier {
 
   User get currentUser => UserRepository.currentUser!;
 
-  Future<void>  getWriter(FeedWriterMode feedWriterMode) async{
+  Future<void>  getWriter(FeedWriterMode feedWriterMode,String? novelSelectedUserUserId) async{
     isProcessing = true;
     notifyListeners();
 
-    writers = await userRepository.getWriter(feedWriterMode);
+    writers = await userRepository.getWriter(feedWriterMode,novelSelectedUserUserId);
 
     isProcessing = false;
     notifyListeners();

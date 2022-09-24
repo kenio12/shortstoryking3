@@ -25,4 +25,5 @@ enum MyProfileSettingMenu{
 
 enum FeedWriterMode{
   All_Writer,
+  SELECTED_WRITER
 }

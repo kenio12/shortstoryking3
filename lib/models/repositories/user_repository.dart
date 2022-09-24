@@ -166,10 +166,13 @@ class UserRepository {
     currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
   }
 
- Future<List<User>> getWriter(FeedWriterMode feedWriterMode) async {
+ Future<List<User>> getWriter(FeedWriterMode feedWriterMode,
+     String? novelSelectedUserUserId,) async {
    switch (feedWriterMode) {
      case FeedWriterMode.All_Writer:
        return await dbManager.getAllWriter();
+     case FeedWriterMode.SELECTED_WRITER:
+       return await dbManager.getSelectedWriter(novelSelectedUserUserId!);
    }
  }
 

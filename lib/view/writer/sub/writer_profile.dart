@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
-import 'package:shortstoryking3/view/novel/components/page_transformer.dart';
+import 'package:shortstoryking3/view/writer/components/page_transformer.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 

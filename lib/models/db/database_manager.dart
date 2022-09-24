@@ -93,4 +93,25 @@ class DatabaseManager {
     return results;
     }
 
+  Future<List<User>>  getSelectedWriter(String novelSelectedUserUserId) async{
+    final query = await _db.collection("users")
+        .where("userId", isEqualTo: novelSelectedUserUserId).get();
+    if (query.docs.length == 0) return [];
+
+    var results = <User>[];
+    await _db
+        .collection("users")
+        .where("userId", isEqualTo: novelSelectedUserUserId)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(User.fromMap(
+          element.data(),
+        ));
+      });
+    });
+    print("おおおおい　users:$results");
+    return results;
+  }
+
 }

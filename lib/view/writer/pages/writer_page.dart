@@ -5,6 +5,9 @@ import 'package:shortstoryking3/view/writer/sub/feed_writer_page.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class WriterPage extends StatelessWidget {
+  final String? novelSelectedUserUserId;
+  WriterPage(this.novelSelectedUserUserId);
+
   @override
   Widget build(BuildContext context) {
     final writerViewModel = context.read<WriterViewModel>();
@@ -14,9 +17,15 @@ class WriterPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           // color: Colors.black12,
-          child: FeedWriterPage(
+          child: (novelSelectedUserUserId == null )
+          ? FeedWriterPage(
             feedWriterMode: FeedWriterMode.All_Writer,
-          ),
+          )
+          : FeedWriterPage(
+            feedWriterMode: FeedWriterMode.SELECTED_WRITER,
+              novelSelectedUserUserId: novelSelectedUserUserId
+          )
+          ,
         ),
       ),
     );
