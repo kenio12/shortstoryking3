@@ -66,6 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
             activeColorPrimary: Colors.black,
             inactiveColorPrimary: Colors.grey,
             // onPressed: (context){
+            //   Navigator.pop(context!);
+            //   // persistentTabController.jumpToTab(1);
+            //   // persistentTabController.index = 1;
+            //   // persistentTabController.jumpToTab(1);
+            // }
             //   persistentTabController.index = 1;
             //   Navigator.of(context!).pushAndRemoveUntil(MaterialPageRoute(
             //     builder: (context) => FeedNovelPage()),(context) => false);
