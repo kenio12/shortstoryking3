@@ -48,13 +48,13 @@ class FeedNovelSubPage extends StatelessWidget {
                         final Novel selectedNovel = model.novels![index];
                         return Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: InkWell(
-                            splashColor: Colors.black,
-                            onTap: () => model.changeNovelDetailSubPage(
-                                selectedNovel.novelId, index),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10.0, top: 10, right: 10),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10.0, top: 10, right: 10),
+                            child: InkWell(
+                              splashColor: Colors.black,
+                              onTap: () => model.changeNovelDetailSubPage(
+                                  selectedNovel.novelId, index),
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0),

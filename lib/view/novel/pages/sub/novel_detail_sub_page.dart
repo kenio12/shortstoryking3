@@ -34,7 +34,7 @@ class NovelDetailSubPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 3.0, right: 3),
+                    padding: const EdgeInsets.only(top:20,left: 3.0, right: 3),
                     child: Container(
                       // color: Colors.black26,
                       child: Column(
@@ -122,9 +122,9 @@ class NovelDetailSubPage extends StatelessWidget {
                                                     splashColor: Colors.black26,
                                                     child: Container(
                                                       decoration: BoxDecoration(
-                                                          color: Colors.black54,
-                                                          border: Border.all(width: 1),
-                                                          borderRadius: BorderRadius.circular(4.0)
+                                                          color: Colors.black12,
+                                                          // border: Border.all(width: 1),
+                                                          // borderRadius: BorderRadius.circular(4.0)
                                                       ),
                                                       child: Padding(
                                                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -313,18 +313,14 @@ class NovelDetailSubPage extends StatelessWidget {
                             height: 10,
                           ),
                           Container(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.topCenter,
                             padding: const EdgeInsets.only(right: 20.0),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.black54,
-                              ),
-                              onPressed: () => feedNovelViewPage
-                                  .changeFeedNovelSubPage(selectedListIndex),
-                              child: Text(
-                                "一覧に戻るよ",
-                                style: TextStyle(fontSize: 20),
-                              ),
+                                style: ElevatedButton.styleFrom(
+                                ),
+                                onPressed: () => feedNovelViewPage
+                                    .changeFeedNovelSubPage(selectedListIndex),
+                                child: FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,)
                             ),
                           ),
                           SizedBox(height: 20),
