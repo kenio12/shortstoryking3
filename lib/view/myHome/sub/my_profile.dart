@@ -133,9 +133,10 @@ class MyProfile extends StatelessWidget {
               ),
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(color: Colors.black12,
+                decoration: BoxDecoration(
+                    // color: Colors.black12,
                     //     borderRadius: BorderRadius.circular(8),
-                    //     border: Border.all(width: 1)
+                        border: Border.all(width: 1)
                     ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

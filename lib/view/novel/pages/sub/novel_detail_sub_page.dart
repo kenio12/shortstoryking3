@@ -1,15 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/novel.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/change_japanease_day.dart';
+import 'package:shortstoryking3/view/home_screen.dart';
 import 'package:shortstoryking3/view/writer/pages/writer_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
+import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class NovelDetailSubPage extends StatelessWidget {
+  final PersistentTabController? persistentTabController;
+  NovelDetailSubPage(this.persistentTabController);
+
+
   @override
   Widget build(BuildContext context) {
     final feedNovelViewPage = context.read<FeedNovelViewModel>();
@@ -33,17 +41,14 @@ class NovelDetailSubPage extends StatelessWidget {
                         children: [
                           // SizedBox(height: 30),
                           Container(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.topCenter,
                             padding: const EdgeInsets.only(right: 20.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.black45),
+                                  ),
                               onPressed: () => feedNovelViewPage
                                   .changeFeedNovelSubPage(selectedListIndex),
-                              child: Text(
-                                "一覧に戻るよ",
-                                style: TextStyle(fontSize: 20),
-                              ),
+                              child: FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,)
                             ),
                           ),
                           SizedBox(
@@ -110,7 +115,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                                 child: Container(
                                                   alignment: Alignment.topRight,
                                                   child: InkWell(
-                                                    onLongPress: () =>
+                                                    onTap: () =>
                                                         _writerProfileChange(
                                                             context,
                                                             selectedNovel.userId),
@@ -124,7 +129,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                                       child: Padding(
                                                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                                         child: Text(
-                                                          "作　${novelUser.inAppUserName}",
+                                                          "作家：${novelUser.inAppUserName}",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   NovelSararaBFont,
@@ -337,11 +342,20 @@ class NovelDetailSubPage extends StatelessWidget {
   }
 
   _writerProfileChange(BuildContext context, String userId) {
-    pushNewScreen(
-      context,
-      screen: WriterPage(userId),
-      withNavBar: true,
-      pageTransitionAnimation: PageTransitionAnimation.cupertino,
-    );
+    // pushNewScreen(
+    //   context,
+    //   screen: WriterPage(userId),
+    //   withNavBar: true,
+    //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+    // );
+
+  //  やっぱこっちにした
+  if (persistentTabController != null) {
+    final writerViewModel = context.read<WriterViewModel>();
+    writerViewModel.getWriter(FeedWriterMode.SELECTED_WRITER,userId);
+    persistentTabController?.jumpToTab(2);
+  }
+
+
   }
 }

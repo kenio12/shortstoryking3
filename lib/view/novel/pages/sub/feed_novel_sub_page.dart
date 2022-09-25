@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shortstoryking3/data_models/novel.dart';
@@ -13,8 +14,12 @@ import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 
 class FeedNovelSubPage extends StatelessWidget {
   final FeedNovelMode feedNovelMode;
+  final PersistentTabController persistentTabController;
 
-  FeedNovelSubPage({required this.feedNovelMode});
+  FeedNovelSubPage({
+    required this.feedNovelMode,
+    required this.persistentTabController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,6 @@ class FeedNovelSubPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else {
-
             return (model.novels == null)
                 ? Container()
                 : RefreshIndicator(
@@ -46,10 +50,11 @@ class FeedNovelSubPage extends StatelessWidget {
                           padding: const EdgeInsets.all(2.0),
                           child: InkWell(
                             splashColor: Colors.black,
-                            onLongPress: () => model.changeNovelDetailSubPage(
+                            onTap: () => model.changeNovelDetailSubPage(
                                 selectedNovel.novelId, index),
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 10.0,top: 10,right: 10),
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, top: 10, right: 10),
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -72,8 +77,8 @@ class FeedNovelSubPage extends StatelessWidget {
                                           Expanded(
                                             flex: 5,
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 10.0,top:10.0),
+                                              padding: const EdgeInsets.only(
+                                                  left: 10.0, top: 10.0),
                                               child: Image.asset(
                                                 selectedNovelUser
                                                     .inAppUserImage,
@@ -170,7 +175,7 @@ class FeedNovelSubPage extends StatelessWidget {
           return Container(
               height: MediaQuery.of(context).size.height,
               color: Colors.black12,
-              child: NovelDetailSubPage());
+              child: NovelDetailSubPage(persistentTabController));
         }
       },
     );

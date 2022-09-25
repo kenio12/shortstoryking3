@@ -12,8 +12,9 @@ import 'package:shortstoryking3/view/writer/pages/writer_page.dart';
 import 'package:shortstoryking3/view/writing/pages/writing_page.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
+PersistentTabController persistentTabController = PersistentTabController();
+
 class HomeScreen extends StatefulWidget {
-  // static PersistentTabController persistentTabController = PersistentTabController(initialIndex: 0);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,8 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _pages = [
       // MyHomePage(myHomeMode: MyHomeMode.NORMAL_PROFILE),
       MyHomePage(),
-      FeedNovelPage(),
-      WriterPage(null),
+      FeedNovelPage(persistentTabController: persistentTabController),
+      WriterPage(novelSelectedUserUserId: null,persistentTabController: persistentTabController),
       WritingPage(persistentTabController: persistentTabController),
       BattlePage(),
     ];

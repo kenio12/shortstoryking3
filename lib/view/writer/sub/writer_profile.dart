@@ -1,9 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/view/writer/components/page_transformer.dart';
+import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
@@ -12,13 +15,14 @@ class WriterProfile extends StatelessWidget {
   final User currentUser;
   final PageController pageController;
   final PageVisibility pageVisibility;
+  final PersistentTabController persistentTabController;
 
-  WriterProfile({
-    required this.writer,
-    required this.currentUser,
-    required this.pageController,
-    required this.pageVisibility
-  });
+  WriterProfile(
+      {required this.writer,
+      required this.currentUser,
+      required this.pageController,
+      required this.pageVisibility,
+      required this.persistentTabController});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class WriterProfile extends StatelessWidget {
     final _bio = writer.bio;
 
     return Card(
-      // color: Colors.black26,
+      color: Colors.white.withOpacity(0.9),
       elevation: 8.0,
       child: Container(
         height: MediaQuery.of(context).size.height,
@@ -99,6 +103,31 @@ class WriterProfile extends StatelessWidget {
                         ), // Text(" 　${_sex}",style: profileTextStyle,)
                       ],
                     ),
+                    SizedBox(height: 5,),
+                    InkWell(
+                      onTap: ()=>_selectedUserFeedNovels(context, writer, persistentTabController),
+                      child: Container(
+                        // color: Colors.black45,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1)
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "小説一覧：　",
+                              style: profileTextStyle,
+                            ),
+                            Flexible(
+                              child: Text(
+                                "ここ押すと出現",
+                                style: profileTextStyle,
+                              ),
+                            ), // Text(" 　${_sex}",style: profileTextStyle,)
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 5,),
                     Row(
                       children: [
                         Text(
@@ -159,26 +188,27 @@ class WriterProfile extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    (_bio != "") ? Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        //     borderRadius: BorderRadius.circular(8),
-                        //     border: Border.all(width: 1)
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "${_bio}",
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            fontFamily: NovelSararaBFont,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    )
-                    : Container(),
+                    (_bio != "")
+                        ? Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              // color: Colors.black12,
+                              //     borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(width: 1)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "${_bio}",
+                                style: TextStyle(
+                                  fontSize: 22.0,
+                                  fontFamily: NovelSararaBFont,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
                     SizedBox(
                       height: 5,
                     ),
@@ -191,4 +221,16 @@ class WriterProfile extends StatelessWidget {
       ),
     );
   }
-}
+
+
+  _selectedUserFeedNovels(
+    BuildContext context,
+    User writer,
+    PersistentTabController persistentTabController,
+  ) {
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    feedNovelViewModel.changeFeedNovelSubPage(0);
+    persistentTabController.jumpToTab(1);
+  }
+
+  }
