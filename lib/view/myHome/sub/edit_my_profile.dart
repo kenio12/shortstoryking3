@@ -356,7 +356,7 @@ class _EditMyProfile extends State<EditMyProfile> {
                     primary: Colors.black87,
                   ),
                   onPressed: () {
-                    _changeProfile(
+                     changeProfile(
                       _inAppUserImage,
                       _sex,
                       _era,
@@ -398,7 +398,7 @@ class _EditMyProfile extends State<EditMyProfile> {
     setState(() {});
   }
 
-  void _changeProfile(
+  void changeProfile(
     String inAppUserImage,
     String sex,
     String era,

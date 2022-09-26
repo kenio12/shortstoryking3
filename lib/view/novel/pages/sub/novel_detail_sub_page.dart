@@ -41,14 +41,20 @@ class NovelDetailSubPage extends StatelessWidget {
                         children: [
                           // SizedBox(height: 30),
                           Container(
-                            alignment: Alignment.topCenter,
-                            padding: const EdgeInsets.only(right: 20.0),
+                            // alignment: Alignment.topCenter,
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   ),
                               onPressed: () => feedNovelViewPage
                                   .changeFeedNovelSubPage(selectedListIndex),
-                              child: FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,)
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,),
+                                  Text(" 一覧に")
+                                ],
+                              )
                             ),
                           ),
                           SizedBox(
@@ -313,14 +319,20 @@ class NovelDetailSubPage extends StatelessWidget {
                             height: 10,
                           ),
                           Container(
-                            alignment: Alignment.topCenter,
-                            padding: const EdgeInsets.only(right: 20.0),
+                            // alignment: Alignment.topCenter,
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                 ),
                                 onPressed: () => feedNovelViewPage
                                     .changeFeedNovelSubPage(selectedListIndex),
-                                child: FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,)
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,),
+                                    Text(" 一覧に")
+                                  ],
+                                )
                             ),
                           ),
                           SizedBox(height: 20),

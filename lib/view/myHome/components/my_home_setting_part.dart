@@ -4,6 +4,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/login/screens/login_screen.dart';
+import 'package:shortstoryking3/view/myHome/sub/edit_my_profile.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
 class MyHomeSettingPart extends StatelessWidget {
@@ -36,12 +37,16 @@ class MyHomeSettingPart extends StatelessWidget {
           (myHomeMode == MyHomeMode.NORMAL_PROFILE)
               ? PopupMenuItem(
                   value: MyProfileSettingMenu.EDIT_PROFILE,
-                  child: Text("プロフィールを編集"),
+                  child: Text("プロフィールを編集画面へ"),
                 )
               : PopupMenuItem(
                   value: MyProfileSettingMenu.NORMAL_PROFILE,
-                  child: Text("プロフィール編集を中止"),
-                )
+                  child: Text("編集を途中でやめる"),
+                ),
+          PopupMenuItem(
+            value: MyProfileSettingMenu.FINISH_EDIT_PROFILE,
+            child: Text("プロフィール編集を完了"),
+          )
         ];
       },
     );
@@ -61,8 +66,10 @@ class MyHomeSettingPart extends StatelessWidget {
       case MyProfileSettingMenu.NORMAL_PROFILE:
         profileViewModel.changeNormalMyProfile();
         break;
+      case MyProfileSettingMenu.FINISH_EDIT_PROFILE:
+        // EditMyProfile edit = EditMyProfile(scrollController: s,);
+        break;
     }
-
   }
 //TODO
 }
