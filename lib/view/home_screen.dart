@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // final writerViewModel = context.read<WriterViewModel>();
     _pages = [
       // MyHomePage(myHomeMode: MyHomeMode.NORMAL_PROFILE),
-      MyHomePage(),
+      MyHomePage(persistentTabController: persistentTabController),
       FeedNovelPage(persistentTabController: persistentTabController),
       WriterPage(novelSelectedUserUserId: null,persistentTabController: persistentTabController),
       WritingPage(persistentTabController: persistentTabController),

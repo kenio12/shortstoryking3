@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/myHome/components/my_home_setting_part.dart';
@@ -8,8 +9,9 @@ import 'package:shortstoryking3/view/myHome/sub/my_profile.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
-  // MyHomeMode myHomeMode;
-  // MyHomePage({required this.myHomeMode});
+
+  final PersistentTabController persistentTabController;
+  MyHomePage({required this.persistentTabController});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,8 @@ class MyHomePage extends StatelessWidget {
               profileViewModel: profileViewModel,
               currentUser: currentUser,
               myHomeMode: myHomeMode,
+              persistentTabController: persistentTabController,
+                scrollController: _scrollController
             )
           ],
         ),
@@ -49,7 +53,9 @@ class MyHomePage extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: () { if (myHomeMode == MyHomeMode.EDIT_PROFILE) {
             return EditMyProfile(
-                scrollController: _scrollController);
+                scrollController: _scrollController,
+                isFinishEditProfile: model.isFinishEditProfile,
+            );
           } else if ( myHomeMode == MyHomeMode.NORMAL_PROFILE) {
             return MyProfile(scrollController: _scrollController);
             }

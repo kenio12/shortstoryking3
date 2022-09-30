@@ -11,11 +11,15 @@ class MyHomeSettingPart extends StatelessWidget {
   final ProfileViewModel profileViewModel;
   final User currentUser;
   final MyHomeMode myHomeMode;
+  final PersistentTabController persistentTabController;
+  final ScrollController scrollController;
 
   MyHomeSettingPart({
     required this.profileViewModel,
     required this.currentUser,
     required this.myHomeMode,
+    required this.persistentTabController,
+    required this.scrollController
   });
 
   @override
@@ -45,7 +49,7 @@ class MyHomeSettingPart extends StatelessWidget {
                 ),
           PopupMenuItem(
             value: MyProfileSettingMenu.FINISH_EDIT_PROFILE,
-            child: Text("プロフィール編集を完了"),
+            child: Text("プロフィール編集を登録する"),
           )
         ];
       },
@@ -67,7 +71,7 @@ class MyHomeSettingPart extends StatelessWidget {
         profileViewModel.changeNormalMyProfile();
         break;
       case MyProfileSettingMenu.FINISH_EDIT_PROFILE:
-        // EditMyProfile edit = EditMyProfile(scrollController: s,);
+        profileViewModel.finishEditProfile();
         break;
     }
   }

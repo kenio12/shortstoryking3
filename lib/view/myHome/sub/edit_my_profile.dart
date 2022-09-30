@@ -12,8 +12,12 @@ import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class EditMyProfile extends StatefulWidget {
   final ScrollController scrollController;
+  final bool isFinishEditProfile;
 
-  EditMyProfile({required this.scrollController});
+  EditMyProfile({
+  required this.scrollController,
+    required this.isFinishEditProfile
+  });
 
   @override
   State<EditMyProfile> createState() => _EditMyProfile();
@@ -107,6 +111,8 @@ class _EditMyProfile extends State<EditMyProfile> {
     _twitterName = currentUser.twitterName;
     if (_twitterName != "") {_checkName = _twitterName;}
 
+
+
     _inAppUserName = currentUser.inAppUserName;
 
     _sex = currentUser.sex;
@@ -117,12 +123,32 @@ class _EditMyProfile extends State<EditMyProfile> {
 
     _inAppUserNameController.text = currentUser.inAppUserName;
     _bioController.text = currentUser.bio;
+
+
+
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
+    final profileViewModel = context.read<ProfileViewModel>();
+
+    if (profileViewModel.isFinishEditProfile) {
+      setState(() {
+      });
+      profileViewModel.isFinishEditProfile = false;
+      changeProfile(
+        _inAppUserImage,
+        _sex,
+        _era,
+        _address,
+        _bioController.text,
+        widget.scrollController,
+        _inAppUserNameController.text,
+      );}
+
     return Column(
       children: [
         Center(
@@ -398,7 +424,7 @@ class _EditMyProfile extends State<EditMyProfile> {
     setState(() {});
   }
 
-  void changeProfile(
+ void changeProfile(
     String inAppUserImage,
     String sex,
     String era,

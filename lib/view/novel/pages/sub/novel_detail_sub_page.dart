@@ -51,7 +51,8 @@ class NovelDetailSubPage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,),
+                                  FaIcon(FontAwesomeIcons.handPointLeft,
+                                    color: Colors.white,),
                                   Text(" 一覧に")
                                 ],
                               )
@@ -140,7 +141,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                                               fontFamily:
                                                                   NovelSararaBFont,
                                                               fontSize: 25.0,
-                                                            color: Colors.white
+                                                            color: Colors.black
                                                           ),
                                                         ),
                                                       ),
