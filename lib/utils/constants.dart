@@ -21,7 +21,7 @@ enum MyProfileSettingMenu{
   LOG_OUT,
   EDIT_PROFILE,
   NORMAL_PROFILE,
-  FINISH_EDIT_PROFILE,
+  // FINISH_EDIT_PROFILE,
 }
 
 enum FeedWriterMode{

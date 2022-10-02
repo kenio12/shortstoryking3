@@ -12,11 +12,11 @@ import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class EditMyProfile extends StatefulWidget {
   final ScrollController scrollController;
-  final bool isFinishEditProfile;
+  // final bool isFinishEditProfile;
 
   EditMyProfile({
   required this.scrollController,
-    required this.isFinishEditProfile
+    // required this.isFinishEditProfile
   });
 
   @override
@@ -124,31 +124,28 @@ class _EditMyProfile extends State<EditMyProfile> {
     _inAppUserNameController.text = currentUser.inAppUserName;
     _bioController.text = currentUser.bio;
 
-
-
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    // final profileViewModel = context.read<ProfileViewModel>();
+    // if (profileViewModel.isFinishEditProfile) {
+    //   setState(() {
+    //   });
+    //   profileViewModel.isFinishEditProfile = false;
+    //   changeProfile(
+    //     _inAppUserImage,
+    //     _sex,
+    //     _era,
+    //     _address,
+    //     _bioController.text,
+    //     widget.scrollController,
+    //     _inAppUserNameController.text,
+    //   );}
+
     _width = MediaQuery.of(context).size.width;
-    final profileViewModel = context.read<ProfileViewModel>();
-
-    if (profileViewModel.isFinishEditProfile) {
-      setState(() {
-      });
-      profileViewModel.isFinishEditProfile = false;
-      changeProfile(
-        _inAppUserImage,
-        _sex,
-        _era,
-        _address,
-        _bioController.text,
-        widget.scrollController,
-        _inAppUserNameController.text,
-      );}
-
     return Column(
       children: [
         Center(
@@ -444,7 +441,7 @@ class _EditMyProfile extends State<EditMyProfile> {
     );
     primaryFocus?.unfocus();
     profileViewModel.changeNormalMyProfile();
-    setState(() {});
+    // setState(() {});
     scrollController.animateTo(
       0,
       duration: Duration(microseconds: 2),

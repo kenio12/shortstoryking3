@@ -54,7 +54,7 @@ class MyHomePage extends StatelessWidget {
           child: () { if (myHomeMode == MyHomeMode.EDIT_PROFILE) {
             return EditMyProfile(
                 scrollController: _scrollController,
-                isFinishEditProfile: model.isFinishEditProfile,
+                // isFinishEditProfile: model.isFinishEditProfile,
             );
           } else if ( myHomeMode == MyHomeMode.NORMAL_PROFILE) {
             return MyProfile(scrollController: _scrollController);

@@ -20,7 +20,7 @@ class ProfileViewModel extends ChangeNotifier {
 
   User get currentUser => UserRepository.currentUser!;
 
-  bool isFinishEditProfile = false;
+  // bool isFinishEditProfile = false;
 
   Future<void> signOut() async {
     await userRepository.signOut();
@@ -49,7 +49,7 @@ class ProfileViewModel extends ChangeNotifier {
       bio,
       inAppUserName,
     );
-    isFinishEditProfile = false;
+    // isFinishEditProfile = false;
     final writerViewModel = WriterViewModel(
         userRepository: userRepository, novelRepository: novelRepository);
     await writerViewModel.getWriter(FeedWriterMode.SELECTED_WRITER,currentUser.userId);
@@ -64,12 +64,11 @@ class ProfileViewModel extends ChangeNotifier {
   Future<void> changeNormalMyProfile() async{
     myHomeMode = MyHomeMode.NORMAL_PROFILE;
     await userRepository.getWriter(FeedWriterMode.SELECTED_WRITER,currentUser.userId);
-
     notifyListeners();
   }
 
-  void finishEditProfile() {
-    isFinishEditProfile = true;
-    ChangeNotifier();
-  }
+  // void finishEditProfile() {
+  //   isFinishEditProfile = true;
+  //   ChangeNotifier();
+  // }
 }

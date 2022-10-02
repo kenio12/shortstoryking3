@@ -47,10 +47,10 @@ class MyHomeSettingPart extends StatelessWidget {
                   value: MyProfileSettingMenu.NORMAL_PROFILE,
                   child: Text("編集を途中でやめる"),
                 ),
-          PopupMenuItem(
-            value: MyProfileSettingMenu.FINISH_EDIT_PROFILE,
-            child: Text("プロフィール編集を登録する"),
-          )
+          // PopupMenuItem(
+          //   value: MyProfileSettingMenu.FINISH_EDIT_PROFILE,
+          //   child: Text("プロフィール編集を登録する"),
+          // )
         ];
       },
     );
@@ -70,9 +70,9 @@ class MyHomeSettingPart extends StatelessWidget {
       case MyProfileSettingMenu.NORMAL_PROFILE:
         profileViewModel.changeNormalMyProfile();
         break;
-      case MyProfileSettingMenu.FINISH_EDIT_PROFILE:
-        profileViewModel.finishEditProfile();
-        break;
+      // case MyProfileSettingMenu.FINISH_EDIT_PROFILE:
+      //   profileViewModel.finishEditProfile();
+      //   break;
     }
   }
 //TODO
