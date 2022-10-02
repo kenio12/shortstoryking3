@@ -51,13 +51,16 @@ class FeedWriterPage extends StatelessWidget {
                                 pageVisibility.visibleFraction;
                             return Container(
                               color: Colors.black26,
-                              child: WriterProfile(
-                                writer: writer,
-                                currentUser: currentUser,
-                                pageController: PageController(),
-                                pageVisibility: pageVisibility,
-                                persistentTabController:
-                                    persistentTabController,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: WriterProfile(
+                                  writer: writer,
+                                  currentUser: currentUser,
+                                  pageController: PageController(),
+                                  pageVisibility: pageVisibility,
+                                  persistentTabController:
+                                      persistentTabController,
+                                ),
                               ),
                             );
                           });
