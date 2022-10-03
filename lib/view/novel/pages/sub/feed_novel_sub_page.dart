@@ -25,7 +25,7 @@ class FeedNovelSubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    Future(() => feedNovelViewModel.getNovels(feedNovelMode));
+    Future(() => feedNovelViewModel.getNovels(feedNovelMode, null));
 
     return Consumer<FeedNovelViewModel>(
       builder: (context, model, child) {
@@ -39,7 +39,7 @@ class FeedNovelSubPage extends StatelessWidget {
             return (model.novels == null)
                 ? Container()
                 : RefreshIndicator(
-                    onRefresh: () => model.getNovels(feedNovelMode),
+                    onRefresh: () => model.getNovels(feedNovelMode, null),
                     child: Column(
                       children: [
                         Padding(
@@ -47,19 +47,16 @@ class FeedNovelSubPage extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
+                              padding:
+                                  const EdgeInsets.only(top: 18.0, bottom: 8.0),
                               child: ElevatedButton(
-                                onPressed: () {
-                                  _settingNovelList(context, feedNovelMode,
-                                      persistentTabController, model);
-                                },
-                                child: Text(
-                                  "設定：全部の小説",
-                                  style: TextStyle(
-                                    fontSize: 20
-                                  ),
-                                ),
-                              ),
+                                  onPressed: () {
+                                    _settingNovelList(context, feedNovelMode,
+                                        persistentTabController, model);
+                                  },
+                                  child: _selectedNovelListText(
+                                      model.selectedWriter,
+                                      model.selectedFeedNovelMode)),
                             ),
                           ),
                         ),
@@ -233,5 +230,26 @@ class FeedNovelSubPage extends StatelessWidget {
           model: model,
         ),
         withNavBar: true);
+  }
+
+  Widget _selectedNovelListText(
+    User? selectedWriter,
+    FeedNovelMode selectedFeedNovelMode,
+  ) {
+    print("${selectedFeedNovelMode}");
+    switch (selectedFeedNovelMode) {
+      case FeedNovelMode.ALL_NOVELS :
+    return Text(
+      "設定：全部の小説",
+      style: TextStyle(fontSize: 20),
+    );
+      case FeedNovelMode.SELECTED_WRITERS_NOVELS:
+        return Text(
+          "設定：${selectedWriter!.inAppUserName}の小説",
+          style: TextStyle(fontSize: 20),
+        );
+      default :
+        return Text("それ以外の小説");
+  }
   }
 }

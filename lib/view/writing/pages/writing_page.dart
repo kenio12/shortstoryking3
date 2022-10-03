@@ -152,8 +152,8 @@ class _WritingPageState extends State<WritingPage> {
 
       // 投稿時に、合わせて小説を取ってくることにした　これは禁じ手、もうすこし頑張る
       final feedNovelViewModel = context.read<FeedNovelViewModel>();
-      await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS);
-      feedNovelViewModel.changeFeedNovelSubPage(0);
+      await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS,null);
+      feedNovelViewModel.changeFeedNovelSubPage(0,null);
 
       // 　これ以外を使っています。
       widget.persistentTabController.jumpToTab(1);

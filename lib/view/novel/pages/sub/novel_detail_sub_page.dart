@@ -47,7 +47,7 @@ class NovelDetailSubPage extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                   ),
                               onPressed: () => feedNovelViewPage
-                                  .changeFeedNovelSubPage(selectedListIndex),
+                                  .changeFeedNovelSubPage(selectedListIndex,null),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -326,7 +326,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                 ),
                                 onPressed: () => feedNovelViewPage
-                                    .changeFeedNovelSubPage(selectedListIndex),
+                                    .changeFeedNovelSubPage(selectedListIndex,null),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

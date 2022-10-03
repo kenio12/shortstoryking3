@@ -25,7 +25,11 @@ class FeedNovelViewModel extends ChangeNotifier {
   String selectedNovelId = "";
 
   int selectedListIndex = 0;
-  
+
+  FeedNovelMode selectedFeedNovelMode = FeedNovelMode.ALL_NOVELS;
+
+  User? selectedWriter;
+
   // void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
   //   if (feedNovelMode == FeedNovelMode.MY_NOVELS){
   //     feedNovelUser = currentUser;
@@ -34,12 +38,17 @@ class FeedNovelViewModel extends ChangeNotifier {
   //   }
   //   }
 
-  Future<void>  getNovels(FeedNovelMode feedNovelMode) async{
+  Future<void>  getNovels(FeedNovelMode feedNovelMode, User? writer) async{
     // print("1");
     isProcessing = true;
     notifyListeners();
 
-    novels = await novelRepository.getNovels(feedNovelMode);
+    novels = await novelRepository.getNovels(feedNovelMode,writer);
+
+    selectedFeedNovelMode = feedNovelMode;
+    if (writer != null) {
+      selectedWriter = writer;
+    }
 
     isProcessing = false;
     notifyListeners();
@@ -56,7 +65,13 @@ class FeedNovelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeFeedNovelSubPage(int selectedListIndex2) {
+  void changeFeedNovelSubPage(int selectedListIndex2, User? writer) async{
+    if (writer != null)
+    {
+      await getNovels(FeedNovelMode.SELECTED_WRITERS_NOVELS,writer);
+    } else {
+      getNovels(FeedNovelMode.ALL_NOVELS,writer);
+    }
     selectedListIndex = selectedListIndex2;
     isFeedNovel = true;
     notifyListeners();

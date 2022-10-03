@@ -28,7 +28,7 @@ class NovelRepository {
     await dbManager.insertNovel(novel);
   }
 
- Future<List<Novel>> getNovels(FeedNovelMode feedNovelMode) async{
+ Future<List<Novel>> getNovels(FeedNovelMode feedNovelMode, User? writer) async{
     switch (feedNovelMode){
       case FeedNovelMode.ALL_NOVELS:
       return await dbManager.getAllNovels();
@@ -43,7 +43,7 @@ class NovelRepository {
         return await dbManager.getAllNovels();
 
       case FeedNovelMode.SELECTED_WRITERS_NOVELS:
-        return await dbManager.getAllNovels();
+        return await dbManager.getSelectedWriterNovels(writer!);
 
       case FeedNovelMode.MY_NOVELS:
         return await dbManager.getAllNovels();

@@ -114,4 +114,29 @@ class DatabaseManager {
     return results;
   }
 
+  Future<List<Novel>> getSelectedWriterNovels(User writer) async{
+    final query =
+        await _db
+        .collection("novels")
+        .where("userId", isEqualTo: writer.userId)
+        .get();
+    if (query.docs.length == 0) return [];
+
+    var results = <Novel>[];
+    await _db
+        .collection("novels")
+        .where("userId", isEqualTo: writer.userId)
+        .orderBy("postDateTime", descending: true)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(Novel.fromMap(
+          element.data(),
+        ));
+      });
+    });
+    // print("novel:$results");
+    return results;
+  }
+
 }

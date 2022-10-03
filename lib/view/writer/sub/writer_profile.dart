@@ -229,7 +229,7 @@ class WriterProfile extends StatelessWidget {
     PersistentTabController persistentTabController,
   ) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    feedNovelViewModel.changeFeedNovelSubPage(0);
+    feedNovelViewModel.changeFeedNovelSubPage(0,writer);
     persistentTabController.jumpToTab(1);
   }
 

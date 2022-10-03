@@ -202,7 +202,7 @@ class MyProfile extends StatelessWidget {
     PersistentTabController persistentTabController,
   ) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    feedNovelViewModel.changeFeedNovelSubPage(0);
+    feedNovelViewModel.changeFeedNovelSubPage(0,null);
     persistentTabController.jumpToTab(1);
   }
 }
