@@ -240,12 +240,12 @@ class FeedNovelSubPage extends StatelessWidget {
     switch (selectedFeedNovelMode) {
       case FeedNovelMode.ALL_NOVELS :
     return Text(
-      "設定：全部の小説",
+      "全部の小説:設定変更",
       style: TextStyle(fontSize: 20),
     );
       case FeedNovelMode.SELECTED_WRITERS_NOVELS:
         return Text(
-          "設定：${selectedWriter!.inAppUserName}の小説",
+          "${selectedWriter!.inAppUserName}の小説：設定変更",
           style: TextStyle(fontSize: 20),
         );
       default :
