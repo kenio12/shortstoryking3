@@ -15,8 +15,8 @@ import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
 class NovelDetailSubPage extends StatelessWidget {
   final PersistentTabController? persistentTabController;
-  NovelDetailSubPage(this.persistentTabController);
 
+  NovelDetailSubPage(this.persistentTabController);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,8 @@ class NovelDetailSubPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top:20,left: 3.0, right: 3),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 3.0, right: 3),
                     child: Container(
                       // color: Colors.black26,
                       child: Column(
@@ -42,21 +43,23 @@ class NovelDetailSubPage extends StatelessWidget {
                           // SizedBox(height: 30),
                           Container(
                             // alignment: Alignment.topCenter,
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  ),
-                              onPressed: () => feedNovelViewPage
-                                  .changeFeedNovelSubPage(selectedListIndex,null),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FaIcon(FontAwesomeIcons.handPointLeft,
-                                    color: Colors.white,),
-                                  Text(" 一覧に")
-                                ],
-                              )
-                            ),
+                                style: ElevatedButton.styleFrom(),
+                                onPressed: () =>
+                                    feedNovelViewPage.changeFeedNovelSubPage(
+                                        selectedListIndex, null),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.handPointLeft,
+                                      color: Colors.white,
+                                    ),
+                                    Text(" 一覧に")
+                                  ],
+                                )),
                           ),
                           SizedBox(
                             height: 10,
@@ -116,33 +119,37 @@ class NovelDetailSubPage extends StatelessWidget {
                                                 snapshot.data != null) {
                                               final novelUser = snapshot.data!;
                                               return Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        right: 20.0),
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
                                                 child: Container(
                                                   alignment: Alignment.topRight,
                                                   child: InkWell(
                                                     onTap: () =>
                                                         _writerProfileChange(
                                                             context,
-                                                            selectedNovel.userId),
+                                                            selectedNovel
+                                                                .userId),
                                                     splashColor: Colors.black26,
                                                     child: Container(
                                                       decoration: BoxDecoration(
-                                                          color: Colors.black12,
-                                                          // border: Border.all(width: 1),
-                                                          // borderRadius: BorderRadius.circular(4.0)
+                                                        color: Colors.black12,
+                                                        // border: Border.all(width: 1),
+                                                        // borderRadius: BorderRadius.circular(4.0)
                                                       ),
                                                       child: Padding(
-                                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    8.0),
                                                         child: Text(
                                                           "作家：${novelUser.inAppUserName}",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   NovelSararaBFont,
                                                               fontSize: 25.0,
-                                                            color: Colors.black
-                                                          ),
+                                                              color:
+                                                                  Colors.black),
                                                         ),
                                                       ),
                                                     ),
@@ -183,14 +190,15 @@ class NovelDetailSubPage extends StatelessWidget {
                   // SizedBox(height: 10),
 
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Container(
-                      // width: double.infinity,
-                      padding: const EdgeInsets.all(5.0),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black54, width: 2),
-                          borderRadius: BorderRadius.circular(2.0),
-                          color: Colors.white70.withOpacity(0.8)),
+                          color: Colors.white70,
+                          // borderRadius: BorderRadius.circular(20),
+                          border: Border(
+                              top: BorderSide(width: 1),
+                              bottom: BorderSide(width: 1))),
+                      alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -200,33 +208,61 @@ class NovelDetailSubPage extends StatelessWidget {
                               child: Text(" タイトル",
                                   style: TextStyle(color: Colors.grey)),
                             ),
-                            Container(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(
-                                  "${selectedNovel.title}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    // letterSpacing: 6.0,
-                                    fontFamily: NovelSararaBFont,
-                                    fontSize: 30,
-                                    // backgroundColor: Colors.white,
-                                    letterSpacing: 5,
-                                    // shadows:[
-                                    //    Shadow(
-                                    //      blurRadius: 80.0,
-                                    //    ),
-                                    // ]
-                                  ),
-                                ),
-                              ),
+                            // SizedBox(height: 3,),
+                            Text(
+                              "${selectedNovel.title}",
+                              style: TextStyle(fontSize: 30, letterSpacing: 20,height: 1.5),
                             ),
                           ],
                         ),
                       ),
                     ),
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(10.0),
+                  //   child: Container(
+                  //     // width: double.infinity,
+                  //     padding: const EdgeInsets.all(5.0),
+                  //     decoration: BoxDecoration(
+                  //         border: Border.all(color: Colors.black54, width: 2),
+                  //         borderRadius: BorderRadius.circular(2.0),
+                  //         color: Colors.white70.withOpacity(0.8)),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.all(8.0),
+                  //       child: Column(
+                  //         children: [
+                  //           Container(
+                  //             alignment: Alignment.topLeft,
+                  //             child: Text(" タイトル",
+                  //                 style: TextStyle(color: Colors.grey)),
+                  //           ),
+                  //           Container(
+                  //             alignment: Alignment.bottomLeft,
+                  //             child: Padding(
+                  //               padding: const EdgeInsets.only(left: 8.0),
+                  //               child: Text(
+                  //                 "${selectedNovel.title}",
+                  //                 style: TextStyle(
+                  //                   color: Colors.black,
+                  //                   // letterSpacing: 6.0,
+                  //                   fontFamily: NovelSararaBFont,
+                  //                   fontSize: 30,
+                  //                   // backgroundColor: Colors.white,
+                  //                   letterSpacing: 5,
+                  //                   // shadows:[
+                  //                   //    Shadow(
+                  //                   //      blurRadius: 80.0,
+                  //                   //    ),
+                  //                   // ]
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(left: 3.0, right: 3),
                     child: Container(
@@ -277,7 +313,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                         fontFamily: NovelSararaRFont,
                                         fontSize: 28,
                                         // backgroundColor: Colors.white,
-                                        letterSpacing: 1,
+                                        letterSpacing: 2,
                                         color: Colors.black,
                                         // shadows:[
                                         //    Shadow(
@@ -321,20 +357,23 @@ class NovelDetailSubPage extends StatelessWidget {
                           ),
                           Container(
                             // alignment: Alignment.topCenter,
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                ),
-                                onPressed: () => feedNovelViewPage
-                                    .changeFeedNovelSubPage(selectedListIndex,null),
+                                style: ElevatedButton.styleFrom(),
+                                onPressed: () =>
+                                    feedNovelViewPage.changeFeedNovelSubPage(
+                                        selectedListIndex, null),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    FaIcon(FontAwesomeIcons.handPointLeft,color: Colors.white,),
+                                    FaIcon(
+                                      FontAwesomeIcons.handPointLeft,
+                                      color: Colors.white,
+                                    ),
                                     Text(" 一覧に")
                                   ],
-                                )
-                            ),
+                                )),
                           ),
                           SizedBox(height: 20),
                         ],
@@ -358,13 +397,11 @@ class NovelDetailSubPage extends StatelessWidget {
     //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
     // );
 
-  //  やっぱこっちにした
-  if (persistentTabController != null) {
-    final writerViewModel = context.read<WriterViewModel>();
-    writerViewModel.getWriter(FeedWriterMode.SELECTED_WRITER,userId);
-    persistentTabController?.jumpToTab(2);
-  }
-
-
+    //  やっぱこっちにした
+    if (persistentTabController != null) {
+      final writerViewModel = context.read<WriterViewModel>();
+      writerViewModel.getWriter(FeedWriterMode.SELECTED_WRITER, userId);
+      persistentTabController?.jumpToTab(2);
+    }
   }
 }

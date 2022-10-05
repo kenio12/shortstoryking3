@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
@@ -46,8 +47,10 @@ class _SettingNovelListState extends State<SettingNovelList> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "設定画面",
-                style: TextStyle(fontSize: 30),
+                "検索設定画面",
+                style: TextStyle(fontSize: 30,
+                letterSpacing: 20
+                ),
               ),
             ),
           ),
@@ -58,6 +61,12 @@ class _SettingNovelListState extends State<SettingNovelList> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextFormField(
+            keyboardType: TextInputType.multiline,
+            inputFormatters: [
+              FilteringTextInputFormatter.singleLineFormatter
+            ],
+            maxLength: 30,
+            maxLines: null,
             controller: _titleSearchController,
             style: TextStyle(fontSize: 20),
             cursorColor: Colors.black,
@@ -117,7 +126,7 @@ class _SettingNovelListState extends State<SettingNovelList> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
-                  "設定終了",
+                  "設定せずに戻る",
                   style: TextStyle(fontSize: 30),
                 ),
               ),
