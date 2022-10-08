@@ -109,6 +109,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      SizedBox(height: 8,),
                                       FutureBuilder(
                                           future: feedNovelViewPage
                                               .getNovelUserInfo(
@@ -120,7 +121,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                               final novelUser = snapshot.data!;
                                               return Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20.0),
+                                                    right: 15.0),
                                                 child: Container(
                                                   alignment: Alignment.topRight,
                                                   child: InkWell(
@@ -132,25 +133,30 @@ class NovelDetailSubPage extends StatelessWidget {
                                                     splashColor: Colors.black26,
                                                     child: Container(
                                                       decoration: BoxDecoration(
-                                                        color: Colors.black12,
+                                                        color: Colors.white70,
                                                         // border: Border.all(width: 1),
                                                         // borderRadius: BorderRadius.circular(4.0)
                                                       ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal:
-                                                                    8.0),
-                                                        child: Text(
-                                                          "作家：${novelUser.inAppUserName}",
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  NovelSararaBFont,
-                                                              fontSize: 25.0,
-                                                              color:
-                                                                  Colors.black),
-                                                        ),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          SizedBox(width: 8,),
+                                                        FaIcon(
+                                                        FontAwesomeIcons.handPointLeft,
+                                                        color: Colors.black,
+                                                      ),
+                                                          Flexible(
+                                                            child: Text(
+                                                              "  作：${novelUser.inAppUserName} ",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      NovelSararaBFont,
+                                                                  fontSize: 25.0,
+                                                                  color:
+                                                                      Colors.black),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                   ),
@@ -160,7 +166,7 @@ class NovelDetailSubPage extends StatelessWidget {
                                               return Container();
                                             }
                                           }),
-                                      SizedBox(height: 20.0),
+                                      SizedBox(height: 10.0),
                                       Container(
                                         alignment: Alignment.topRight,
                                         child: Row(
@@ -196,8 +202,8 @@ class NovelDetailSubPage extends StatelessWidget {
                           color: Colors.white70,
                           // borderRadius: BorderRadius.circular(20),
                           border: Border(
-                              top: BorderSide(width: 1),
-                              bottom: BorderSide(width: 1))),
+                              top: BorderSide(width: 3),
+                              bottom: BorderSide(width: 3))),
                       alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -389,7 +395,7 @@ class NovelDetailSubPage extends StatelessWidget {
         });
   }
 
-  _writerProfileChange(BuildContext context, String userId) {
+  _writerProfileChange(BuildContext context, String userId) async{
     // pushNewScreen(
     //   context,
     //   screen: WriterPage(userId),
@@ -400,7 +406,7 @@ class NovelDetailSubPage extends StatelessWidget {
     //  やっぱこっちにした
     if (persistentTabController != null) {
       final writerViewModel = context.read<WriterViewModel>();
-      writerViewModel.getWriter(FeedWriterMode.SELECTED_WRITER, userId);
+      await writerViewModel.getWriter(FeedWriterMode.SELECTED_WRITER, userId);
       persistentTabController?.jumpToTab(2);
     }
   }

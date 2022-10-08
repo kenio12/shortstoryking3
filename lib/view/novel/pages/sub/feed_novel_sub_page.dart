@@ -52,7 +52,7 @@ class FeedNovelSubPage extends StatelessWidget {
                               child: ElevatedButton(
                                   onPressed: () {
                                     _settingNovelList(context, feedNovelMode,
-                                        persistentTabController, model);
+                                        persistentTabController);
                                   },
                                   child: _selectedNovelListText(
                                       model.selectedWriter,
@@ -220,14 +220,12 @@ class FeedNovelSubPage extends StatelessWidget {
     BuildContext context,
     FeedNovelMode feedNovelMode,
     PersistentTabController persistentTabController,
-    FeedNovelViewModel model,
   ) {
     pushNewScreen(context,
         screen: SettingNovelList(
           context: context,
           feedNovelMode: feedNovelMode,
           persistentTabController: persistentTabController,
-          model: model,
         ),
         withNavBar: true);
   }

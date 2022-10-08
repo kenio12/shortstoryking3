@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 
@@ -8,13 +9,12 @@ class SettingNovelList extends StatefulWidget {
   final BuildContext context;
   final FeedNovelMode feedNovelMode;
   final PersistentTabController persistentTabController;
-  final FeedNovelViewModel model;
 
   SettingNovelList(
       {required this.context,
       required this.feedNovelMode,
       required this.persistentTabController,
-      required this.model});
+      });
 
   @override
   State<SettingNovelList> createState() => _SettingNovelListState();
@@ -82,7 +82,9 @@ class _SettingNovelListState extends State<SettingNovelList> {
                 child: IconButton(
                   color: Colors.black,
                   icon: Icon(Icons.search, size: 40),
-                  onPressed: () => _SearchNovelFromTitle(_titleSearchController),
+                  onPressed: () => _searchNovelFromTitle(
+                      context,
+                      _titleSearchController),
                 ),
               ),
               suffixIconColor: Colors.black,
@@ -141,5 +143,13 @@ class _SettingNovelListState extends State<SettingNovelList> {
     Navigator.pop(context);
   }
 
-  _SearchNovelFromTitle(TextEditingController titleSearchController) {}
+  _searchNovelFromTitle(
+      BuildContext context,
+      TextEditingController titleSearchController,
+      ) async{
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    // await feedNovelViewModel.searchNovelFromTitle(titleSearchController);
+    Navigator.pop(context);
+  }
+
 }
