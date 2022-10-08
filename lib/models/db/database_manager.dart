@@ -139,4 +139,32 @@ class DatabaseManager {
     return results;
   }
 
+
+ getSelectedNovelListFromTitle(String selectedTitle)  async{
+    final query =
+        await _db
+        .collection("novels")
+        .orderBy("title")
+        .startAt([selectedTitle]).endAt([selectedTitle + '\uf8ff'])
+        .get();
+    if (query.docs.length == 0) return [];
+
+    var results = <Novel>[];
+    await _db
+        .collection("novels")
+        .orderBy("title")
+        .startAt([selectedTitle]).endAt([selectedTitle + '\uf8ff'])
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(Novel.fromMap(
+          element.data(),
+        ));
+      });
+    });
+    print("novel:$results");
+    return results;
+
+  }
+
 }

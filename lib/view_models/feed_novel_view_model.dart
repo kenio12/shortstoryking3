@@ -30,6 +30,8 @@ class FeedNovelViewModel extends ChangeNotifier {
 
   User? selectedWriter;
 
+  String selectedTitle ="";
+
   // void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
   //   if (feedNovelMode == FeedNovelMode.MY_NOVELS){
   //     feedNovelUser = currentUser;
@@ -43,7 +45,7 @@ class FeedNovelViewModel extends ChangeNotifier {
     isProcessing = true;
     notifyListeners();
 
-    novels = await novelRepository.getNovels(feedNovelMode,writer);
+    novels = await novelRepository.getNovels(feedNovelMode,writer,selectedTitle);
 
     selectedFeedNovelMode = feedNovelMode;
     if (writer != null) {
@@ -80,6 +82,17 @@ class FeedNovelViewModel extends ChangeNotifier {
   Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
     return await novelRepository.selectedNovelFromNovelId(selectedNovelId);
   }
+
+  // Future<void> searchNovelListFromTitle() async{
+  //   isProcessing = true;
+  //   notifyListeners();
+  //
+  //   novels = await novelRepository.searchNovelListFromTitle(selectedTitle);
+  //   ChangeNotifier();
+  //
+  //   isProcessing = false;
+  //   notifyListeners();
+  // }
 
   // notifyListeners()なし版
   // Future<void>  getNovels2(FeedNovelMode feedNovelMode) async{
