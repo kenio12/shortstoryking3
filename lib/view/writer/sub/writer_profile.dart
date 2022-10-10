@@ -5,6 +5,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/writer/components/page_transformer.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
@@ -229,7 +230,7 @@ class WriterProfile extends StatelessWidget {
     PersistentTabController persistentTabController,
   ) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    feedNovelViewModel.changeFeedNovelSubPage(0,writer);
+    feedNovelViewModel.changeFeedNovelSubPage(0,writer,FeedNovelMode.SELECTED_WRITERS_NOVELS);
     persistentTabController.jumpToTab(1);
   }
 

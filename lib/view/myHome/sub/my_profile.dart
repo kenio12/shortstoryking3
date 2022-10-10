@@ -4,6 +4,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/data_models/user.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
+import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/profile_view_model.dart';
 
@@ -202,7 +203,7 @@ class MyProfile extends StatelessWidget {
     PersistentTabController persistentTabController,
   ) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    feedNovelViewModel.changeFeedNovelSubPage(0,null);
+    feedNovelViewModel.changeFeedNovelSubPage(0,null,FeedNovelMode.MY_NOVELS);
     persistentTabController.jumpToTab(1);
   }
 }

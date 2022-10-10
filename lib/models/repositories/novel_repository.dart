@@ -46,7 +46,7 @@ class NovelRepository {
         return await dbManager.getSelectedWriterNovels(writer!);
 
       case FeedNovelMode.MY_NOVELS:
-        return await dbManager.getAllNovels();
+        return await dbManager.getSelectedWriterNovels(writer!);
 
     }
 

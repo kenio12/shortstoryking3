@@ -39,143 +39,153 @@ _titleSearchController.dispose();
   
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 60),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  // borderRadius: BorderRadius.circular(20),
-                  border: Border(
-                      top: BorderSide(
-                          width: 4
-                      ),
-                      bottom: BorderSide(
-                          width: 4
-                      )
-                  )
-              ),
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "検索設定画面",
-                  style: TextStyle(fontSize: 30,
-                      letterSpacing: 20
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              // onFieldSubmitted: (String? value){
-              //   _searchNovelFromTitle();
-              // },
-              keyboardType: TextInputType.multiline,
-              inputFormatters: [
-                FilteringTextInputFormatter.singleLineFormatter
-              ],
-              maxLength: 30,
-              maxLines: null,
-              controller: _titleSearchController,
-              style: TextStyle(fontSize: 20),
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 30,
-                  horizontal: 20,
-                ),
-                // prefixIcon: Icon(Icons.search),
-                // prefixIconColor: Colors.black,
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.only(right: 22.0),
-                  child: IconButton(
-                    color: Colors.black,
-                    icon: Icon(Icons.search, size: 40),
-                    onPressed: () =>
-                        _searchNovelFromTitle()
-                  ),
-                ),
-                suffixIconColor: Colors.black,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Colors.black,
-                    width: 3.0,
-                  ),
-                ),
 
-                labelStyle: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+    return Consumer<FeedNovelViewModel>(builder: (context, model, child) {
+      if (model.isFeedNovel) {
+        Navigator.pop(context);
+      }
+
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 60),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    // borderRadius: BorderRadius.circular(20),
+                    border: Border(
+                        top: BorderSide(
+                            width: 4
+                        ),
+                        bottom: BorderSide(
+                            width: 4
+                        )
+                    )
                 ),
-                labelText: '  タイトル頭文字による検索',
-                floatingLabelStyle:
-                const TextStyle(fontSize: 20, color: Colors.black),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "検索設定画面",
+                    style: TextStyle(fontSize: 30,
+                        letterSpacing: 20
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                // onFieldSubmitted: (String? value){
+                //   _searchNovelFromTitle();
+                // },
+                keyboardType: TextInputType.multiline,
+                inputFormatters: [
+                  FilteringTextInputFormatter.singleLineFormatter
+                ],
+                maxLength: 30,
+                maxLines: null,
+                controller: _titleSearchController,
+                style: TextStyle(fontSize: 20),
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 30,
+                    horizontal: 20,
+                  ),
+                  // prefixIcon: Icon(Icons.search),
+                  // prefixIconColor: Colors.black,
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 22.0),
+                    child: IconButton(
+                        color: Colors.black,
+                        icon: Icon(Icons.search, size: 40),
+                        onPressed: () =>
+                            _searchNovelFromTitle()
+                    ),
+                  ),
+                  suffixIconColor: Colors.black,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                      width: 3.0,
+                    ),
+                  ),
+
+                  labelStyle: TextStyle(
+                    fontSize: 20,
                     color: Colors.black,
-                    width: 3.0,
+                  ),
+                  labelText: '  タイトル頭文字による検索',
+                  floatingLabelStyle:
+                  const TextStyle(fontSize: 20, color: Colors.black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 3.0,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              alignment: Alignment.topRight,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
-                ),
-                onPressed: () => _finishSettingNovelList(context),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "設定せずに戻る",
-                    style: TextStyle(fontSize: 30),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                alignment: Alignment.topRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                  ),
+                  onPressed: () => _AllNovelList(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      "全部",
+                      style: TextStyle(fontSize: 30),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              alignment: Alignment.topRight,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
-                ),
-                onPressed: () => _AllNovelList(),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "全ての小説",
-                    style: TextStyle(fontSize: 30),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                alignment: Alignment.topRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                  ),
+                  onPressed: () => _finishSettingNovelList(context),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      "一覧に戻る",
+                      style: TextStyle(fontSize: 30),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-        ],
-      ),
+
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      );
+
+    }
     );
   }
 
