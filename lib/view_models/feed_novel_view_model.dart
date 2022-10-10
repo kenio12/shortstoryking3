@@ -108,22 +108,9 @@ class FeedNovelViewModel extends ChangeNotifier {
     return await novelRepository.selectedNovelFromNovelId(selectedNovelId);
   }
 
-// Future<void> searchNovelListFromTitle() async{
-//   isProcessing = true;
-//   notifyListeners();
-//
-//   novels = await novelRepository.searchNovelListFromTitle(selectedTitle);
-//   ChangeNotifier();
-//
-//   isProcessing = false;
-//   notifyListeners();
-// }
+  //TODO 小説消す
+  deletedNovel(String novelId) {}
 
-// notifyListeners()なし版
-// Future<void>  getNovels2(FeedNovelMode feedNovelMode) async{
-//
-//   novels = await novelRepository.getNovels(feedNovelMode);
-//
-// }
+
 
 }

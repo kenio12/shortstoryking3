@@ -35,17 +35,19 @@ class ConfirmDialog extends StatelessWidget {
       content: Text(content),
       actions: [
         TextButton(
-            child: Text("はーい"),
-            onPressed: () {
-              Navigator.pop(context);
-              onConfirmed(true);
-            }),
+          child: Text("はーい"),
+          onPressed: () {
+            Navigator.pop(context);
+            onConfirmed(true);
+          },
+        ),
         TextButton(
-            child: Text("いいえ"),
-            onPressed: () {
-              Navigator.pop(context);
-              onConfirmed(true);
-            })
+          child: Text("いいえ"),
+          onPressed: () {
+            Navigator.pop(context);
+            onConfirmed(false);
+          },
+        )
       ],
     );
   }
