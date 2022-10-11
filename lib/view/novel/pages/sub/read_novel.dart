@@ -74,15 +74,21 @@ class ReadNovel extends StatelessWidget {
                                   onPressed: () => Navigator.pop(context),
                                   // _changeFeedNovelSubPage(
                                   // selectedListIndex, context, feedNovelMode),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.handPointLeft,
-                                        color: Colors.white,
-                                      ),
-                                      Text(" 一覧に戻る")
-                                    ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.handPointLeft,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          " 一覧に戻る",
+                                          style: TextStyle(fontSize: 20),
+                                        )
+                                      ],
+                                    ),
                                   )),
                             ),
                             SizedBox(
@@ -403,15 +409,21 @@ class ReadNovel extends StatelessWidget {
                                   onPressed: () => Navigator.pop(context),
                                   // _changeFeedNovelSubPage(
                                   // selectedListIndex, context, feedNovelMode),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.handPointLeft,
-                                        color: Colors.white,
-                                      ),
-                                      Text(" 一覧に戻る")
-                                    ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.handPointLeft,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          " 一覧に戻る",
+                                          style: TextStyle(fontSize: 20),
+                                        )
+                                      ],
+                                    ),
                                   )),
                             ),
                             SizedBox(height: 20),

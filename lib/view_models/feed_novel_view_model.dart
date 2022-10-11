@@ -109,7 +109,8 @@ class FeedNovelViewModel extends ChangeNotifier {
   }
 
   //TODO 小説消す
-  deletedNovel(String novelId) {}
+ Future<void> deletedNovel(String novelId) async {
+  }
 
 
 

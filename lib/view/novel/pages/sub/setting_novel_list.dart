@@ -88,9 +88,9 @@ _titleSearchController.dispose();
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  // onFieldSubmitted: (String? value){
-                  //   _searchNovelFromTitle();
-                  // },
+                  onFieldSubmitted: (String? value){
+                    _searchNovelFromTitle();
+                  },
                   keyboardType: TextInputType.multiline,
                   inputFormatters: [
                     FilteringTextInputFormatter.singleLineFormatter
