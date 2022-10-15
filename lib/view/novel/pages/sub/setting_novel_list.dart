@@ -83,12 +83,13 @@ _titleSearchController.dispose();
                 ),
               ),
               SizedBox(
-                height: 21,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   onFieldSubmitted: (String? value){
+                    print(value);
                     _searchNovelFromTitle();
                   },
                   keyboardType: TextInputType.multiline,

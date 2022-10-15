@@ -24,6 +24,33 @@ class WritingPage extends StatefulWidget {
 class _WritingPageState extends State<WritingPage> {
   final _titleController = TextEditingController();
   final _novelContentController = TextEditingController();
+  List<DropdownMenuItem<String>> _genreItems = [];
+
+  String _selectedGenre = "";
+
+  @override
+  void initState() {
+    super.initState();
+    setGenreItems();
+    _selectedGenre =  _genreItems[0].value!;
+  }
+
+  void setGenreItems() {
+    _genreItems
+      ..add(DropdownMenuItem(value: "none" ,child: Text(""),))
+    ..add(DropdownMenuItem(value: "love" ,child: Text("恋愛"),))
+    ..add(DropdownMenuItem(value: "history" ,child: Text("歴史・時代"),))
+    ..add(DropdownMenuItem(value: "horror" ,child: Text("ホラー"),))
+    ..add(DropdownMenuItem(value: "reasoning" ,child: Text("推理"),))
+    ..add(DropdownMenuItem(value: "everydayLife" ,child: Text("日常"),))
+    ..add(DropdownMenuItem(value: "sf" ,child: Text("SF"),))
+    ..add(DropdownMenuItem(value: "fantasy" ,child: Text("ファンタジー"),))
+    ..add(DropdownMenuItem(value: "society" ,child: Text("社会"),))
+    ..add(DropdownMenuItem(value: "sensuality" ,child: Text("官能"),))
+      ..add(DropdownMenuItem(value: "others" ,child: Text("その他"),))
+    ;
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +104,24 @@ class _WritingPageState extends State<WritingPage> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
+                Row(
+                  children: [
+                    Text("ジャンル選択",style: TextStyle(fontSize: 25,fontFamily: NovelSararaBFont),),
+                    SizedBox(width: 15,),
+                    DropdownButton(
+                      elevation: 20,
+                      items: _genreItems,
+                      value: _selectedGenre,
+                      style: TextStyle(fontSize: 25,color: Colors.black,fontFamily: NovelSararaBFont),
+                      onChanged: (String? selectedValue) {
+                        setState(() {
+                          _selectedGenre = selectedValue!;
+                        });
+                      },
+            ),
+                  ],
+                ),
+                SizedBox(height: 20,),
                 TextFormField(
                   // autofocus: true,
                   cursorColor: Colors.black,
@@ -166,4 +211,5 @@ class _WritingPageState extends State<WritingPage> {
       _novelContentController.clear();
     }
   }
+  
 }

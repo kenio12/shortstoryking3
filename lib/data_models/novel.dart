@@ -129,7 +129,7 @@ class Novel {
       title: map['title'] as String,
       content: map['content'] as String,
       postScript: map['postScript'] as String,
-      genre: map['genre'] as String,
+      genre: (map['genre'] == null) ? "" : map['genre'] as String,
       wordCount: map['wordCount'] as String,
       battleType: map['battleType'] as String,
       saveDateTime: DateTime.parse(map['saveDateTime'] as String).toLocal(),
