@@ -83,7 +83,7 @@ _titleSearchController.dispose();
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 21,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
