@@ -9,9 +9,6 @@ class Novel {
   String postScript;
   String genre;
   String battleType;
-  String eventType;
-  int battlePoint;
-  int eventPoint;
   int wordCount;
   DateTime saveDateTime;
   DateTime postDateTime;
@@ -27,9 +24,6 @@ class Novel {
     required this.postScript,
     required this.genre,
     required this.battleType,
-    required this.eventType,
-    required this.battlePoint,
-    required this.eventPoint,
     required this.wordCount,
     required this.saveDateTime,
     required this.postDateTime,
@@ -48,9 +42,6 @@ class Novel {
           postScript == other.postScript &&
           genre == other.genre &&
           battleType == other.battleType &&
-          eventType == other.eventType &&
-          battlePoint == other.battlePoint &&
-          eventPoint == other.eventPoint &&
           wordCount == other.wordCount &&
           saveDateTime == other.saveDateTime &&
           postDateTime == other.postDateTime);
@@ -65,9 +56,6 @@ class Novel {
       postScript.hashCode ^
       genre.hashCode ^
       battleType.hashCode ^
-      eventType.hashCode ^
-      battlePoint.hashCode ^
-      eventPoint.hashCode ^
       wordCount.hashCode ^
       saveDateTime.hashCode ^
       postDateTime.hashCode;
@@ -83,9 +71,6 @@ class Novel {
         ' postScript: $postScript,' +
         ' genre: $genre,' +
         ' battleType: $battleType,' +
-        ' eventType: $eventType,' +
-        ' battlePoint: $battlePoint,' +
-        ' eventPoint: $eventPoint,' +
         ' wordCount: $wordCount,' +
         ' saveDateTime: $saveDateTime,' +
         ' postDateTime: $postDateTime,' +
@@ -101,9 +86,6 @@ class Novel {
     String? postScript,
     String? genre,
     String? battleType,
-    String? eventType,
-    int? battlePoint,
-    int? eventPoint,
     int? wordCount,
     DateTime? saveDateTime,
     DateTime? postDateTime,
@@ -117,9 +99,6 @@ class Novel {
       postScript: postScript ?? this.postScript,
       genre: genre ?? this.genre,
       battleType: battleType ?? this.battleType,
-      eventType: eventType ?? this.eventType,
-      battlePoint: battlePoint ?? this.battlePoint,
-      eventPoint: eventPoint ?? this.eventPoint,
       wordCount: wordCount ?? this.wordCount,
       saveDateTime: saveDateTime ?? this.saveDateTime,
       postDateTime: postDateTime ?? this.postDateTime,
@@ -136,9 +115,6 @@ class Novel {
       'postScript': this.postScript,
       'genre': this.genre,
       'battleType': this.battleType,
-      'eventType': this.eventType,
-      'battlePoint': this.battlePoint,
-      'eventPoint': this.eventPoint,
       'wordCount': this.wordCount,
       'saveDateTime': this.saveDateTime.toIso8601String(),
       'postDateTime': this.postDateTime.toIso8601String(),
@@ -155,9 +131,6 @@ class Novel {
       postScript: map['postScript'] as String,
       genre: (map['genre'] == null) ? "" : map['genre'] as String,
       battleType: map['battleType'] as String,
-      eventType: (map['eventType'] == null) ? "" : map['eventType'] as String,
-      battlePoint: (map['battlePoint'] == null) ? 0 : map['battlePoint'] as int,
-      eventPoint: (map['eventPoint'] == null) ? 0 : map['eventPoint'] as int,
       wordCount: (map['wordCount'] == "") ? (map['content'] as String).length : map['wordCount'] as int,
       saveDateTime: DateTime.parse(map['saveDateTime'] as String).toLocal(),
       postDateTime: DateTime.parse(map['postDateTime'] as String).toLocal(),

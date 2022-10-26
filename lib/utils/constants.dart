@@ -28,3 +28,8 @@ enum FeedWriterMode{
   All_Writer,
   SELECTED_WRITER
 }
+
+enum GenreDropDownButtonMode{
+  WRITING_GENRE_DROP_DOWN,
+  FEED_GENRE_DROP_DOWN
+}

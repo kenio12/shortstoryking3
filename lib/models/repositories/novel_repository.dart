@@ -11,7 +11,7 @@ class NovelRepository {
   NovelRepository({required this.dbManager});
 
   Future<void> novelPosting(User currentUser, String novelTitle,
-      String novelContent) async {
+      String novelContent, String selectedGenre) async {
     final novel = Novel(
       isPublish: true,
       novelId: Uuid().v1(),
@@ -19,9 +19,12 @@ class NovelRepository {
       title: novelTitle,
       content: novelContent,
       postScript: "",
-      genre: "",
-      wordCount: "",
+      genre: selectedGenre,
       battleType: "",
+      eventType: "",
+      battlePoint: 0,
+      eventPoint: 0,
+      wordCount: novelContent.length,
       saveDateTime: DateTime.now(),
       postDateTime: DateTime.now(),
     );

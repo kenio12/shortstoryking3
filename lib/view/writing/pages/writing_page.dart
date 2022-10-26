@@ -8,9 +8,12 @@ import 'package:shortstoryking3/styles/eye_icons.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/dialog/alert_dialog.dart';
+import 'package:shortstoryking3/view/common/drop_down_button/genre_drop_down_button.dart';
 import 'package:shortstoryking3/view/novel/pages/feed_novel_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
+
+
 
 class WritingPage extends StatefulWidget {
   final PersistentTabController persistentTabController;
@@ -26,36 +29,87 @@ class _WritingPageState extends State<WritingPage> {
   final _novelContentController = TextEditingController();
   List<DropdownMenuItem<String>> _genreItems = [];
 
-  String _selectedGenre = "";
+  // String _selectedGenre = "";
 
   @override
   void initState() {
     super.initState();
     setGenreItems();
-    _selectedGenre =  _genreItems[0].value!;
+    final novelViewModel = context.read<NovelViewModel>();
+    novelViewModel.selectedGenre = _genreItems[0].value!;
+    _titleController.addListener(() {
+      novelViewModel.writingNovelTitle = _titleController.text;
+    });
+    _novelContentController.addListener(() {
+      novelViewModel.writingNovelContent = _novelContentController.text;
+    });
+    // selectedGenre = genreItems[0].value!;
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _novelContentController.dispose();
+    super.dispose();
   }
 
   void setGenreItems() {
     _genreItems
-      ..add(DropdownMenuItem(value: "none" ,child: Text(""),))
-    ..add(DropdownMenuItem(value: "love" ,child: Text("恋愛"),))
-    ..add(DropdownMenuItem(value: "history" ,child: Text("歴史・時代"),))
-    ..add(DropdownMenuItem(value: "horror" ,child: Text("ホラー"),))
-    ..add(DropdownMenuItem(value: "reasoning" ,child: Text("推理"),))
-    ..add(DropdownMenuItem(value: "everydayLife" ,child: Text("日常"),))
-    ..add(DropdownMenuItem(value: "sf" ,child: Text("SF"),))
-    ..add(DropdownMenuItem(value: "fantasy" ,child: Text("ファンタジー"),))
-    ..add(DropdownMenuItem(value: "society" ,child: Text("社会"),))
-    ..add(DropdownMenuItem(value: "sensuality" ,child: Text("官能"),))
-      ..add(DropdownMenuItem(value: "others" ,child: Text("その他"),))
-    ;
-
+      ..add(DropdownMenuItem(
+        value: "",
+        child: Text(""),
+      ))
+      ..add(DropdownMenuItem(
+        value: "恋愛",
+        child: Text("恋愛"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "歴史・時代",
+        child: Text("歴史・時代"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "ホラー",
+        child: Text("ホラー"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "推理",
+        child: Text("推理"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "日常",
+        child: Text("日常"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "SF",
+        child: Text("SF"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "ファンタジー",
+        child: Text("ファンタジー"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "社会",
+        child: Text("社会"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "奇妙・不思議",
+        child: Text("奇妙・不思議"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "官能",
+        child: Text("官能"),
+      ))
+      ..add(DropdownMenuItem(
+        value: "その他",
+        child: Text("その他"),
+      ));
   }
 
   @override
   Widget build(BuildContext context) {
     // //　投稿時に合わせて、小説リストを取ってくるために、宣言した。
     // final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    final novelViewModel = context.read<NovelViewModel>();
 
     return SafeArea(
       child: Scaffold(
@@ -104,24 +158,13 @@ class _WritingPageState extends State<WritingPage> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Text("ジャンル選択",style: TextStyle(fontSize: 25,fontFamily: NovelSararaBFont),),
-                    SizedBox(width: 15,),
-                    DropdownButton(
-                      elevation: 20,
-                      items: _genreItems,
-                      value: _selectedGenre,
-                      style: TextStyle(fontSize: 25,color: Colors.black,fontFamily: NovelSararaBFont),
-                      onChanged: (String? selectedValue) {
-                        setState(() {
-                          _selectedGenre = selectedValue!;
-                        });
-                      },
-            ),
-                  ],
+                    GenreDropDownButton(
+                      genreDropDownButtonMode:
+                      GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN,
+                    ),
+                SizedBox(
+                  height: 20,
                 ),
-                SizedBox(height: 20,),
                 TextFormField(
                   // autofocus: true,
                   cursorColor: Colors.black,
@@ -163,6 +206,14 @@ class _WritingPageState extends State<WritingPage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20,),
+                Container(
+                  alignment: Alignment.topRight,
+                  child: ElevatedButton(
+                    onPressed: () => _novel(context),
+                    child: Text("投稿する",style: TextStyle(fontSize: 30,fontFamily: NovelSararaBFont),),
+                  ),
+                )
               ],
             ),
           ),
@@ -175,16 +226,24 @@ class _WritingPageState extends State<WritingPage> {
   _novel(BuildContext context) async {
     //むりやり、小説を取るためにかいたこーど
     //  _novel(BuildContext context, FeedNovelViewModel feedNovelViewModel,) async {
-    String _novelTitle = _titleController.value.text;
-    String _novelContent = _novelContentController.value.text;
-    if (_novelTitle == "") {
+    // String _novelTitle = _titleController.value.text;
+    // String _novelContent = _novelContentController.value.text;
+    final novelViewModel = context.read<NovelViewModel>();
+    if ( novelViewModel.selectedGenre == "") {
+      showAlertDialog(
+        title: "おいおい",
+        content: "ジャンルないでー、やりなおしやー",
+        message: "でなおす",
+        context: context,
+      );
+    } else if ( novelViewModel.writingNovelTitle == "") {
       showAlertDialog(
         title: "おいおい",
         content: "タイトルないでー、やりなおしやー",
         message: "でなおす",
         context: context,
       );
-    } else if (_novelContent == "") {
+    } else if ( novelViewModel.writingNovelContent == "") {
       showAlertDialog(
         title: "おいおい",
         content: "小説がないでー、やりなおしやー",
@@ -193,12 +252,14 @@ class _WritingPageState extends State<WritingPage> {
       );
     } else {
       final novelViewModel = context.read<NovelViewModel>();
-      await novelViewModel.novelPosting(_novelTitle, _novelContent);
+      print("eeeeee:${novelViewModel.selectedGenre}");
+      await novelViewModel.novelPosting();
 
       // 投稿時に、合わせて小説を取ってくることにした　これは禁じ手、もうすこし頑張る
       final feedNovelViewModel = context.read<FeedNovelViewModel>();
-      await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS,null);
-      feedNovelViewModel.changeFeedNovelSubPage(0,null,FeedNovelMode.ALL_NOVELS);
+      await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS, null);
+      feedNovelViewModel.changeFeedNovelSubPage(
+          0, null, FeedNovelMode.ALL_NOVELS);
 
       // 　これ以外を使っています。
       widget.persistentTabController.jumpToTab(1);
@@ -209,7 +270,9 @@ class _WritingPageState extends State<WritingPage> {
 
       _titleController.clear();
       _novelContentController.clear();
+      setState(() {
+        novelViewModel.selectedGenre = _genreItems[0].value.toString();
+      });
     }
   }
-  
 }

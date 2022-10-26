@@ -147,7 +147,7 @@ class DatabaseManager {
         .orderBy("title")
         .startAt([selectedTitle]).endAt([selectedTitle + '\uf8ff'])
         .get();
-    if (query.docs.length == 0) return [];
+    if (query.docs.length == 0) return <Novel>[];
 
     var results = <Novel>[];
     await _db

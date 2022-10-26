@@ -45,21 +45,24 @@ class FeedNovelSubPage extends StatelessWidget {
               : Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.symmetric(horizontal:10),
                     child: Container(
                       alignment: Alignment.center,
                       child: Padding(
                         padding:
                             const EdgeInsets.only(top: 18.0, bottom: 8.0),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              _settingNovelList(context, feedNovelMode,
-                                  persistentTabController);
-                            },
-                            child: _selectedNovelListText(
-                                model.selectedWriter,
-                                model.selectedFeedNovelMode,
-                                context)),
+                        child: Container(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                _settingNovelList(context, feedNovelMode,
+                                    persistentTabController);
+                              },
+                              child: _selectedNovelListText(
+                                  model.selectedWriter,
+                                  model.selectedFeedNovelMode,
+                                  context)),
+                        ),
                       ),
                     ),
                   ),
@@ -212,18 +215,35 @@ class FeedNovelSubPage extends StatelessWidget {
                                                         Container(
                                                           width: double
                                                               .infinity,
-                                                          child: Text(
-                                                            "${selectedNovel.content.length}文字",
-                                                            style: TextStyle(
-                                                                fontFamily:
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                "${selectedNovel.wordCount.toString()}文字",
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        NovelSararaRFont,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        18),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                              ),
+                                                              Text(
+                                                                "：${selectedNovel.genre}",
+                                                                style: TextStyle(
+                                                                    fontFamily:
                                                                     NovelSararaRFont,
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize:
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
                                                                     18),
-                                                            textAlign:
+                                                                textAlign:
                                                                 TextAlign
                                                                     .left,
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                         Container(

@@ -92,12 +92,12 @@ _titleSearchController.dispose();
                     print(value);
                     _searchNovelFromTitle();
                   },
-                  keyboardType: TextInputType.multiline,
+                  // keyboardType: TextInputType.multiline,
                   inputFormatters: [
                     FilteringTextInputFormatter.singleLineFormatter
                   ],
                   maxLength: 30,
-                  maxLines: null,
+                  // maxLines: null,
                   controller: _titleSearchController,
                   style: TextStyle(fontSize: 20),
                   cursorColor: Colors.black,
