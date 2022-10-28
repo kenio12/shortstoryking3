@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/styles/textStyle.dart';
 import 'package:shortstoryking3/utils/constants.dart';
+import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class GenreDropDownButton extends StatefulWidget {
@@ -118,9 +119,8 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
                       novelViewModel.selectedGenre = selectedValue;
                       break;
                     case GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN:
-                      //TODO あとで直す。
-                      final novelViewModel = context.read<NovelViewModel>();
-                      novelViewModel.selectedGenre = selectedValue;
+                      final feedNovelViewModel = context.read<FeedNovelViewModel>();
+                      feedNovelViewModel.selectedGenre = selectedValue;
                   }
 
 

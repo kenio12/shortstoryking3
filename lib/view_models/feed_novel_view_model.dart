@@ -33,22 +33,27 @@ class FeedNovelViewModel extends ChangeNotifier {
 
   String selectedTitle = "";
 
-  // void setNovelFeedUser(FeedNovelMode feedNovelMode,User? user){
-  //   if (feedNovelMode == FeedNovelMode.MY_NOVELS){
-  //     feedNovelUser = currentUser;
-  //   } else if (feedNovelMode == FeedNovelMode.SELECTED_WRITERS_NOVELS){
-  //     feedNovelUser = user!;
-  //   }
-  //   }
+  String selectedGenre = "";
+
+  String selectedWordCount = "";
 
   Future<void> getNovels(FeedNovelMode feedNovelMode, User? writer) async {
-    // print("1");
     isProcessing = true;
     notifyListeners();
 
-    novels =
-        await novelRepository.getNovels(feedNovelMode, writer, selectedTitle);
-
+    switch (feedNovelMode) {
+      case FeedNovelMode.SEARCHED_BY_MULTIPLE_NOVELS:
+        novels = await novelRepository.getNovelsSearchedByMultiple(
+            selectedGenre, selectedWordCount);
+        // print("${selectedWordCount}oo${selectedGenre}");
+        selectedGenre = "";
+        selectedWordCount = "最大10,000文字数内";
+        break;
+      default:
+        novels = await novelRepository.getNovels(
+            feedNovelMode, writer, selectedTitle);
+        break;
+    }
     selectedFeedNovelMode = feedNovelMode;
 
     if (writer != null) {
@@ -109,9 +114,5 @@ class FeedNovelViewModel extends ChangeNotifier {
   }
 
   //TODO 小説消す
- Future<void> deletedNovel(String novelId) async {
-  }
-
-
-
+  Future<void> deletedNovel(String novelId) async {}
 }

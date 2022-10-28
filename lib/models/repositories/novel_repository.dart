@@ -50,12 +50,18 @@ class NovelRepository {
 
       case FeedNovelMode.MY_NOVELS:
         return await dbManager.getSelectedWriterNovels(writer!);
-
+      default:
+        return await dbManager.getAllNovels();
     }
-
  }
 
- Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
+  Future<List<Novel>>  getNovelsSearchedByMultiple
+      (String selectedGenre, String selectedWordCount) async{
+    return await dbManager.getNovelsSearchedByMultiple
+      (selectedGenre,selectedWordCount);
+  }
+
+  Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
     return await dbManager.selectedNovelFromNovelId(selectedNovelId);
  }
 

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/utils/constants.dart';
+import 'package:shortstoryking3/view/common/drop_down_button/genre_drop_down_button.dart';
+import 'package:shortstoryking3/view/common/drop_down_button/word_count_drop_down_button.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 
 class SettingNovelList extends StatefulWidget {
@@ -10,11 +12,11 @@ class SettingNovelList extends StatefulWidget {
   final FeedNovelMode feedNovelMode;
   final PersistentTabController persistentTabController;
 
-  SettingNovelList(
-      {required this.context,
-      required this.feedNovelMode,
-      required this.persistentTabController,
-      });
+  SettingNovelList({
+    required this.context,
+    required this.feedNovelMode,
+    required this.persistentTabController,
+  });
 
   @override
   State<SettingNovelList> createState() => _SettingNovelListState();
@@ -33,16 +35,17 @@ class _SettingNovelListState extends State<SettingNovelList> {
 
   @override
   void dispose() {
-_titleSearchController.dispose();
+    _titleSearchController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-
     return Consumer<FeedNovelViewModel>(builder: (context, model, child) {
       if (model.isFeedNovel) {
-        Future(() {Navigator.pop(context);} );
+        Future(() {
+          Navigator.pop(context);
+        });
       }
 
       return GestureDetector(
@@ -62,22 +65,14 @@ _titleSearchController.dispose();
                       color: Colors.black12,
                       // borderRadius: BorderRadius.circular(20),
                       border: Border(
-                          top: BorderSide(
-                              width: 4
-                          ),
-                          bottom: BorderSide(
-                              width: 4
-                          )
-                      )
-                  ),
+                          top: BorderSide(width: 4),
+                          bottom: BorderSide(width: 4))),
                   alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "検索設定画面",
-                      style: TextStyle(fontSize: 30,
-                          letterSpacing: 20
-                      ),
+                      style: TextStyle(fontSize: 30, letterSpacing: 20),
                     ),
                   ),
                 ),
@@ -88,7 +83,7 @@ _titleSearchController.dispose();
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  onFieldSubmitted: (String? value){
+                  onFieldSubmitted: (String? value) {
                     print(value);
                     _searchNovelFromTitle();
                   },
@@ -111,10 +106,9 @@ _titleSearchController.dispose();
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(right: 22.0),
                       child: IconButton(
-                          color: Colors.black,
-                          icon: Icon(Icons.search, size: 40),
-                          onPressed: () =>
-                              _searchNovelFromTitle()
+                        color: Colors.black,
+                        icon: Icon(Icons.search, size: 40),
+                        onPressed: () => _searchNovelFromTitle(),
                       ),
                     ),
                     suffixIconColor: Colors.black,
@@ -132,7 +126,7 @@ _titleSearchController.dispose();
                     ),
                     labelText: '  タイトル頭文字による検索',
                     floatingLabelStyle:
-                    const TextStyle(fontSize: 20, color: Colors.black),
+                        const TextStyle(fontSize: 20, color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide(
@@ -143,8 +137,53 @@ _titleSearchController.dispose();
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 3,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "複合条件の検索",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Column(
+                  children: [
+                    GenreDropDownButton(genreDropDownButtonMode:
+                    GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN,),
+                    WordCountDropDownButton(),
+                  ],
+                ),
+              ),
               SizedBox(
                 height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 22.0),
+                child: Container(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    color: Colors.black,
+                    icon: Icon(Icons.search, size: 40),
+                    onPressed: () => _novelsSearchedByMultipleConditions(),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 3,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -159,7 +198,7 @@ _titleSearchController.dispose();
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        "全部",
+                        "全　部　検　索",
                         style: TextStyle(fontSize: 30),
                       ),
                     ),
@@ -179,14 +218,13 @@ _titleSearchController.dispose();
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        "一覧に戻る",
+                        "一　覧　に　戻　る",
                         style: TextStyle(fontSize: 30),
                       ),
                     ),
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 20,
               ),
@@ -194,35 +232,34 @@ _titleSearchController.dispose();
           ),
         ),
       );
-
-    }
-    );
+    });
   }
 
   _finishSettingNovelList(BuildContext context) {
     Navigator.pop(context);
   }
 
-  _onTitleUpDated(){
+  _onTitleUpDated() {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    feedNovelViewModel.selectedTitle =  _titleSearchController.text;
+    feedNovelViewModel.selectedTitle = _titleSearchController.text;
     // print("${feedNovelViewModel.title}");
   }
 
-  _searchNovelFromTitle()
-  async{
-    // print("${_titleSearchController.text}");
+  _searchNovelFromTitle() async {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
     await feedNovelViewModel.getNovels(FeedNovelMode.SELECTED_NOVELS, null);
     Navigator.pop(context);
   }
 
-  _AllNovelList()
-    async{
-      final feedNovelViewModel = context.read<FeedNovelViewModel>();
-      await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS, null);
-      Navigator.pop(context);
-    }
-
-
+  _novelsSearchedByMultipleConditions() async{
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    await feedNovelViewModel.getNovels(FeedNovelMode.SEARCHED_BY_MULTIPLE_NOVELS, null);
+    Navigator.pop(context);
   }
+
+  _AllNovelList() async {
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS, null);
+    Navigator.pop(context);
+  }
+}

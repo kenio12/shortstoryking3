@@ -174,14 +174,14 @@ class ReadNovel extends StatelessWidget {
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            SizedBox(
-                                                              width: 8,
-                                                            ),
-                                                            FaIcon(
-                                                              FontAwesomeIcons
-                                                                  .handPointLeft,
-                                                              color: Colors.black,
-                                                            ),
+                                                            // SizedBox(
+                                                            //   width: 8,
+                                                            // ),
+                                                            // FaIcon(
+                                                            //   FontAwesomeIcons
+                                                            //       .handPointLeft,
+                                                            //   color: Colors.black,
+                                                            // ),
                                                             Flexible(
                                                               child: Text(
                                                                 "  作：${novelUser.inAppUserName} ",
@@ -212,7 +212,13 @@ class ReadNovel extends StatelessWidget {
                                                 MainAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "総文字数：${selectedNovel.content.length}文字　",
+                                                "総文字数：${selectedNovel.wordCount}文字　",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                "、種別：${selectedNovel.genre}",
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                 ),
