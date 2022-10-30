@@ -128,8 +128,8 @@ class User {
       bio: map['bio'] as String,
       address: map['address'] as String,
       sex: map['sex'] as String,
-      writerGenre: map['writerGenre'] as String,
-      writerWordCount: map['writerWordCount'] as String,
+      writerGenre: (map['writerGenre'] == null) ? "" : map['writerGenre'] as String,
+      writerWordCount: (map['writerWordCount'] == null) ? "" : map['writerWordCount'] as String,
       age: map['age'] as int,
       era: map['era'] as String,
     );
