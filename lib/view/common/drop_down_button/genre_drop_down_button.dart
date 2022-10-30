@@ -7,6 +7,7 @@ import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class GenreDropDownButton extends StatefulWidget {
   final GenreDropDownButtonMode genreDropDownButtonMode;
+
   GenreDropDownButton({required this.genreDropDownButtonMode});
 
   @override
@@ -31,6 +32,12 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
     //     final novelViewModel = context.read<NovelViewModel>();
     //     novelViewModel.selectedGenre = _genreItems[0].value!;
     // }
+
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    if (widget.genreDropDownButtonMode == GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN
+        && feedNovelViewModel.selectedGenre != "") {
+      _selectedGenre = feedNovelViewModel.selectedGenre;
+    }
   }
 
   void setGenreItems() {
@@ -87,52 +94,49 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
 
   @override
   Widget build(BuildContext context) {
-        return Row(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "ジャンル",
-              style: TextStyle(fontSize: 30, fontFamily: NovelSararaBFont),
-            ),
-            SizedBox(
-              width: 25,
-            ),
-            DropdownButton(
-              elevation: 20,
-              items: _genreItems,
-              value: _selectedGenre,
-              // value: novelViewModel.selectedGenre,
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontFamily: NovelSararaBFont),
-              onChanged: (String? selectedValue) {
-                setState(() {
-                  // novelViewModel.selectedGenre = selectedValue!;
-                  _selectedGenre = selectedValue!;
+    return Row(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "ジャンル",
+          style: TextStyle(fontSize: 30, fontFamily: NovelSararaBFont),
+        ),
+        SizedBox(
+          width: 25,
+        ),
+        DropdownButton(
+          elevation: 20,
+          items: _genreItems,
+          value: _selectedGenre,
+          // value: novelViewModel.selectedGenre,
+          style: TextStyle(
+              fontSize: 30, color: Colors.black, fontFamily: NovelSararaBFont),
+          onChanged: (String? selectedValue) {
+            setState(
+              () {
+                // novelViewModel.selectedGenre = selectedValue!;
+                _selectedGenre = selectedValue!;
 
-                  switch (widget.genreDropDownButtonMode) {
-                    case GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN:
-                      final novelViewModel = context.read<NovelViewModel>();
-                      novelViewModel.selectedGenre = selectedValue;
-                      break;
-                    case GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN:
-                      final feedNovelViewModel = context.read<FeedNovelViewModel>();
-                      feedNovelViewModel.selectedGenre = selectedValue;
-                  }
-
-
-
-                });
+                switch (widget.genreDropDownButtonMode) {
+                  case GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN:
+                    final novelViewModel = context.read<NovelViewModel>();
+                    novelViewModel.selectedGenre = selectedValue;
+                    break;
+                  case GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN:
+                    final feedNovelViewModel =
+                        context.read<FeedNovelViewModel>();
+                    feedNovelViewModel.selectedGenre = selectedValue;
+                    break;
+                }
               },
-            ),
-          ],
-        );
-
-    }
-
-    // final novelViewModel = context.read<NovelViewModel>();
+            );
+          },
+        ),
+      ],
+    );
   }
 
+// final novelViewModel = context.read<NovelViewModel>();
+}

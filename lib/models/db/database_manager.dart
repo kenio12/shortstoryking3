@@ -170,7 +170,7 @@ class DatabaseManager {
 
   Future<List<Novel>> getNovelsSearchedByMultiple(
       String selectedGenre, String selectedWordCount) async {
-    print("${selectedWordCount}oo${selectedGenre}");
+    // print("${selectedWordCount}oo${selectedGenre}");
     int selectedWordCountInt = 0;
     switch (selectedWordCount) {
       case "最大10,000文字数内":
@@ -207,6 +207,7 @@ class DatabaseManager {
           .collection("novels")
           .orderBy("wordCount")
           .where("wordCount", isLessThanOrEqualTo: selectedWordCountInt)
+          .orderBy("postDateTime", descending: true)
           .get();
       if (query.docs.length == 0) return [];
       var results = <Novel>[];
@@ -224,6 +225,7 @@ class DatabaseManager {
         });
       });
       // print("novel:$results");
+      results.sort((a,b)=>-a.postDateTime.compareTo(b.postDateTime));
       return results;
 
 
@@ -233,6 +235,7 @@ class DatabaseManager {
           .orderBy("wordCount")
           .where("wordCount", isLessThanOrEqualTo: selectedWordCountInt)
           .where("genre", isEqualTo: selectedGenre)
+          .orderBy("postDateTime", descending: true)
           .get();
       if (query.docs.length == 0) return [];
 
@@ -252,6 +255,7 @@ class DatabaseManager {
         });
       });
       // print("novel:$results");
+      results.sort((a,b)=>-a.postDateTime.compareTo(b.postDateTime));
       return results;
     }
   }

@@ -6,8 +6,8 @@ class User {
   final String bio;
   final String address;
   final String sex;
-  final String writerGenre;
-  final String writerWordCount;
+  // final String writerGenre;
+  // final String writerWordCount;
   final int age;
   final String era;
 
@@ -21,8 +21,6 @@ class User {
     required this.bio,
     required this.address,
     required this.sex,
-    required this.writerGenre,
-    required this.writerWordCount,
     required this.age,
     required this.era,
   });
@@ -39,10 +37,9 @@ class User {
           bio == other.bio &&
           address == other.address &&
           sex == other.sex &&
-          writerGenre == other.writerGenre &&
-          writerWordCount == other.writerWordCount &&
           age == other.age &&
-          era == other.era);
+          era == other.era
+      );
 
   @override
   int get hashCode =>
@@ -53,10 +50,9 @@ class User {
       bio.hashCode ^
       address.hashCode ^
       sex.hashCode ^
-      writerGenre.hashCode ^
-      writerWordCount.hashCode ^
       age.hashCode ^
-      era.hashCode;
+      era.hashCode
+  ;
 
   @override
   String toString() {
@@ -68,8 +64,6 @@ class User {
         ' bio: $bio,' +
         ' address: $address,' +
         ' sex: $sex,' +
-        ' writerGenre: $writerGenre,' +
-        ' writerWordCount: $writerWordCount,' +
         ' age: $age,' +
         ' era: $era,' +
         '}';
@@ -83,8 +77,6 @@ class User {
     String? bio,
     String? address,
     String? sex,
-    String? writerGenre,
-    String? writerWordCount,
     int? age,
     String? era,
   }) {
@@ -96,8 +88,6 @@ class User {
       bio: bio ?? this.bio,
       address: address ?? this.address,
       sex: sex ?? this.sex,
-      writerGenre: writerGenre ?? this.writerGenre,
-      writerWordCount: writerWordCount ?? this.writerWordCount,
       age: age ?? this.age,
       era: era ?? this.era,
     );
@@ -112,8 +102,6 @@ class User {
       'bio': this.bio,
       'address': this.address,
       'sex': this.sex,
-      'writerGenre': this.writerGenre,
-      'writerWordCount': this.writerWordCount,
       'age': this.age,
       'era': this.era,
     };
@@ -128,8 +116,6 @@ class User {
       bio: map['bio'] as String,
       address: map['address'] as String,
       sex: map['sex'] as String,
-      writerGenre: map['writerGenre'] as String,
-      writerWordCount: map['writerWordCount'] as String,
       age: map['age'] as int,
       era: map['era'] as String,
     );

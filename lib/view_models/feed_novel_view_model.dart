@@ -46,12 +46,14 @@ class FeedNovelViewModel extends ChangeNotifier {
         novels = await novelRepository.getNovelsSearchedByMultiple(
             selectedGenre, selectedWordCount);
         // print("${selectedWordCount}oo${selectedGenre}");
-        selectedGenre = "";
-        selectedWordCount = "最大10,000文字数内";
+        // selectedGenre = "";
+        // selectedWordCount = "最大10,000文字数内";
         break;
       default:
         novels = await novelRepository.getNovels(
             feedNovelMode, writer, selectedTitle);
+        selectedGenre = "";
+        selectedWordCount = "最大10,000文字数内";
         break;
     }
     selectedFeedNovelMode = feedNovelMode;

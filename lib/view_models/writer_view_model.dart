@@ -15,6 +15,8 @@ class WriterViewModel extends ChangeNotifier {
 
   bool isProcessing = false;
 
+  bool isFeedNovel = false;
+
   List<User>? writers = <User>[];
 
   late User profileUser;

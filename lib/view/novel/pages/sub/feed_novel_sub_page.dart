@@ -43,108 +43,246 @@ class FeedNovelSubPage extends StatelessWidget {
           return (model.novels == null)
               ? Container()
               : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:10),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 18.0, bottom: 8.0),
-                        child: Container(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                _settingNovelList(context, feedNovelMode,
-                                    persistentTabController);
-                              },
-                              child: _selectedNovelListText(
-                                  model.selectedWriter,
-                                  model.selectedFeedNovelMode,
-                                  context)),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(top: 18.0, bottom: 8.0),
+                          child: Container(
+                            width: double.infinity,
+                            child: Wrap(
+                              alignment: WrapAlignment.spaceBetween,
+                              // spacing: 18,
+                              children: [
+                                _selectedNovelListText(
+                                    model.selectedWriter,
+                                    model.selectedFeedNovelMode, context
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _settingNovelList(context, feedNovelMode,
+                                        persistentTabController);
+                                  },
+                                  child: Text("探　す",style: TextStyle(fontSize: 20),),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Flexible(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              top: BorderSide(
-                                  width: 1, color: Colors.black26),
-                              bottom: BorderSide(
-                                  width: 1, color: Colors.black26))),
-                      child: ScrollablePositionedList.builder(
-                        initialScrollIndex: model.selectedListIndex,
-                        physics: AlwaysScrollableScrollPhysics(),
-                        itemCount: model.novels!.length,
-                        itemBuilder: (context, index) {
-                          final List<Novel> novels = model.novels!;
-                          final Novel selectedNovel = model.novels![index];
-                          return Container(
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    // top: BorderSide(
-                                    //     width: 1
-                                    // ),
-                                    bottom: BorderSide(
-                                        width: 1, color: Colors.black26))),
-                            child: InkWell(
-                              splashColor: Colors.black,
-                              onTap: () => _readNovel(
-                                selectedNovel.novelId,
-                                index,
-                                feedNovelMode,
-                                context,
-                              ),
+                    Flexible(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border(
+                                top:
+                                    BorderSide(width: 1, color: Colors.black26),
+                                bottom: BorderSide(
+                                    width: 1, color: Colors.black26))),
+                        child: ScrollablePositionedList.builder(
+                          initialScrollIndex: model.selectedListIndex,
+                          physics: AlwaysScrollableScrollPhysics(),
+                          itemCount: model.novels!.length,
+                          itemBuilder: (context, index) {
+                            final List<Novel> novels = model.novels!;
+                            final Novel selectedNovel = model.novels![index];
+                            return Container(
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      // top: BorderSide(
+                                      //     width: 1
+                                      // ),
+                                      bottom: BorderSide(
+                                          width: 1, color: Colors.black26))),
+                              child: InkWell(
+                                splashColor: Colors.black,
+                                onTap: () => _readNovel(
+                                  selectedNovel.novelId,
+                                  index,
+                                  feedNovelMode,
+                                  context,
+                                ),
 
-                              // model.changeNovelDetailSubPage(
-                              // selectedNovel.novelId, index,feedNovelMode),
-                              child: FutureBuilder(
-                                future: model
-                                    .getNovelUserInfo(selectedNovel.userId),
-                                builder: (context,
-                                    AsyncSnapshot<User> snapshot) {
-                                  if (snapshot.hasData &&
-                                      snapshot.data != null) {
-                                    final selectedNovelUser =
-                                        snapshot.data!;
-                                    final currentUser = model.currentUser;
+                                // model.changeNovelDetailSubPage(
+                                // selectedNovel.novelId, index,feedNovelMode),
+                                child: FutureBuilder(
+                                  future: model
+                                      .getNovelUserInfo(selectedNovel.userId),
+                                  builder:
+                                      (context, AsyncSnapshot<User> snapshot) {
+                                    if (snapshot.hasData &&
+                                        snapshot.data != null) {
+                                      final selectedNovelUser = snapshot.data!;
+                                      final currentUser = model.currentUser;
 
-                                    return (selectedNovel.userId ==
-                                            currentUser.userId)
-                                        ? Slidable(
-                                            key: const ValueKey(0),
-                                            endActionPane: ActionPane(
-                                              motion: const ScrollMotion(),
-                                              // dismissible: DismissiblePane(
-                                              //   onDismissed: () {},
-                                              // ),
-                                              children: [
-                                                SlidableAction(
-                                                  onPressed: null,
-                                                  backgroundColor:
-                                                      Colors.white60,
-                                                  foregroundColor:
-                                                      Colors.black,
-                                                  icon: Icons.edit,
-                                                  label: '編集',
+                                      return (selectedNovel.userId ==
+                                              currentUser.userId)
+                                          ? Slidable(
+                                              key: const ValueKey(0),
+                                              endActionPane: ActionPane(
+                                                motion: const ScrollMotion(),
+                                                // dismissible: DismissiblePane(
+                                                //   onDismissed: () {},
+                                                // ),
+                                                children: [
+                                                  SlidableAction(
+                                                    onPressed: null,
+                                                    backgroundColor:
+                                                        Colors.white60,
+                                                    foregroundColor:
+                                                        Colors.black,
+                                                    icon: Icons.edit,
+                                                    label: '編集',
+                                                  ),
+                                                  SlidableAction(
+                                                    onPressed: (_) =>
+                                                        _deleteNovel(
+                                                            context,
+                                                            selectedNovel
+                                                                .novelId,
+                                                            selectedNovel
+                                                                .title),
+                                                    backgroundColor:
+                                                        Colors.black87,
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                    icon: Icons.delete,
+                                                    label: '削除',
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border(
+                                                        // top: BorderSide(
+                                                        //     width: 1
+                                                        // ),
+                                                        bottom: BorderSide(
+                                                            width: 1,
+                                                            color: Colors
+                                                                .black26))),
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 10.0,
+                                                                top: 10.0),
+                                                        child: Image.asset(
+                                                          selectedNovelUser
+                                                              .inAppUserImage,
+                                                          fit: BoxFit.contain,
+                                                          width: 120,
+                                                          height: 120,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: SizedBox(
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 10,
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            width:
+                                                                double.infinity,
+                                                            child: Text(
+                                                              "${selectedNovel.title}",
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    NovelSararaBFont,
+                                                                fontSize: 25,
+                                                              ),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .fade,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            width:
+                                                                double.infinity,
+                                                            child: ConpactChangeJapaneaseDay(
+                                                                postDateTime:
+                                                                    selectedNovel
+                                                                        .postDateTime),
+                                                          ),
+                                                          //           Text(
+
+                                                          Container(
+                                                            width:
+                                                                double.infinity,
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "${selectedNovel.wordCount.toString()}文字",
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          NovelSararaRFont,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          18),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .left,
+                                                                ),
+                                                                Text(
+                                                                  "：${selectedNovel.genre}",
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          NovelSararaRFont,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          18),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .left,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            width:
+                                                                double.infinity,
+                                                            child: Text(
+                                                              "作　${(selectedNovelUser.inAppUserName)}",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      NovelSararaRFont,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 18),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                SlidableAction(
-                                                  onPressed: (_) =>_deleteNovel(
-                                                      context,
-                                                      selectedNovel.novelId,
-                                                      selectedNovel.title),
-                                                  backgroundColor:
-                                                      Colors.black87,
-                                                  foregroundColor:
-                                                      Colors.white,
-                                                  icon: Icons.delete,
-                                                  label: '削除',
-                                                ),
-                                              ],
-                                            ),
-                                            child: Container(
+                                              ),
+                                            )
+                                          : Container(
                                               decoration: BoxDecoration(
                                                   border: Border(
                                                       // top: BorderSide(
@@ -152,16 +290,15 @@ class FeedNovelSubPage extends StatelessWidget {
                                                       // ),
                                                       bottom: BorderSide(
                                                           width: 1,
-                                                          color: Colors
-                                                              .black26))),
+                                                          color:
+                                                              Colors.black26))),
                                               child: Row(
                                                 children: [
                                                   Expanded(
                                                     flex: 5,
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets
-                                                                  .only(
+                                                          const EdgeInsets.only(
                                                               left: 10.0,
                                                               top: 10.0),
                                                       child: Image.asset(
@@ -184,12 +321,11 @@ class FeedNovelSubPage extends StatelessWidget {
                                                     child: Column(
                                                       children: [
                                                         Container(
-                                                          width: double
-                                                              .infinity,
+                                                          width:
+                                                              double.infinity,
                                                           child: Text(
                                                             "${selectedNovel.title}",
-                                                            style:
-                                                                TextStyle(
+                                                            style: TextStyle(
                                                               fontFamily:
                                                                   NovelSararaBFont,
                                                               fontSize: 25,
@@ -198,13 +334,12 @@ class FeedNovelSubPage extends StatelessWidget {
                                                                 TextOverflow
                                                                     .fade,
                                                             textAlign:
-                                                                TextAlign
-                                                                    .left,
+                                                                TextAlign.left,
                                                           ),
                                                         ),
                                                         Container(
-                                                          width: double
-                                                              .infinity,
+                                                          width:
+                                                              double.infinity,
                                                           child: ConpactChangeJapaneaseDay(
                                                               postDateTime:
                                                                   selectedNovel
@@ -213,42 +348,23 @@ class FeedNovelSubPage extends StatelessWidget {
                                                         //           Text(
 
                                                         Container(
-                                                          width: double
-                                                              .infinity,
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "${selectedNovel.wordCount.toString()}文字",
-                                                                style: TextStyle(
-                                                                    fontFamily:
-                                                                        NovelSararaRFont,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        18),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                              Text(
-                                                                "：${selectedNovel.genre}",
-                                                                style: TextStyle(
-                                                                    fontFamily:
+                                                          width:
+                                                              double.infinity,
+                                                          child: Text(
+                                                            "${selectedNovel.content.length}文字",
+                                                            style: TextStyle(
+                                                                fontFamily:
                                                                     NovelSararaRFont,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                    18),
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .left,
-                                                              ),
-                                                            ],
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 18),
+                                                            textAlign:
+                                                                TextAlign.left,
                                                           ),
                                                         ),
                                                         Container(
-                                                          width: double
-                                                              .infinity,
+                                                          width:
+                                                              double.infinity,
                                                           child: Text(
                                                             "作　${(selectedNovelUser.inAppUserName)}",
                                                             style: TextStyle(
@@ -256,11 +372,9 @@ class FeedNovelSubPage extends StatelessWidget {
                                                                     NovelSararaRFont,
                                                                 color: Colors
                                                                     .black,
-                                                                fontSize:
-                                                                    18),
+                                                                fontSize: 18),
                                                             textAlign:
-                                                                TextAlign
-                                                                    .left,
+                                                                TextAlign.left,
                                                             maxLines: 2,
                                                             overflow:
                                                                 TextOverflow
@@ -272,135 +386,25 @@ class FeedNovelSubPage extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          )
-                                        : Container(
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    // top: BorderSide(
-                                                    //     width: 1
-                                                    // ),
-                                                    bottom: BorderSide(
-                                                        width: 1,
-                                                        color: Colors
-                                                            .black26))),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 5,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets
-                                                                .only(
-                                                            left: 10.0,
-                                                            top: 10.0),
-                                                    child: Image.asset(
-                                                      selectedNovelUser
-                                                          .inAppUserImage,
-                                                      fit: BoxFit.contain,
-                                                      width: 120,
-                                                      height: 120,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 2,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 10,
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        width:
-                                                            double.infinity,
-                                                        child: Text(
-                                                          "${selectedNovel.title}",
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                NovelSararaBFont,
-                                                            fontSize: 25,
-                                                          ),
-                                                          overflow:
-                                                              TextOverflow
-                                                                  .fade,
-                                                          textAlign:
-                                                              TextAlign
-                                                                  .left,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width:
-                                                            double.infinity,
-                                                        child: ConpactChangeJapaneaseDay(
-                                                            postDateTime:
-                                                                selectedNovel
-                                                                    .postDateTime),
-                                                      ),
-                                                      //           Text(
-
-                                                      Container(
-                                                        width:
-                                                            double.infinity,
-                                                        child: Text(
-                                                          "${selectedNovel.content.length}文字",
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  NovelSararaRFont,
-                                                              color: Colors
-                                                                  .black,
-                                                              fontSize: 18),
-                                                          textAlign:
-                                                              TextAlign
-                                                                  .left,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width:
-                                                            double.infinity,
-                                                        child: Text(
-                                                          "作　${(selectedNovelUser.inAppUserName)}",
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  NovelSararaRFont,
-                                                              color: Colors
-                                                                  .black,
-                                                              fontSize: 18),
-                                                          textAlign:
-                                                              TextAlign
-                                                                  .left,
-                                                          maxLines: 2,
-                                                          overflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                  } else {
-                                    return Container();
-                                  }
-                                },
+                                            );
+                                    } else {
+                                      return Container();
+                                    }
+                                  },
+                                ),
                               ),
-                            ),
-                          );
+                            );
 
-                          FeedNovelTile(
-                            feedNovelMode: feedNovelMode,
-                            novel: model.novels![index],
-                          );
-                        },
+                            FeedNovelTile(
+                              feedNovelMode: feedNovelMode,
+                              novel: model.novels![index],
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
         }
         // } else {
         //   return Container(
@@ -425,26 +429,39 @@ class FeedNovelSubPage extends StatelessWidget {
     switch (selectedFeedNovelMode) {
       case FeedNovelMode.ALL_NOVELS:
         return Text(
-          "全部の小説:設定変更",
+          "全部の小説",
           style: TextStyle(fontSize: 20),
         );
       case FeedNovelMode.SELECTED_WRITERS_NOVELS:
         return Text(
-          "${selectedWriter!.inAppUserName}の小説：設定変更",
+          "${selectedWriter!.inAppUserName}の小説",
           style: TextStyle(fontSize: 20),
         );
       case FeedNovelMode.MY_NOVELS:
         return Text(
-          "${selectedWriter!.inAppUserName}の小説：設定変更",
+          "${selectedWriter!.inAppUserName}の小説",
           style: TextStyle(fontSize: 20),
         );
       case FeedNovelMode.SELECTED_NOVELS:
         return Text(
-          "「${feedNovelViewModel.selectedTitle}」…　の小説：設定変更",
+          "「${feedNovelViewModel.selectedTitle}」…　の小説",
           style: TextStyle(fontSize: 20),
         );
+      case FeedNovelMode.SEARCHED_BY_MULTIPLE_NOVELS:
+        return (feedNovelViewModel.selectedGenre == "")
+        ? Text(
+            "種別：なし,"
+                "${feedNovelViewModel.selectedWordCount}"
+                ,style: TextStyle(fontSize: 20),
+        )
+        :
+        Text(
+            "種別：${feedNovelViewModel.selectedGenre},"
+                "${feedNovelViewModel.selectedWordCount}"
+                ,style: TextStyle(fontSize: 20),
+        );
       default:
-        return Text("それ以外の小説");
+        return Text("それ以外の小説",style: TextStyle(fontSize: 20),);
     }
   }
 
@@ -484,21 +501,16 @@ class FeedNovelSubPage extends StatelessWidget {
 
   _deleteNovel(BuildContext context, String novelId, String title) {
     // final bool isConfirmed;
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showConfirmDialog(
-            context: context,
-            title: "「${title}」",
-            content: "本当に、消してええんか？",
-            onConfirmed: (isConfirmed) {
-              if (isConfirmed) {
-                print("djidf");} else {
-                print("idfsjifsj");
-              }
-            }
-        )
-    );
-
+    WidgetsBinding.instance.addPostFrameCallback((_) => showConfirmDialog(
+        context: context,
+        title: "「${title}」",
+        content: "本当に、消してええんか？",
+        onConfirmed: (isConfirmed) {
+          if (isConfirmed) {
+            print("djidf");
+          } else {
+            print("idfsjifsj");
+          }
+        }));
   }
-
-
-  }
+}

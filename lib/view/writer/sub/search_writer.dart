@@ -6,28 +6,27 @@ import 'package:shortstoryking3/utils/constants.dart';
 import 'package:shortstoryking3/view/common/drop_down_button/genre_drop_down_button.dart';
 import 'package:shortstoryking3/view/common/drop_down_button/word_count_drop_down_button.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
+import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
-class SettingNovelList extends StatefulWidget {
+class SearchWriter extends StatefulWidget {
   final BuildContext context;
-  final FeedNovelMode feedNovelMode;
   final PersistentTabController persistentTabController;
 
-  SettingNovelList({
+  SearchWriter({
     required this.context,
-    required this.feedNovelMode,
     required this.persistentTabController,
   });
 
   @override
-  State<SettingNovelList> createState() => _SettingNovelListState();
+  State<SearchWriter> createState() => _SearchWriter();
 }
 
-class _SettingNovelListState extends State<SettingNovelList> {
-  final _titleSearchController = TextEditingController();
+class _SearchWriter extends State<SearchWriter> {
+  final _writerSearchController = TextEditingController();
 
   @override
   void initState() {
-    _titleSearchController.addListener(() {
+    _writerSearchController.addListener(() {
       _onTitleUpDated();
     });
     super.initState();
@@ -35,13 +34,13 @@ class _SettingNovelListState extends State<SettingNovelList> {
 
   @override
   void dispose() {
-    _titleSearchController.dispose();
+    _writerSearchController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FeedNovelViewModel>(builder: (context, model, child) {
+    return Consumer<WriterViewModel>(builder: (context, model, child) {
       if (model.isFeedNovel) {
         Future(() {
           Navigator.pop(context);
@@ -71,7 +70,7 @@ class _SettingNovelListState extends State<SettingNovelList> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "小説を検索",
+                      "作家の検索",
                       style: TextStyle(fontSize: 30, letterSpacing: 20),
                     ),
                   ),
@@ -79,63 +78,6 @@ class _SettingNovelListState extends State<SettingNovelList> {
               ),
               SizedBox(
                 height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  onFieldSubmitted: (String? value) {
-                    print(value);
-                    _searchNovelFromTitle();
-                  },
-                  // keyboardType: TextInputType.multiline,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.singleLineFormatter
-                  ],
-                  maxLength: 30,
-                  // maxLines: null,
-                  controller: _titleSearchController,
-                  style: TextStyle(fontSize: 20),
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 30,
-                      horizontal: 20,
-                    ),
-                    // prefixIcon: Icon(Icons.search),
-                    // prefixIconColor: Colors.black,
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 22.0),
-                      child: IconButton(
-                        color: Colors.black,
-                        icon: Icon(Icons.search, size: 40),
-                        onPressed: () => _searchNovelFromTitle(),
-                      ),
-                    ),
-                    suffixIconColor: Colors.black,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 3.0,
-                      ),
-                    ),
-
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                    labelText: '  タイトル頭文字による検索',
-                    floatingLabelStyle:
-                        const TextStyle(fontSize: 20, color: Colors.black),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 3.0,
-                      ),
-                    ),
-                  ),
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -154,6 +96,66 @@ class _SettingNovelListState extends State<SettingNovelList> {
                   ),
                 ),
               ),
+              SizedBox(height: 15,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  onFieldSubmitted: (String? value) {
+                    print(value);
+                    _searchWriterFromWriterName();
+                  },
+                  // keyboardType: TextInputType.multiline,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.singleLineFormatter
+                  ],
+                  maxLength: 30,
+                  // maxLines: null,
+                  controller: _writerSearchController,
+                  style: TextStyle(fontSize: 20),
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 30,
+                      horizontal: 20,
+                    ),
+                    // prefixIcon: Icon(Icons.search),
+                    // prefixIconColor: Colors.black,
+                    //TODO 消した
+                    // suffixIcon: Padding(
+                    //   padding: const EdgeInsets.only(right: 22.0),
+                    //   child: IconButton(
+                    //     color: Colors.black,
+                    //     icon: Icon(Icons.search, size: 40),
+                    //     onPressed: () => _searchWriterFromWriterName(),
+                    //   ),
+                    // ),
+                    suffixIconColor: Colors.black,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                        width: 3.0,
+                      ),
+                    ),
+
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                    labelText: '作家の頭文字による検索',
+                    floatingLabelStyle:
+                    const TextStyle(fontSize: 20, color: Colors.black),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 3.0,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Column(
@@ -266,11 +268,11 @@ class _SettingNovelListState extends State<SettingNovelList> {
     //   {
     //     _titleSearchController.text = feedNovelViewModel.selectedTitle;
     //   }
-    feedNovelViewModel.selectedTitle = _titleSearchController.text;
+    feedNovelViewModel.selectedTitle = _writerSearchController.text;
     // print("${feedNovelViewModel.title}");
   }
 
-  _searchNovelFromTitle() async {
+  _searchWriterFromWriterName() async {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
     await feedNovelViewModel.getNovels(FeedNovelMode.SELECTED_NOVELS, null);
     Navigator.pop(context);

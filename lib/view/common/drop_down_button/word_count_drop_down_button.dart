@@ -12,13 +12,18 @@ class WordCountDropDownButton extends StatefulWidget {
 }
 
 class _WordCountDropDownButtonState extends State<WordCountDropDownButton> {
+
   List<DropdownMenuItem<String>> _genreItems = [];
-  String _selectedGenre = "最大10,000文字数内";
+  String _selectedWordCount = "最大10,000文字数内";
 
   @override
   void initState() {
     super.initState();
     setGenreItems();
+    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+    if (feedNovelViewModel.selectedWordCount != "") {
+      _selectedWordCount = feedNovelViewModel.selectedWordCount;
+    }
   }
 
   void setGenreItems() {
@@ -96,12 +101,12 @@ class _WordCountDropDownButtonState extends State<WordCountDropDownButton> {
         DropdownButton(
           elevation: 20,
           items: _genreItems,
-          value: _selectedGenre,
+          value: _selectedWordCount,
           style: TextStyle(
               fontSize: 30, color: Colors.black, fontFamily: NovelSararaBFont),
           onChanged: (String? selectedValue) {
             setState(() {
-              _selectedGenre = selectedValue!;
+              _selectedWordCount = selectedValue!;
               final feedNovelViewModel = context.read<FeedNovelViewModel>();
               feedNovelViewModel.selectedWordCount = selectedValue;
             });

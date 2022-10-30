@@ -101,6 +101,8 @@ class UserRepository {
       bio: "",
       address: "",
       sex: "",
+      writerGenre: "",
+      writerWordCount: "",
       age: 0,
       era: "",
     );
