@@ -182,7 +182,7 @@ class _SearchWriter extends State<SearchWriter> {
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        "ジャンル＋文字　検索",
+                        "検索",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),

@@ -6,10 +6,8 @@ class User {
   final String bio;
   final String address;
   final String sex;
-  final Set<String> writerGenre;
-  final Set<String> writerWordCount;
-  final int score;
-  final int level;
+  final String writerGenre;
+  final String writerWordCount;
   final int age;
   final String era;
 
@@ -25,8 +23,6 @@ class User {
     required this.sex,
     required this.writerGenre,
     required this.writerWordCount,
-    required this.score,
-    required this.level,
     required this.age,
     required this.era,
   });
@@ -34,21 +30,19 @@ class User {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          (other is User &&
-              runtimeType == other.runtimeType &&
-              userId == other.userId &&
-              twitterName == other.twitterName &&
-              inAppUserName == other.inAppUserName &&
-              inAppUserImage == other.inAppUserImage &&
-              bio == other.bio &&
-              address == other.address &&
-              sex == other.sex &&
-              writerGenre == other.writerGenre &&
-              writerWordCount == other.writerWordCount &&
-              score == other.score &&
-              level == other.level &&
-              age == other.age &&
-              era == other.era);
+      (other is User &&
+          runtimeType == other.runtimeType &&
+          userId == other.userId &&
+          twitterName == other.twitterName &&
+          inAppUserName == other.inAppUserName &&
+          inAppUserImage == other.inAppUserImage &&
+          bio == other.bio &&
+          address == other.address &&
+          sex == other.sex &&
+          writerGenre == other.writerGenre &&
+          writerWordCount == other.writerWordCount &&
+          age == other.age &&
+          era == other.era);
 
   @override
   int get hashCode =>
@@ -61,8 +55,6 @@ class User {
       sex.hashCode ^
       writerGenre.hashCode ^
       writerWordCount.hashCode ^
-      score.hashCode ^
-      level.hashCode ^
       age.hashCode ^
       era.hashCode;
 
@@ -78,8 +70,6 @@ class User {
         ' sex: $sex,' +
         ' writerGenre: $writerGenre,' +
         ' writerWordCount: $writerWordCount,' +
-        ' score: $score,' +
-        ' level: $level,' +
         ' age: $age,' +
         ' era: $era,' +
         '}';
@@ -93,10 +83,8 @@ class User {
     String? bio,
     String? address,
     String? sex,
-    Set<String>? writerGenre,
-    Set<String>? writerWordCount,
-    int? score,
-    int? level,
+    String? writerGenre,
+    String? writerWordCount,
     int? age,
     String? era,
   }) {
@@ -110,8 +98,6 @@ class User {
       sex: sex ?? this.sex,
       writerGenre: writerGenre ?? this.writerGenre,
       writerWordCount: writerWordCount ?? this.writerWordCount,
-      score: score ?? this.score,
-      level: level ?? this.level,
       age: age ?? this.age,
       era: era ?? this.era,
     );
@@ -128,8 +114,6 @@ class User {
       'sex': this.sex,
       'writerGenre': this.writerGenre,
       'writerWordCount': this.writerWordCount,
-      'score': this.score,
-      'level': this.level,
       'age': this.age,
       'era': this.era,
     };
@@ -144,10 +128,8 @@ class User {
       bio: map['bio'] as String,
       address: map['address'] as String,
       sex: map['sex'] as String,
-      writerGenre: (map['writerGenre'] == null) ? {} :map['writerGenre'] as Set<String>,
-      writerWordCount: (map['writerWordCount'] == null) ? {} :map['writerWordCount'] as Set<String>,
-      score: (map['score'] == null) ? 0 : map['score']  as int,
-      level: (map['level'] == null) ? 0 : map['level'] as int,
+      writerGenre: (map['writerGenre'] == null) ? "" : map['writerGenre'] as String,
+      writerWordCount: (map['writerWordCount'] == null) ? "" : map['writerWordCount'] as String,
       age: map['age'] as int,
       era: map['era'] as String,
     );

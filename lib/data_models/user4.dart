@@ -34,21 +34,21 @@ class User {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          (other is User &&
-              runtimeType == other.runtimeType &&
-              userId == other.userId &&
-              twitterName == other.twitterName &&
-              inAppUserName == other.inAppUserName &&
-              inAppUserImage == other.inAppUserImage &&
-              bio == other.bio &&
-              address == other.address &&
-              sex == other.sex &&
-              writerGenre == other.writerGenre &&
-              writerWordCount == other.writerWordCount &&
-              score == other.score &&
-              level == other.level &&
-              age == other.age &&
-              era == other.era);
+      (other is User &&
+          runtimeType == other.runtimeType &&
+          userId == other.userId &&
+          twitterName == other.twitterName &&
+          inAppUserName == other.inAppUserName &&
+          inAppUserImage == other.inAppUserImage &&
+          bio == other.bio &&
+          address == other.address &&
+          sex == other.sex &&
+          writerGenre == other.writerGenre &&
+          writerWordCount == other.writerWordCount &&
+          score == other.score &&
+          level == other.level &&
+          age == other.age &&
+          era == other.era);
 
   @override
   int get hashCode =>
@@ -144,10 +144,10 @@ class User {
       bio: map['bio'] as String,
       address: map['address'] as String,
       sex: map['sex'] as String,
-      writerGenre: (map['writerGenre'] == null) ? {} :map['writerGenre'] as Set<String>,
-      writerWordCount: (map['writerWordCount'] == null) ? {} :map['writerWordCount'] as Set<String>,
-      score: (map['score'] == null) ? 0 : map['score']  as int,
-      level: (map['level'] == null) ? 0 : map['level'] as int,
+      writerGenre: map['writerGenre'] as Set<String>,
+      writerWordCount: map['writerWordCount'] as Set<String>,
+      score: map['score'] as int,
+      level: map['level'] as int,
       age: map['age'] as int,
       era: map['era'] as String,
     );

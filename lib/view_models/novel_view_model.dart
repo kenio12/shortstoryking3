@@ -19,6 +19,9 @@ class NovelViewModel extends ChangeNotifier {
   String writingNovelTitle = "";
   String writingNovelContent = "";
 
+  String writerGenre = "";
+  String writerWordCount = "";
+
     Future<void>  novelPosting() async{
       isProcessing = true;
       notifyListeners();
@@ -28,6 +31,11 @@ class NovelViewModel extends ChangeNotifier {
         writingNovelContent,
         selectedGenre,
       );
+
+      await userRepository.UserGenreAndWordCountInput(
+          writerGenre,writerWordCount,UserRepository.currentUser!,
+      );
+
       selectedGenre = "";
       writingNovelTitle = "";
       writingNovelContent= "";
