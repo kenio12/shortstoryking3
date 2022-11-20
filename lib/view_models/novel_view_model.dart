@@ -33,7 +33,7 @@ class NovelViewModel extends ChangeNotifier {
       );
 
       await userRepository.UserGenreAndWordCountInput(
-          writerGenre,writerWordCount,UserRepository.currentUser!,
+          selectedGenre,writerWordCount,UserRepository.currentUser!,
       );
 
       selectedGenre = "";

@@ -101,8 +101,8 @@ class UserRepository {
       bio: "",
       address: "",
       sex: "",
-      writerGenre: {},
-      writerWordCount: {},
+      writerGenre: <String>{},
+      writerWordCount: <String>{},
       score: 0,
       level: 0,
       age: 0,
@@ -178,23 +178,25 @@ class UserRepository {
     }
   }
 
-  Future<void> UserGenreAndWordCountInput(String writerGenre,
+  Future<void> UserGenreAndWordCountInput(String selectedGenre,
       String writerWordCount,
       User user,) async {
     final currentUserBeforeUpdate =
     await dbManager.getUserInfoFromDbById(user.userId);
 
     var addWriterGenre = <String>{};
-    addWriterGenre = currentUserBeforeUpdate.writerGenre
-        .add(writerGenre) as Set<String>;
+    addWriterGenre = currentUserBeforeUpdate.writerGenre;
+    addWriterGenre.add(selectedGenre);
+    print("${selectedGenre}");
+    print("${addWriterGenre}");
 
-    var addWriterWordCount = <String>{};
-    addWriterWordCount= currentUserBeforeUpdate.writerWordCount
-        .add(writerWordCount) as Set<String>;
+    // var addWriterWordCount = <String>{};
+    // addWriterWordCount= currentUserBeforeUpdate.writerWordCount;
+    // addWriterWordCount.add(writerWordCount);
 
     final updateCurrentUser = currentUserBeforeUpdate.copyWith(
       writerGenre: addWriterGenre,
-      writerWordCount: addWriterWordCount,
+      // writerWordCount: addWriterWordCount,
     );
     await dbManager.changeProfile(updateCurrentUser);
     currentUser = await dbManager.getUserInfoFromDbById(user.userId);
