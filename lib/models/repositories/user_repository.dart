@@ -101,8 +101,8 @@ class UserRepository {
       bio: "",
       address: "",
       sex: "",
-      writerGenre: <String>{},
-      writerWordCount: <String>{},
+      writerGenre: [],
+      writerWordCount: [],
       score: 0,
       level: 0,
       age: 0,
@@ -184,19 +184,25 @@ class UserRepository {
     final currentUserBeforeUpdate =
     await dbManager.getUserInfoFromDbById(user.userId);
 
-    var addWriterGenre = <String>{};
+    List<String> addWriterGenre = [];
     addWriterGenre = currentUserBeforeUpdate.writerGenre;
     addWriterGenre.add(selectedGenre);
-    print("${selectedGenre}");
-    print("${addWriterGenre}");
+    addWriterGenre = addWriterGenre.toSet().toList();
+    // print(addWriterGenre.runtimeType);
+    // print(currentUserBeforeUpdate.writerGenre.runtimeType);
 
-    // var addWriterWordCount = <String>{};
-    // addWriterWordCount= currentUserBeforeUpdate.writerWordCount;
-    // addWriterWordCount.add(writerWordCount);
+
+    // print("${selectedGenre}");
+    // print("${addWriterGenre}");
+
+    List<String> addWriterWordCount = [];
+    addWriterWordCount= currentUserBeforeUpdate.writerWordCount;
+    addWriterWordCount.add(writerWordCount);
+    addWriterWordCount = addWriterWordCount.toSet().toList();
 
     final updateCurrentUser = currentUserBeforeUpdate.copyWith(
       writerGenre: addWriterGenre,
-      // writerWordCount: addWriterWordCount,
+      writerWordCount: addWriterWordCount,
     );
     await dbManager.changeProfile(updateCurrentUser);
     currentUser = await dbManager.getUserInfoFromDbById(user.userId);

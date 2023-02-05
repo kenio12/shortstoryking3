@@ -19,8 +19,9 @@ class NovelViewModel extends ChangeNotifier {
   String writingNovelTitle = "";
   String writingNovelContent = "";
 
-  String writerGenre = "";
-  String writerWordCount = "";
+  // String writerGenre = "";
+  //  TODO 次いらんかも。。
+  String writerWordCount = "pinokio";
 
     Future<void>  novelPosting() async{
       isProcessing = true;

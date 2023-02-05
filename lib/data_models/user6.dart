@@ -6,8 +6,8 @@ class User {
   final String bio;
   final String address;
   final String sex;
-  final List<String> writerGenre;
-  final List<String> writerWordCount;
+  final Set<String> writerGenre;
+  final Set<String> writerWordCount;
   final int score;
   final int level;
   final int age;
@@ -31,7 +31,7 @@ class User {
     required this.era,
   });
 
-//</e@override
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
           (other is User &&
@@ -48,9 +48,7 @@ class User {
               score == other.score &&
               level == other.level &&
               age == other.age &&
-              era == other.era
-          );
-
+              era == other.era);
 
   @override
   int get hashCode =>
@@ -67,7 +65,6 @@ class User {
       level.hashCode ^
       age.hashCode ^
       era.hashCode;
-
 
   @override
   String toString() {
@@ -88,7 +85,6 @@ class User {
         '}';
   }
 
-
   User copyWith({
     String? userId,
     String? twitterName,
@@ -97,8 +93,8 @@ class User {
     String? bio,
     String? address,
     String? sex,
-    List<String>? writerGenre,
-    List<String>? writerWordCount,
+    Set<String>? writerGenre,
+    Set<String>? writerWordCount,
     int? score,
     int? level,
     int? age,
@@ -120,7 +116,6 @@ class User {
       era: era ?? this.era,
     );
   }
-
 
   Map<String, dynamic> toMap() {
     return {
@@ -149,8 +144,8 @@ class User {
       bio: map['bio'] as String,
       address: map['address'] as String,
       sex: map['sex'] as String,
-      writerGenre: (map['writerGenre'] == null) ? <String>[] : map['writerGenre'].cast<String>() as List<String>,
-      writerWordCount: (map['writerWordCount'] == null) ? <String>[] : map['writerWordCount'].cast<String>() as List<String>,
+      writerGenre: (map['writerGenre'] == null) ? <String>{} : map['writerGenre'] as Set<String>,
+      writerWordCount: (map['writerWordCount'] == null) ? <String>{} : map['writerWordCount'] as Set<String>,
       score: (map['score'] == null) ? 0 : map['score']  as int,
       level: (map['level'] == null) ? 0 : map['level'] as int,
       age: map['age'] as int,
@@ -158,7 +153,5 @@ class User {
     );
   }
 
-
-  //</editor-fold>
-
+//</editor-fold>
 }
