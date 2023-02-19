@@ -8,6 +8,9 @@ import 'package:shortstoryking3/view/common/drop_down_button/word_count_drop_dow
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
+import '../../../view_models/writer_view_model.dart';
+import '../../../view_models/writer_view_model.dart';
+
 class SearchWriter extends StatefulWidget {
   final BuildContext context;
   final PersistentTabController persistentTabController;
@@ -27,7 +30,7 @@ class _SearchWriter extends State<SearchWriter> {
   @override
   void initState() {
     _writerSearchController.addListener(() {
-      _onTitleUpDated();
+      _onWriterNameUpDated();
     });
     super.initState();
   }
@@ -102,7 +105,7 @@ class _SearchWriter extends State<SearchWriter> {
                 child: TextFormField(
                   onFieldSubmitted: (String? value) {
                     print(value);
-                    _searchWriterFromWriterName();
+                    // _searchWriterFromWriterName();
                   },
                   // keyboardType: TextInputType.multiline,
                   inputFormatters: [
@@ -178,11 +181,11 @@ class _SearchWriter extends State<SearchWriter> {
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),
                     ),
-                    onPressed: () => _novelsSearchedByMultipleConditions(),
+                    onPressed: () => _writerSearchedByMultipleConditions(),
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        "検索",
+                        "検　索",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -196,7 +199,7 @@ class _SearchWriter extends State<SearchWriter> {
               //     child: IconButton(
               //       color: Colors.black,
               //       icon: Icon(Icons.search, size: 50),
-              //       onPressed: () => _novelsSearchedByMultipleConditions(),
+              //       onPressed: () => _writerSearchedByMultipleConditions(),
               //     ),
               //   ),
               // ),
@@ -221,7 +224,7 @@ class _SearchWriter extends State<SearchWriter> {
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        "全　部　検　索",
+                        "全　員　検　索",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -262,25 +265,25 @@ class _SearchWriter extends State<SearchWriter> {
     Navigator.pop(context);
   }
 
-  _onTitleUpDated() {
-    final feedNovelViewModel = context.read<FeedNovelViewModel>();
+  _onWriterNameUpDated() {
+    final writerViewModel = context.read<WriterViewModel>();
     // if (feedNovelViewModel.selectedTitle != "" && _titleSearchController.text == "")
     //   {
     //     _titleSearchController.text = feedNovelViewModel.selectedTitle;
     //   }
-    feedNovelViewModel.selectedTitle = _writerSearchController.text;
+    writerViewModel.selectedWriterName = _writerSearchController.text;
     // print("${feedNovelViewModel.title}");
   }
 
-  _searchWriterFromWriterName() async {
-    final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    await feedNovelViewModel.getNovels(FeedNovelMode.SELECTED_NOVELS, null);
-    Navigator.pop(context);
-  }
+  // _searchWriterFromWriterName() async {
+  //   final writerViewModel = context.read<WriterViewModel>();
+  //   await writerViewModel.get(FeedNovelMode.SELECTED_NOVELS, null);
+  //   Navigator.pop(context);
+  // }
 
-  _novelsSearchedByMultipleConditions() async{
-    final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    await feedNovelViewModel.getNovels(FeedNovelMode.SEARCHED_BY_MULTIPLE_NOVELS, null);
+  _writerSearchedByMultipleConditions() async{
+    final writerViewModel = context.read<WriterViewModel>();
+    await writerViewModel.writerSearchedByMultipleConditions();
     Navigator.pop(context);
   }
 

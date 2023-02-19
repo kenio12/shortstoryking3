@@ -178,6 +178,11 @@ class UserRepository {
     }
   }
 
+  Future<List<User>> writerSearchedByMultipleConditions(String selectedWriterName) async{
+    return await dbManager.writerSearchedByMultipleConditions(selectedWriterName);
+  }
+
+
   Future<void> UserGenreAndWordCountInput(String selectedGenre,
       String writerWordCount,
       User user,) async {
@@ -207,4 +212,5 @@ class UserRepository {
     await dbManager.changeProfile(updateCurrentUser);
     currentUser = await dbManager.getUserInfoFromDbById(user.userId);
   }
+
 }

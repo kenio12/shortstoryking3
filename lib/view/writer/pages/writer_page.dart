@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shortstoryking3/utils/constants.dart';
+import 'package:shortstoryking3/view/writer/components/writer_search_results.dart';
 import 'package:shortstoryking3/view/writer/sub/feed_writer_page.dart';
 import 'package:shortstoryking3/view/writer/sub/search_writer.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
@@ -20,43 +21,55 @@ class WriterPage extends StatelessWidget {
     final writerViewModel = context.read<WriterViewModel>();
     // final currentUser = writerViewModel.currentUser;
 
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _searchWriter(context, persistentTabController),
-        backgroundColor: Colors.black54,
-        child: const Icon(Icons.search, size: 40,),
-      ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0),
-        child: AppBar(
-          backgroundColor: Colors.white54,
-
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _searchWriter(context, persistentTabController),
+          backgroundColor: Colors.black54,
+          child: const Icon(
+            Icons.search,
+            size: 40,
+          ),
         ),
-      ),
-      body: Container(
-        // color: Colors.black12,
-        child: (novelSelectedUserUserId == null)
-            ? FeedWriterPage(
-          feedWriterMode: FeedWriterMode.All_Writer,
-          persistentTabController: persistentTabController,
-        )
-            : FeedWriterPage(
-          feedWriterMode: FeedWriterMode.SELECTED_WRITER,
-          novelSelectedUserUserId: novelSelectedUserUserId,
-          persistentTabController: persistentTabController,
+        body: Container(
+          // color: Colors.black12,
+          child: (novelSelectedUserUserId == null)
+              ? Column(
+                  children: [
+                    WriterSearchResults(),
+                    Expanded(
+                      child: FeedWriterPage(
+                        feedWriterMode: FeedWriterMode.All_Writer,
+                        persistentTabController: persistentTabController,
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    SizedBox(
+                      height: 500,
+                    ),
+                    WriterSearchResults(),
+                    FeedWriterPage(
+                      feedWriterMode: FeedWriterMode.SELECTED_WRITER,
+                      novelSelectedUserUserId: novelSelectedUserUserId,
+                      persistentTabController: persistentTabController,
+                    ),
+                  ],
+                ),
         ),
       ),
     );
   }
 
-  _searchWriter(BuildContext context,
-      PersistentTabController persistentTabController) {
+  _searchWriter(
+      BuildContext context, PersistentTabController persistentTabController) {
     pushNewScreen(context,
         screen: SearchWriter(
           context: context,
           persistentTabController: persistentTabController,
         ),
-        withNavBar: true
-    );
+        withNavBar: true);
   }
 }

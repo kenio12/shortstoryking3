@@ -44,6 +44,9 @@ class FeedNovelSubPage extends StatelessWidget {
               ? Container()
               : Column(
                   children: [
+                    Container(
+
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Container(

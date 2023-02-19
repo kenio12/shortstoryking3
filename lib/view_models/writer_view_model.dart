@@ -23,6 +23,8 @@ class WriterViewModel extends ChangeNotifier {
 
   User get currentUser => UserRepository.currentUser!;
 
+  String selectedWriterName = "";
+
   Future<void>  getWriter(FeedWriterMode feedWriterMode,String? novelSelectedUserUserId) async{
     isProcessing = true;
     notifyListeners();
@@ -31,6 +33,17 @@ class WriterViewModel extends ChangeNotifier {
 
     isProcessing = false;
     notifyListeners();
+  }
+
+  Future<void> writerSearchedByMultipleConditions() async{
+    isProcessing = true;
+    notifyListeners();
+
+    writers = await userRepository.writerSearchedByMultipleConditions(selectedWriterName);
+
+    isProcessing = false;
+    notifyListeners();
+
   }
 
 
