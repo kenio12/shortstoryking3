@@ -118,15 +118,17 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
               () {
                 // novelViewModel.selectedGenre = selectedValue!;
                 _selectedGenre = selectedValue!;
+                final novelViewModel = context.read<NovelViewModel>();
+
+                final feedNovelViewModel = context.read<FeedNovelViewModel>();
 
                 switch (widget.genreDropDownButtonMode) {
                   case GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN:
-                    final novelViewModel = context.read<NovelViewModel>();
+
                     novelViewModel.selectedGenre = selectedValue;
                     break;
                   case GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN:
-                    final feedNovelViewModel =
-                        context.read<FeedNovelViewModel>();
+
                     feedNovelViewModel.selectedGenre = selectedValue;
                     break;
                 }
