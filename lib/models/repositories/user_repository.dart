@@ -43,8 +43,8 @@ class UserRepository {
       print("waaaa");
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
-        // success
-        //   print("${authResult.status}");
+          // success
+          //   print("${authResult.status}");
           print('====== Login success ======');
 
           // まるこぴ　Create a credential from the access token
@@ -54,7 +54,7 @@ class UserRepository {
           );
           // まるこぴ　Once signed in, return the UserCredential
           auth.UserCredential userCredential =
-          await _auth.signInWithCredential(twitterAuthCredential);
+              await _auth.signInWithCredential(twitterAuthCredential);
           final firebaseUser = userCredential.user;
           if (firebaseUser == null) {
             print('====== ツイッターに登録されてないようだ ======');
@@ -75,13 +75,13 @@ class UserRepository {
           return true;
           break;
         case TwitterLoginStatus.cancelledByUser:
-        // cancel
+          // cancel
           print('====== Login cancel ======');
           return false;
           break;
         case TwitterLoginStatus.error:
         case null:
-        // error
+          // error
           print('====== Login error ======');
           return false;
           break;
@@ -147,14 +147,16 @@ class UserRepository {
   //   currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
   // }
 
-  Future<void> changeProfile(String inAppUserImage,
-      String sex,
-      String era,
-      String address,
-      String bio,
-      String inAppUserName,) async {
+  Future<void> changeProfile(
+    String inAppUserImage,
+    String sex,
+    String era,
+    String address,
+    String bio,
+    String inAppUserName,
+  ) async {
     final currentUserBeforeUpdate =
-    await dbManager.getUserInfoFromDbById(currentUser!.userId);
+        await dbManager.getUserInfoFromDbById(currentUser!.userId);
     final updateCurrentUser = currentUserBeforeUpdate.copyWith(
       inAppUserImage: inAppUserImage,
       sex: sex,
@@ -168,8 +170,10 @@ class UserRepository {
     currentUser = await dbManager.getUserInfoFromDbById(currentUser!.userId);
   }
 
-  Future<List<User>> getWriter(FeedWriterMode feedWriterMode,
-      String? novelSelectedUserUserId,) async {
+  Future<List<User>> getWriter(
+    FeedWriterMode feedWriterMode,
+    String? novelSelectedUserUserId,
+  ) async {
     switch (feedWriterMode) {
       case FeedWriterMode.All_Writer:
         return await dbManager.getAllWriter();
@@ -178,16 +182,31 @@ class UserRepository {
     }
   }
 
-  Future<List<User>> writerSearchedByMultipleConditions(String selectedWriterName) async{
-    return await dbManager.writerSearchedByMultipleConditions(selectedWriterName);
+  Future<List<User>> writerSearchedByMultipleConditions(
+    String selectedWriterName,
+    String selectedGenre,
+  ) async {
+    if (selectedWriterName == "" &&  selectedGenre == ""){
+      return await dbManager.getAllWriter();
+    } else if (selectedWriterName != "" &&  selectedGenre != ""){
+      return await dbManager
+          .writerSearchedByMultipleConditions(selectedWriterName,selectedGenre);
+    } else if (selectedWriterName != "" && selectedGenre == "" ){
+      return await dbManager.writerSearchedBySelectedWriterName(selectedWriterName);
+    } else if (selectedWriterName == "" && selectedGenre != "" ) {
+      return await dbManager.writerSearchedBySelectedGenre(selectedGenre);
+    } else  {
+      return <User>[];
+    }
   }
 
-
-  Future<void> UserGenreAndWordCountInput(String selectedGenre,
-      String writerWordCount,
-      User user,) async {
+  Future<void> UserGenreAndWordCountInput(
+    String selectedGenre,
+    String writerWordCount,
+    User user,
+  ) async {
     final currentUserBeforeUpdate =
-    await dbManager.getUserInfoFromDbById(user.userId);
+        await dbManager.getUserInfoFromDbById(user.userId);
 
     List<String> addWriterGenre = [];
     addWriterGenre = currentUserBeforeUpdate.writerGenre;
@@ -196,12 +215,11 @@ class UserRepository {
     // print(addWriterGenre.runtimeType);
     // print(currentUserBeforeUpdate.writerGenre.runtimeType);
 
-
     // print("${selectedGenre}");
     // print("${addWriterGenre}");
 
     List<String> addWriterWordCount = [];
-    addWriterWordCount= currentUserBeforeUpdate.writerWordCount;
+    addWriterWordCount = currentUserBeforeUpdate.writerWordCount;
     addWriterWordCount.add(writerWordCount);
     addWriterWordCount = addWriterWordCount.toSet().toList();
 
@@ -212,5 +230,4 @@ class UserRepository {
     await dbManager.changeProfile(updateCurrentUser);
     currentUser = await dbManager.getUserInfoFromDbById(user.userId);
   }
-
 }

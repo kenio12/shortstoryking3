@@ -34,7 +34,7 @@ class DatabaseManager {
 
   Future<User> getUserInfoFromDbById(String userId) async {
     final query =
-    await _db.collection("users").where("userId", isEqualTo: userId).get();
+        await _db.collection("users").where("userId", isEqualTo: userId).get();
     // print("$query.docs[0].");
 
     return User.fromMap(query.docs[0].data());
@@ -158,18 +158,18 @@ class DatabaseManager {
         .endAt([selectedTitle + '\uf8ff'])
         .get()
         .then((value) {
-      value.docs.forEach((element) {
-        results.add(Novel.fromMap(
-          element.data(),
-        ));
-      });
-    });
+          value.docs.forEach((element) {
+            results.add(Novel.fromMap(
+              element.data(),
+            ));
+          });
+        });
     print("novel:$results");
     return results;
   }
 
-  Future<List<Novel>> getNovelsSearchedByMultiple(String selectedGenre,
-      String selectedWordCount) async {
+  Future<List<Novel>> getNovelsSearchedByMultiple(
+      String selectedGenre, String selectedWordCount) async {
     // print("${selectedWordCount}oo${selectedGenre}");
     int selectedWordCountInt = 0;
     switch (selectedWordCount) {
@@ -258,29 +258,88 @@ class DatabaseManager {
     }
   }
 
-  writerSearchedByMultipleConditions(String selectedWriterName) async {
-      final query = await _db
-          .collection("users")
-          .orderBy("inAppUserName")
-          .startAt([selectedWriterName]).endAt([selectedWriterName + '\uf8ff']).get();
-      if (query.docs.length == 0) return <Novel>[];
+  Future<List<User>> writerSearchedByMultipleConditions(
+      String selectedWriterName, String selectedGenre) async {
+    // print("あれれ${selectedGenre}");
+    final query = await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .startAt([selectedWriterName])
+        .endAt([selectedWriterName + '\uf8ff'])
+        .where("writerGenre", arrayContains: selectedGenre)
+        .get();
+    if (query.docs.length == 0) return <User>[];
 
-      var results = <User>[];
-      await _db
-          .collection("users")
-          .orderBy("inAppUserName")
-          .startAt([selectedWriterName])
-          .endAt([selectedWriterName + '\uf8ff'])
-          .get()
-          .then((value) {
-        value.docs.forEach((element) {
-          results.add(User.fromMap(
-            element.data(),
-          ));
+    var results = <User>[];
+    await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .startAt([selectedWriterName])
+        .endAt([selectedWriterName + '\uf8ff'])
+        .where("writerGenre", arrayContains: selectedGenre)
+        .get()
+        .then((value) {
+          value.docs.forEach((element) {
+            results.add(User.fromMap(
+              element.data(),
+            ));
+          });
         });
-      });
-      print("users:$results");
-      return results;
-    }
+    // print("users:$results");
+    return results;
+  }
 
+  Future<List<User>> writerSearchedBySelectedWriterName(String selectedWriterName) async{
+    // print("あれれ${selectedGenre}");
+    final query = await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .startAt([selectedWriterName])
+        .endAt([selectedWriterName + '\uf8ff'])
+        .get();
+    if (query.docs.length == 0) return <User>[];
+
+    var results = <User>[];
+    await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .startAt([selectedWriterName])
+        .endAt([selectedWriterName + '\uf8ff'])
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(User.fromMap(
+          element.data(),
+        ));
+      });
+    });
+    // print("users:$results");
+    return results;
+  }
+
+  Future<List<User>> writerSearchedBySelectedGenre(String selectedGenre) async{
+    // print("あれれ${selectedGenre}");
+    final query = await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .where("writerGenre", arrayContains: selectedGenre)
+        .get();
+    if (query.docs.length == 0) return <User>[];
+
+    var results = <User>[];
+    await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .where("writerGenre", arrayContains: selectedGenre)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(User.fromMap(
+          element.data(),
+        ));
+      });
+    });
+    // print("users:$results");
+    return results;
+  }
 }

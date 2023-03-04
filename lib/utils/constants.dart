@@ -32,5 +32,7 @@ enum FeedWriterMode{
 
 enum GenreDropDownButtonMode{
   WRITING_GENRE_DROP_DOWN,
-  FEED_GENRE_DROP_DOWN
+  FEED_GENRE_DROP_DOWN,
+  WRITER_GENRE_DROP_DOWN,
+  CLEAR
 }

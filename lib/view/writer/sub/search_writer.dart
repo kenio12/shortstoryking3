@@ -164,7 +164,7 @@ class _SearchWriter extends State<SearchWriter> {
                 child: Column(
                   children: [
                     GenreDropDownButton(genreDropDownButtonMode:
-                    GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN,),
+                    GenreDropDownButtonMode.WRITER_GENRE_DROP_DOWN,),
                     WordCountDropDownButton(),
                   ],
                 ),
@@ -220,7 +220,12 @@ class _SearchWriter extends State<SearchWriter> {
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),
                     ),
-                    onPressed: () => _AllNovelList(),
+                    onPressed: () async{
+                      await model.getWriter(FeedWriterMode.All_Writer, null);
+                      Navigator.pop(context);
+                      _writerSearchController.text = "";
+                      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR,);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
@@ -285,11 +290,9 @@ class _SearchWriter extends State<SearchWriter> {
     final writerViewModel = context.read<WriterViewModel>();
     await writerViewModel.writerSearchedByMultipleConditions();
     Navigator.pop(context);
+    _writerSearchController.text = "";
+    GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR,);
   }
 
-  _AllNovelList() async {
-    final feedNovelViewModel = context.read<FeedNovelViewModel>();
-    await feedNovelViewModel.getNovels(FeedNovelMode.ALL_NOVELS, null);
-    Navigator.pop(context);
-  }
+
 }
