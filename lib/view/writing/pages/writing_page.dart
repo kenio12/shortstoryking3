@@ -27,22 +27,25 @@ class WritingPage extends StatefulWidget {
 class _WritingPageState extends State<WritingPage> {
   final _titleController = TextEditingController();
   final _novelContentController = TextEditingController();
-  List<DropdownMenuItem<String>> _genreItems = [];
+  String _selectedGenre = "";
+  // List<DropdownMenuItem<String>> _genreItems = [];
 
   // String _selectedGenre = "";
 
   @override
   void initState() {
     super.initState();
-    setGenreItems();
+    // setGenreItems();
     final novelViewModel = context.read<NovelViewModel>();
-    novelViewModel.selectedGenre = _genreItems[0].value!;
+    // novelViewModel.selectedGenre = _genreItems[0].value!;
     _titleController.addListener(() {
       novelViewModel.writingNovelTitle = _titleController.text;
     });
     _novelContentController.addListener(() {
       novelViewModel.writingNovelContent = _novelContentController.text;
     });
+
+
     // selectedGenre = genreItems[0].value!;
   }
 
@@ -53,57 +56,6 @@ class _WritingPageState extends State<WritingPage> {
     super.dispose();
   }
 
-  void setGenreItems() {
-    _genreItems
-      ..add(DropdownMenuItem(
-        value: "",
-        child: Text(""),
-      ))
-      ..add(DropdownMenuItem(
-        value: "恋愛",
-        child: Text("恋愛"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "歴史・時代",
-        child: Text("歴史・時代"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "ホラー",
-        child: Text("ホラー"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "推理",
-        child: Text("推理"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "日常",
-        child: Text("日常"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "SF",
-        child: Text("SF"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "ファンタジー",
-        child: Text("ファンタジー"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "社会",
-        child: Text("社会"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "奇妙・不思議",
-        child: Text("奇妙・不思議"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "官能",
-        child: Text("官能"),
-      ))
-      ..add(DropdownMenuItem(
-        value: "その他",
-        child: Text("その他"),
-      ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +113,13 @@ class _WritingPageState extends State<WritingPage> {
                     GenreDropDownButton(
                       genreDropDownButtonMode:
                       GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN,
+                      selectedGenre:_selectedGenre,
+                      onChanged:(String? selectedValue){
+                        setState(() {
+                          _selectedGenre = selectedValue ?? "";
+                        });
+                      }
+
                     ),
                 SizedBox(
                   height: 20,
@@ -270,9 +229,12 @@ class _WritingPageState extends State<WritingPage> {
 
       _titleController.clear();
       _novelContentController.clear();
-      setState(() {
-        novelViewModel.selectedGenre = _genreItems[0].value.toString();
-      });
+      // _genreItems.clear();
+      // setState(() {
+      //   novelViewModel.selectedGenre = _genreItems[0].value.toString();
+      //   _genreItems.clear();
+      // });
+      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR, onChanged: (String? selectedValue) {  }, selectedGenre: '',);
     }
   }
 }
