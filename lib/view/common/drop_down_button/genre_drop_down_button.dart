@@ -14,11 +14,11 @@ class GenreDropDownButton extends StatefulWidget {
   @override
   State<GenreDropDownButton> createState() => _GenreDropDownButtonState();
 }
-
+//実験
 class _GenreDropDownButtonState extends State<GenreDropDownButton> {
   List<DropdownMenuItem<String>> _genreItems = [];
   String _selectedGenre = "";
-  //どうや
+
   @override
   void initState() {
     super.initState();
