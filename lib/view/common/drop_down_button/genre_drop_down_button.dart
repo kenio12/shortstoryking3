@@ -18,7 +18,7 @@ class GenreDropDownButton extends StatefulWidget {
 class _GenreDropDownButtonState extends State<GenreDropDownButton> {
   List<DropdownMenuItem<String>> _genreItems = [];
   String _selectedGenre = "";
-
+  //どうや
   @override
   void initState() {
     super.initState();
