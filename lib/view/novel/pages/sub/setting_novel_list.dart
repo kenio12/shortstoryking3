@@ -159,7 +159,7 @@ class _SettingNovelListState extends State<SettingNovelList> {
                 child: Column(
                   children: [
                     GenreDropDownButton(genreDropDownButtonMode:
-                    GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN,),
+                    GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN, selectedGenre: '', onChanged: (String? selectedValue) {  },),
                     WordCountDropDownButton(),
                   ],
                 ),
