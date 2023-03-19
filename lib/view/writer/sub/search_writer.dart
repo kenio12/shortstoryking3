@@ -164,7 +164,7 @@ class _SearchWriter extends State<SearchWriter> {
                 child: Column(
                   children: [
                     GenreDropDownButton(genreDropDownButtonMode:
-                    GenreDropDownButtonMode.WRITER_GENRE_DROP_DOWN, selectedGenre: '', onChanged: (String? selectedValue) {  },),
+                    GenreDropDownButtonMode.WRITER_GENRE_DROP_DOWN),
                     WordCountDropDownButton(),
                   ],
                 ),
@@ -224,7 +224,7 @@ class _SearchWriter extends State<SearchWriter> {
                       await model.getWriter(FeedWriterMode.All_Writer, null);
                       Navigator.pop(context);
                       _writerSearchController.text = "";
-                      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR, selectedGenre: '', onChanged: (String? selectedValue) {  },);
+                      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -291,7 +291,7 @@ class _SearchWriter extends State<SearchWriter> {
     await writerViewModel.writerSearchedByMultipleConditions();
     Navigator.pop(context);
     _writerSearchController.text = "";
-    GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR, selectedGenre: '', onChanged: (String? selectedValue) {  },);
+    GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR,);
   }
 
 
