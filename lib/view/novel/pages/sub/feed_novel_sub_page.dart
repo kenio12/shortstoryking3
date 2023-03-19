@@ -353,33 +353,16 @@ class FeedNovelSubPage extends StatelessWidget {
                                                         Container(
                                                           width:
                                                               double.infinity,
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "${selectedNovel.content.length}文字",
-                                                                style: TextStyle(
-                                                                    fontFamily:
-                                                                        NovelSararaRFont,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize: 18),
-                                                                textAlign:
-                                                                    TextAlign.left,
-                                                              ),
-                                                              Text(
-                                                                "：${selectedNovel.genre}",
-                                                                style: TextStyle(
-                                                                    fontFamily:
+                                                          child: Text(
+                                                            "${selectedNovel.content.length}文字",
+                                                            style: TextStyle(
+                                                                fontFamily:
                                                                     NovelSararaRFont,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                    18),
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .left,
-                                                              ),
-                                                            ],
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 18),
+                                                            textAlign:
+                                                                TextAlign.left,
                                                           ),
                                                         ),
                                                         Container(
