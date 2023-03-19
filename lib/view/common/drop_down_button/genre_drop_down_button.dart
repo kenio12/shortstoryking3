@@ -6,6 +6,8 @@ import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 import 'package:shortstoryking3/view_models/writer_view_model.dart';
 
+//umaku
+
 class GenreDropDownButton extends StatefulWidget {
   final GenreDropDownButtonMode genreDropDownButtonMode;
 
