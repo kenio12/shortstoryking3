@@ -113,13 +113,6 @@ class _WritingPageState extends State<WritingPage> {
                     GenreDropDownButton(
                       genreDropDownButtonMode:
                       GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN,
-                      selectedGenre:_selectedGenre,
-                      onChanged:(String? selectedValue){
-                        setState(() {
-                          _selectedGenre = selectedValue ?? "";
-                        });
-                      }
-
                     ),
                 SizedBox(
                   height: 20,
@@ -234,7 +227,7 @@ class _WritingPageState extends State<WritingPage> {
       //   novelViewModel.selectedGenre = _genreItems[0].value.toString();
       //   _genreItems.clear();
       // });
-      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR, onChanged: (String? selectedValue) {  }, selectedGenre: '',);
+      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR);
     }
   }
 }
