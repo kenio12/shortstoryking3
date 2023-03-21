@@ -17,8 +17,9 @@ import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
 class WritingPage extends StatefulWidget {
   final PersistentTabController persistentTabController;
+  final bool reset;
 
-  WritingPage({required this.persistentTabController});
+  WritingPage({required this.reset, required this.persistentTabController});
 
   @override
   State<WritingPage> createState() => _WritingPageState();
@@ -112,7 +113,8 @@ class _WritingPageState extends State<WritingPage> {
               children: [
                     GenreDropDownButton(
                       genreDropDownButtonMode:
-                      GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN,
+                      GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN, reset: true,
+
                     ),
                 SizedBox(
                   height: 20,
@@ -227,7 +229,7 @@ class _WritingPageState extends State<WritingPage> {
       //   novelViewModel.selectedGenre = _genreItems[0].value.toString();
       //   _genreItems.clear();
       // });
-      GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR);
+      // GenreDropDownButton(genreDropDownButtonMode: GenreDropDownButtonMode.CLEAR, reset: true,);
     }
   }
 }

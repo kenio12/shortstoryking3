@@ -4,6 +4,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:shortstoryking3/models/db/database_manager.dart';
 import 'package:shortstoryking3/models/repositories/novel_repository.dart';
 import 'package:shortstoryking3/models/repositories/user_repository.dart';
+import 'package:shortstoryking3/view_models/drop_button_view_model.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/login_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
@@ -57,6 +58,12 @@ List<SingleChildWidget> viewModels = [
   ),
   ChangeNotifierProvider<WriterViewModel>(
     create: (context) => WriterViewModel(
+      userRepository: context.read<UserRepository>(),
+      novelRepository: context.read<NovelRepository>(),
+    ),
+  ),
+  ChangeNotifierProvider<DropButtonViewModel>(
+    create: (context) => DropButtonViewModel(
       userRepository: context.read<UserRepository>(),
       novelRepository: context.read<NovelRepository>(),
     ),

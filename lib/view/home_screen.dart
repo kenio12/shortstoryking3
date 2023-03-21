@@ -15,7 +15,6 @@ import 'package:shortstoryking3/view_models/writer_view_model.dart';
 PersistentTabController persistentTabController = PersistentTabController();
 
 class HomeScreen extends StatefulWidget {
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -33,8 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
       // MyHomePage(myHomeMode: MyHomeMode.NORMAL_PROFILE),
       MyHomePage(persistentTabController: persistentTabController),
       FeedNovelPage(persistentTabController: persistentTabController),
-      WriterPage(novelSelectedUserUserId: null,persistentTabController: persistentTabController),
-      WritingPage(persistentTabController: persistentTabController),
+      WriterPage(
+          novelSelectedUserUserId: null,
+          persistentTabController: persistentTabController),
+      WritingPage(reset: true,persistentTabController: persistentTabController, ),
       BattlePage(),
     ];
     super.initState();
@@ -50,16 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: persistentTabController,
         items: [
           PersistentBottomNavBarItem(
-              icon: FaIcon(FontAwesomeIcons.home),
-              title: "自宅",
-              activeColorPrimary: Colors.black,
-              inactiveColorPrimary: Colors.grey,
-              // onPressed: (context) {
-              //   persistentTabController.index = 0;
-              //   Navigator.of(context!).push(MaterialPageRoute(
-              //     builder: (context) => MyHomePage(),
-              //   ));
-              // },
+            icon: FaIcon(FontAwesomeIcons.home),
+            title: "自宅",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
+            // onPressed: (context) {
+            //   persistentTabController.index = 0;
+            //   Navigator.of(context!).push(MaterialPageRoute(
+            //     builder: (context) => MyHomePage(),
+            //   ));
+            // },
           ),
           PersistentBottomNavBarItem(
             icon: FaIcon(FontAwesomeIcons.bookOpen),
@@ -78,51 +79,62 @@ class _HomeScreenState extends State<HomeScreen> {
             // },
           ),
           PersistentBottomNavBarItem(
-            icon: Icon(Writer.writer),
-            title: "作家",
-            activeColorPrimary: Colors.black,
-            inactiveColorPrimary: Colors.grey,
-            onPressed: (context) {
-              final writerViewModel = context?.read<WriterViewModel>();
-              Future(() => writerViewModel?.getWriter(FeedWriterMode.All_Writer,null));
+              icon: Icon(Writer.writer),
+              title: "作家",
+              activeColorPrimary: Colors.black,
+              inactiveColorPrimary: Colors.grey,
+              onPressed: (context) {
+                final writerViewModel = context?.read<WriterViewModel>();
+                Future(() => writerViewModel?.getWriter(
+                    FeedWriterMode.All_Writer, null));
 
-            persistentTabController.jumpToTab(2);
-    }
-            // {
+                persistentTabController.jumpToTab(2);
+              }
+              // {
               // persistentTabController.index = 2;
               // Navigator.of(context!).push(MaterialPageRoute(
               //   builder: (context) => WriterPage(null),
-            //   ));
-            // },
-          ),
+              //   ));
+              // },
+              ),
           PersistentBottomNavBarItem(
-            icon: Icon(FontAwesomeIcons.featherAlt),
-            title: "書く",
-            activeColorPrimary: Colors.black,
-            inactiveColorPrimary: Colors.grey,
-            // onPressed: (context) {
-            //   persistentTabController.index = 3;
-            //   Navigator.of(context!).push(
-            //     MaterialPageRoute(
-            //       builder: (context) => WritingPage(
-            //           persistentTabController: persistentTabController),
-            //     ),
-            //   );
-            // },
-          ),
-          PersistentBottomNavBarItem(
-              icon: Icon(Battle2.battle2),
-              title: "戦い",
+              icon: Icon(FontAwesomeIcons.featherAlt),
+              title: "書く",
               activeColorPrimary: Colors.black,
               inactiveColorPrimary: Colors.grey,
               // onPressed: (context) {
-              //   persistentTabController.index = 4;
+              //   persistentTabController.jumpToTab(3);
+              //   Navigator.of(context!).pushAndRemoveUntil(MaterialPageRoute(
+              //     builder: (context) => WritingPage(
+              //       persistentTabController: persistentTabController,
+              //     ),
+              //   ),
+              //           (_) => false);
+              // }
+              // onPressed: (context) {
+              //   final bool reset = true;
+              //   persistentTabController.index = 3;
               //   Navigator.of(context!).push(
               //     MaterialPageRoute(
-              //       builder: (context) => BattlePage(),
+              //       builder: (context) => WritingPage(reset:reset,
+              //           persistentTabController: persistentTabController, ),
               //     ),
               //   );
               // },
+              ),
+          PersistentBottomNavBarItem(
+            icon: Icon(Battle2.battle2),
+            title: "戦い",
+            activeColorPrimary: Colors.black,
+            inactiveColorPrimary: Colors.grey,
+            // onPressed: (context) {
+            //   persistentTabController.index = 4;
+            //   Navigator.of(context!).push(
+            //     MaterialPageRoute(
+            //       builder: (context) => BattlePage(),
+            //     ),
+            //   );
+            // },
           ),
         ],
       ),
