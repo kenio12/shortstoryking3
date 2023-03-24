@@ -29,6 +29,8 @@ class FeedNovelViewModel extends ChangeNotifier {
 
   FeedNovelMode selectedFeedNovelMode = FeedNovelMode.ALL_NOVELS;
 
+  String selectedWriterToString = "";
+
   User? selectedWriter;
 
   String selectedTitle = "";
@@ -61,6 +63,17 @@ class FeedNovelViewModel extends ChangeNotifier {
     if (writer != null) {
       selectedWriter = writer;
     }
+
+    isProcessing = false;
+    notifyListeners();
+  }
+
+  Future<void> getNovelsByWriterName() async{
+    isProcessing = true;
+    notifyListeners();
+
+    novels = await novelRepository.getNovelsByWriterName(
+        selectedWriterToString);
 
     isProcessing = false;
     notifyListeners();
@@ -117,4 +130,5 @@ class FeedNovelViewModel extends ChangeNotifier {
 
   //TODO 小説消す
   Future<void> deletedNovel(String novelId) async {}
+
 }

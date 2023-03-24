@@ -147,7 +147,9 @@ class DatabaseManager {
     final query = await _db
         .collection("novels")
         .orderBy("title")
-        .startAt([selectedTitle]).endAt([selectedTitle + '\uf8ff']).get();
+        .startAt([selectedTitle])
+        .endAt([selectedTitle + '\uf8ff'])
+        .get();
     if (query.docs.length == 0) return <Novel>[];
 
     var results = <Novel>[];
@@ -164,7 +166,9 @@ class DatabaseManager {
             ));
           });
         });
-    print("novel:$results");
+    // print("novel:$results");
+    // results = results.orderBy("postDateTime", descending: true);
+    results.sort((a, b) => -a.postDateTime.compareTo(b.postDateTime));
     return results;
   }
 
@@ -258,6 +262,18 @@ class DatabaseManager {
     }
   }
 
+  Future<List<Novel>?> getNovelsByWriterName(String selectedWriterToString) async{
+    // print("${selectedWriterToString}");
+    if (await oneWriterSearchedBySelectedWriterName(selectedWriterToString) != null)
+      {
+        User? selectedWriter = await oneWriterSearchedBySelectedWriterName(selectedWriterToString);
+        print("${selectedWriter?.inAppUserName}");
+        return getSelectedWriterNovels(selectedWriter!);
+      } else {
+      return [];
+    }
+  }
+
   Future<List<User>> writerSearchedByMultipleConditions(
       String selectedWriterName, String selectedGenre) async {
     // print("あれれ${selectedGenre}");
@@ -317,6 +333,22 @@ class DatabaseManager {
     return results;
   }
 
+  Future<User?> oneWriterSearchedBySelectedWriterName(String oneWriterSelectedWriterName) async{
+    print("あれれ${oneWriterSelectedWriterName}");
+    final query = await _db
+        .collection("users")
+        // .orderBy("inAppUserName")
+        .where("inAppUserName", isEqualTo: oneWriterSelectedWriterName)
+        .get();
+    if (query.docs.length == 0) {return null;
+    } else {
+      print("くおおお");
+    return User.fromMap(query.docs[0].data());
+  }
+  }
+
+
+
   Future<List<User>> writerSearchedBySelectedGenre(String selectedGenre) async{
     // print("あれれ${selectedGenre}");
     final query = await _db
@@ -342,4 +374,5 @@ class DatabaseManager {
     // print("users:$results");
     return results;
   }
+
 }

@@ -61,9 +61,15 @@ class NovelRepository {
       (selectedGenre,selectedWordCount);
   }
 
+  Future<List<Novel>?> getNovelsByWriterName(String selectedWriterToString) async{
+    return await dbManager.getNovelsByWriterName(selectedWriterToString);
+  }
+
   Future<Novel> selectedNovelFromNovelId(String selectedNovelId) async{
     return await dbManager.selectedNovelFromNovelId(selectedNovelId);
  }
+
+
 
  // Future<void> searchNovelListFromTitle(String selectedTitle) async {
  //    await dbManager.searchNovelListFromTitle(selectedTitle);
