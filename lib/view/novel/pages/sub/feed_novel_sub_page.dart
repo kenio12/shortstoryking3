@@ -243,7 +243,7 @@ class FeedNovelSubPage extends StatelessWidget {
                                                                           .left,
                                                                 ),
                                                                 Text(
-                                                                  "：${selectedNovel.genre}",
+                                                                  "：${selectedNovel.genre.toString()}",
                                                                   style: TextStyle(
                                                                       fontFamily:
                                                                           NovelSararaRFont,
@@ -440,11 +440,27 @@ class FeedNovelSubPage extends StatelessWidget {
           "${selectedWriter!.inAppUserName}の小説",
           style: TextStyle(fontSize: 20),
         );
+      case FeedNovelMode.SELECTED_ONE_WRITER_NOVELS:
+        if (selectedWriter != null) {
+        return Text(
+          "${selectedWriter.inAppUserName}の小説",
+          style: TextStyle(fontSize: 20),
+        );} else {
+          return Text("その作家は存在しないよ");
+        }
+
       case FeedNovelMode.MY_NOVELS:
         return Text(
           "${selectedWriter!.inAppUserName}の小説",
           style: TextStyle(fontSize: 20),
         );
+
+      case FeedNovelMode.NOTHING:
+        return Text(
+          "条件に合う小説がございません。",
+          style: TextStyle(fontSize: 20),
+        );
+
       case FeedNovelMode.SELECTED_NOVELS:
         return Text(
           "「${feedNovelViewModel.selectedTitle}」…　の小説",
@@ -493,6 +509,12 @@ class FeedNovelSubPage extends StatelessWidget {
   ) {
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
     feedNovelViewModel.isFeedNovel = false;
+
+    feedNovelViewModel.novels = [];
+    feedNovelViewModel.selectedWriter = null;
+    feedNovelViewModel.selectedFeedNovelMode = FeedNovelMode.ALL_NOVELS;
+    feedNovelViewModel.selectedWriterToString = "";
+
     pushNewScreen(context,
         screen: SettingNovelList(
           context: context,

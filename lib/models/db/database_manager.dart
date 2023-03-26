@@ -35,7 +35,7 @@ class DatabaseManager {
   Future<User> getUserInfoFromDbById(String userId) async {
     final query =
         await _db.collection("users").where("userId", isEqualTo: userId).get();
-    // print("$query.docs[0].");
+    // print("ooooi${query.docs[0].data()}");
 
     return User.fromMap(query.docs[0].data());
   }
@@ -267,7 +267,7 @@ class DatabaseManager {
     if (await oneWriterSearchedBySelectedWriterName(selectedWriterToString) != null)
       {
         User? selectedWriter = await oneWriterSearchedBySelectedWriterName(selectedWriterToString);
-        print("${selectedWriter?.inAppUserName}");
+        // print("${selectedWriter?.inAppUserName}");
         return getSelectedWriterNovels(selectedWriter!);
       } else {
       return [];

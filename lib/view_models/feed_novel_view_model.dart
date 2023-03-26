@@ -74,9 +74,17 @@ class FeedNovelViewModel extends ChangeNotifier {
 
     novels = await novelRepository.getNovelsByWriterName(
         selectedWriterToString);
+    if (novels == []) {
+      // print("えええ${novels?[0].userId}");
+      selectedWriter = await userRepository.getUserById(novels?[0].userId);
+      selectedFeedNovelMode = FeedNovelMode.SELECTED_ONE_WRITER_NOVELS;
+    } else {
+      selectedWriter = null;
+      selectedFeedNovelMode = FeedNovelMode.NOTHING;
+    }
+        isProcessing = false;
+        notifyListeners();
 
-    isProcessing = false;
-    notifyListeners();
   }
 
   Future<User> getNovelUserInfo(String? userId) async {
@@ -108,7 +116,6 @@ class FeedNovelViewModel extends ChangeNotifier {
       case FeedNovelMode.MY_NOVELS:
         await getNovels(FeedNovelMode.MY_NOVELS, currentUser);
         break;
-
       case FeedNovelMode.ALL_NOVELS:
         await getNovels(FeedNovelMode.ALL_NOVELS, null);
         break;

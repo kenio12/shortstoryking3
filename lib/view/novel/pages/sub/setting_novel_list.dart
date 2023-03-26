@@ -92,7 +92,7 @@ class _SettingNovelListState extends State<SettingNovelList> {
                     child: TextFormField(
                       onFieldSubmitted: (String? value) {
                         print(value);
-                        _searchNovelFromTitle();
+                        _searchNovelFromWriterName();
                       },
                       // keyboardType: TextInputType.multiline,
                       inputFormatters: [
