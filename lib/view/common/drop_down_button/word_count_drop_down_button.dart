@@ -19,14 +19,14 @@ class _WordCountDropDownButtonState extends State<WordCountDropDownButton> {
   @override
   void initState() {
     super.initState();
-    setGenreItems();
+    setWordCountItems();
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
     if (feedNovelViewModel.selectedWordCount != "") {
       _selectedWordCount = feedNovelViewModel.selectedWordCount;
     }
   }
 
-  void setGenreItems() {
+  void setWordCountItems() {
     _genreItems
       ..add(
         DropdownMenuItem(

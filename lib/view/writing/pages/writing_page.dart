@@ -13,6 +13,8 @@ import 'package:shortstoryking3/view/novel/pages/feed_novel_page.dart';
 import 'package:shortstoryking3/view_models/feed_novel_view_model.dart';
 import 'package:shortstoryking3/view_models/novel_view_model.dart';
 
+import '../../common/drop_down_button/word_count_drop_down_button.dart';
+
 //これで
 
 class WritingPage extends StatefulWidget {
@@ -29,6 +31,7 @@ class _WritingPageState extends State<WritingPage> {
   final _titleController = TextEditingController();
   final _novelContentController = TextEditingController();
   String _selectedGenre = "";
+
   // List<DropdownMenuItem<String>> _genreItems = [];
 
   // String _selectedGenre = "";
@@ -46,7 +49,6 @@ class _WritingPageState extends State<WritingPage> {
       novelViewModel.writingNovelContent = _novelContentController.text;
     });
 
-
     // selectedGenre = genreItems[0].value!;
   }
 
@@ -56,7 +58,6 @@ class _WritingPageState extends State<WritingPage> {
     _novelContentController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -111,11 +112,12 @@ class _WritingPageState extends State<WritingPage> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
-                    GenreDropDownButton(
-                      genreDropDownButtonMode:
-                      GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN, reset: true,
-
-                    ),
+                WordCountDropDownButton(),
+                GenreDropDownButton(
+                  genreDropDownButtonMode:
+                      GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN,
+                  reset: true,
+                ),
                 SizedBox(
                   height: 20,
                 ),
@@ -160,12 +162,18 @@ class _WritingPageState extends State<WritingPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   alignment: Alignment.topRight,
                   child: ElevatedButton(
                     onPressed: () => _novel(context),
-                    child: Text("投稿する",style: TextStyle(fontSize: 30,fontFamily: NovelSararaBFont),),
+                    child: Text(
+                      "投稿する",
+                      style:
+                          TextStyle(fontSize: 30, fontFamily: NovelSararaBFont),
+                    ),
                   ),
                 )
               ],
@@ -183,24 +191,32 @@ class _WritingPageState extends State<WritingPage> {
     // String _novelTitle = _titleController.value.text;
     // String _novelContent = _novelContentController.value.text;
     final novelViewModel = context.read<NovelViewModel>();
-    if ( novelViewModel.selectedGenre == "") {
+    if (novelViewModel.selectedGenre == "") {
       showAlertDialog(
         title: "おいおい",
         content: "ジャンルないでー、やりなおしやー",
         message: "でなおす",
         context: context,
       );
-    } else if ( novelViewModel.writingNovelTitle == "") {
+    } else if (novelViewModel.writingNovelTitle == "") {
       showAlertDialog(
         title: "おいおい",
         content: "タイトルないでー、やりなおしやー",
         message: "でなおす",
         context: context,
       );
-    } else if ( novelViewModel.writingNovelContent == "") {
+    } else if (novelViewModel.writingNovelContent == "") {
       showAlertDialog(
         title: "おいおい",
         content: "小説がないでー、やりなおしやー",
+        message: "でなおす",
+        context: context,
+      );
+    } else if (novelViewModel.writingNovelContent.length >
+        novelViewModel.LimitWritingNovelWordCount) {
+      showAlertDialog(
+        title: "おいおい",
+        content: "設定した文字数を越えてるで！",
         message: "でなおす",
         context: context,
       );

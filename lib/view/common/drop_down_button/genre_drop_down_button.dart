@@ -28,16 +28,6 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
   void initState() {
     super.initState();
     setGenreItems();
-    // switch (widget.genreDropDownButtonMode) {
-    //   case GenreDropDownButtonMode.WRITING_GENRE_DROP_DOWN:
-    //     final novelViewModel = context.read<NovelViewModel>();
-    //     novelViewModel.selectedGenre = _genreItems[0].value!;
-    //     break;
-    //   case GenreDropDownButtonMode.FEED_GENRE_DROP_DOWN:
-    //     //TODO あとで直す。
-    //     final novelViewModel = context.read<NovelViewModel>();
-    //     novelViewModel.selectedGenre = _genreItems[0].value!;
-    // }
 
     final feedNovelViewModel = context.read<FeedNovelViewModel>();
     if (widget.genreDropDownButtonMode ==
@@ -47,7 +37,6 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
       setState(() {
         _selectedGenre = "";
       });
-      ;
     }
 
     final writerViewModel = context.read<WriterViewModel>();
@@ -58,19 +47,7 @@ class _GenreDropDownButtonState extends State<GenreDropDownButton> {
       setState(() {
         _selectedGenre = "";
       });
-      ;
     }
-    // else if (widget.genreDropDownButtonMode ==
-    //     GenreDropDownButtonMode.CLEAR) {
-    //   setState(() {
-    //     _selectedGenre = "";
-    //   });
-    //   ;
-    // }
-
-    // if (widget.genreDropDownButtonMode == GenreDropDownButtonMode.CLEAR){
-    //   _selectedGenre = "";
-    // }
 
     writerViewModel.selectedGenre = feedNovelViewModel.selectedGenre;
   }
